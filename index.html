@@ -1,1 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AussieSail Deals - Cheapest Cruises from Australia 2026+</title>
+  <meta name="description" content="Exclusive deals on cruises from Sydney, Brisbane & more. Carnival, Royal Caribbean, Princess & top lines. South Pacific, NZ & beyond!"/>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; color: #222; background: #f8f9fa; line-height: 1.6; }
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1400px; margin: 0 auto; }
 
+    /* Header */
+    header { position: fixed; top: 0; width: 100%; background: rgba(0, 71, 171, 0.92); backdrop-filter: blur(8px); z-index: 1000; transition: background 0.3s; }
+    header.scrolled { background: rgba(0, 71, 171, 1); }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 2.1rem; color: white; text-decoration: none; }
+    .logo span { color: #ffd700; }
+    .nav-links a { color: white; text-decoration: none; margin-left: 2rem; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: #ffd700; }
+
+    /* Hero */
+    .hero { height: 100vh; background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)), url('https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?auto=format&fit=crop&q=80&w=2940') center/cover no-repeat; color: white; display: flex; align-items: center; text-align: center; }
+    .hero-content { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 4.2rem; margin-bottom: 1rem; text-shadow: 0 4px 12px rgba(0,0,0,0.6); }
+    .hero p { font-size: 1.4rem; margin-bottom: 2.5rem; }
+
+    /* Search Box */
+    .search-box { background: rgba(255,255,255,0.95); border-radius: 16px; padding: 2.5rem; max-width: 880px; margin: 0 auto; box-shadow: 0 15px 40px rgba(0,0,0,0.3); color: #222; }
+    .search-box h3 { margin-bottom: 1.8rem; color: #0047ab; font-size: 1.8rem; }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+    input, select, button { padding: 1rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; }
+    button { background: #0047ab; color: white; border: none; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+    button:hover { background: #003080; }
+
+    /* Sections */
+    h2 { text-align: center; font-size: 3rem; margin-bottom: 3rem; color: #0047ab; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+    .card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .card:hover { transform: translateY(-12px); }
+    .card img { width: 100%; height: 220px; object-fit: cover; }
+    .card-info { padding: 1.8rem; }
+    .card-info h3 { margin-bottom: 0.8rem; color: #0047ab; }
+    .price { font-size: 1.8rem; font-weight: 700; color: #d32f2f; margin: 1rem 0; }
+    .icon { color: #0047ab; margin-right: 0.5rem; }
+
+    /* About */
+    #about { background: #e6f2ff; }
+    #about p { max-width: 800px; margin: 0 auto 2rem; text-align: center; }
+
+    /* Destinations */
+    #destinations { background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=2940') center/cover no-repeat; color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+
+    /* Cruise Lines */
+    .line-card { text-align: center; }
+    .line-card img { height: 100px; object-fit: contain; }
+
+    /* Testimonials */
+    #testimonials { background: #f8f9fa; }
+    .testimonial { font-style: italic; text-align: center; max-width: 600px; margin: 0 auto; }
+
+    /* Contact */
+    #contact form { max-width: 600px; margin: 0 auto; display: grid; gap: 1.5rem; }
+    textarea { height: 150px; }
+
+    /* Footer */
+    footer { background: #0047ab; color: white; text-align: center; padding: 3rem 1rem; }
+    .social a { color: white; margin: 0 1rem; font-size: 1.5rem; transition: color 0.3s; }
+    .social a:hover { color: #ffd700; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 3rem; }
+      .nav-links { display: none; } /* Add hamburger in prod */
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="container">
+      <a href="#" class="logo">Aussie<span>Sail</span> Deals</a>
+      <div class="nav-links">
+        <a href="#deals">Deals</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#lines">Cruise Lines</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Unlock Epic Cruise Deals Down Under</h1>
+      <p>Cheapest 2026+ sailings from Sydney, Brisbane & more. Exclusive perks on Carnival, Royal Caribbean, Princess & top lines!</p>
+      
+      <div class="search-box">
+        <h3>Search Your Dream Cruise</h3>
+        <form class="form-grid" id="search-form">
+          <select>
+            <option>Depart From</option>
+            <option>Sydney</option>
+            <option>Brisbane</option>
+            <option>Melbourne</option>
+            <option>Perth</option>
+          </select>
+          <select>
+            <option>Cruise Line</option>
+            <option>Carnival</option>
+            <option>Royal Caribbean</option>
+            <option>Princess</option>
+            <option>Celebrity</option>
+            <option>Cunard</option>
+            <option>Viking</option>
+            <option>Seabourn</option>
+            <option>Norwegian</option>
+            <option>Holland America</option>
+            <option>Disney (Early 2026)</option>
+            <option>Coral Expeditions</option>
+            <option>Ponant</option>
+            <option>Silversea</option>
+          </select>
+          <select>
+            <option>Departure Month</option>
+            <option>Anytime 2026</option>
+            <option>Jan-Mar 2026</option>
+            <option>Apr-Jun 2026</option>
+            <option>Jul-Sep 2026</option>
+            <option>Oct-Dec 2026</option>
+          </select>
+          <select>
+            <option>Nights</option>
+            <option>3-5 Nights</option>
+            <option>7-9 Nights</option>
+            <option>10-14 Nights</option>
+            <option>15+ Nights</option>
+          </select>
+          <button type="submit">Search Now <i class="fas fa-search"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="deals" class="container">
+    <h2>Hot 2026 Deals</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?auto=format&fit=crop&q=80&w=800" alt="South Pacific"/>
+        <div class="card-info">
+          <h3>9-Night South Pacific (Carnival Splendor)</h3>
+          <p><i class="fas fa-map-marker-alt icon"></i>Sydney → Mystery Island → Lifou → Noumea → Sydney</p>
+          <div class="price">From $899<sup>pp</sup> twin + $100 OBC</div>
+          <button>Book Now</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=800" alt="New Zealand"/>
+        <div class="card-info">
+          <h3>12-Night NZ Fjords (Royal Caribbean Anthem)</h3>
+          <p><i class="fas fa-map-marker-alt icon"></i>Roundtrip Sydney – Stunning fjords & wildlife</p>
+          <div class="price">From $1,249<sup>pp</sup> + Free WiFi</div>
+          <button>Book Now</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800" alt="Great Barrier Reef"/>
+        <div class="card-info">
+          <h3>7-Night Barrier Reef (Princess Crown)</h3>
+          <p><i class="fas fa-map-marker-alt icon"></i>Brisbane → Cairns → Airlie Beach → Brisbane</p>
+          <div class="price">From $749<sup>pp</sup> + Gratuities Included</div>
+          <button>Book Now</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1518684075438-7c726f2c632e?auto=format&fit=crop&q=80&w=800" alt="Tasmania"/>
+        <div class="card-info">
+          <h3>10-Night Tasmania Explorer (Viking Orion)</h3>
+          <p><i class="fas fa-map-marker-alt icon"></i>Melbourne → Hobart → Wineglass Bay → Melbourne</p>
+          <div class="price">From $1,599<sup>pp</sup> + Excursion Credit</div>
+          <button>Book Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="destinations">
+    <div class="container">
+      <h2>Popular Destinations</h2>
+      <div class="grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?auto=format&fit=crop&q=80&w=800" alt="South Pacific"/>
+          <div class="card-info">
+            <h3>South Pacific Islands</h3>
+            <p>Vanuatu, New Caledonia, Fiji – Pristine beaches & cultures.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=800" alt="New Zealand"/>
+          <div class="card-info">
+            <h3>New Zealand Adventures</h3>
+            <p>Fjords, Auckland, Wellington – Epic scenery & Maori heritage.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&q=80&w=800" alt="Great Barrier Reef"/>
+          <div class="card-info">
+            <h3>Great Barrier Reef</h3>
+            <p>Snorkel Cairns, Whitsundays – World's largest coral system.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1518684075438-7c726f2c632e?auto=format&fit=crop&q=80&w=800" alt="Tasmania"/>
+          <div class="card-info">
+            <h3>Tasmania Wilderness</h3>
+            <p>Hobart, Wineglass Bay – Hiking, wildlife & gourmet food.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lines" class="container">
+    <h2>Our Top Cruise Lines</h2>
+    <div class="grid">
+      <div class="card line-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Carnival_Cruise_Lines_logo.svg/800px-Carnival_Cruise_Lines_logo.svg.png" alt="Carnival"/>
+        <div class="card-info">
+          <h3>Carnival</h3>
+          <p>Fun-filled family cruises from Sydney.</p>
+        </div>
+      </div>
+      <div class="card line-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Royal_Caribbean_Logo.svg/800px-Royal_Caribbean_Logo.svg.png" alt="Royal Caribbean"/>
+        <div class="card-info">
+          <h3>Royal Caribbean</h3>
+          <p>Adventure-packed with rock climbing & more.</p>
+        </div>
+      </div>
+      <div class="card line-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Princess_Cruises_Logo.svg/800px-Princess_Cruises_Logo.svg.png" alt="Princess"/>
+        <div class="card-info">
+          <h3>Princess</h3>
+          <p>#1 in Australia – Elegant voyages.</p>
+        </div>
+      </div>
+      <div class="card line-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Celebrity_Cruises_logo.svg/800px-Celebrity_Cruises_logo.svg.png" alt="Celebrity"/>
+        <div class="card-info">
+          <h3>Celebrity</h3>
+          <p>Luxury modern escapes to NZ & Pacific.</p>
+        </div>
+      </div>
+      <div class="card line-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Viking_Cruises_logo.svg/800px-Viking_Cruises_logo.svg.png" alt="Viking"/>
+        <div class="card-info">
+          <h3>Viking</h3>
+          <p>Cultural immersion & small ships.</p>
+        </div>
+      </div>
+      <div class="card line-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Seabourn_Cruise_Line_logo.svg/800px-Seabourn_Cruise_Line_logo.svg.png" alt="Seabourn"/>
+        <div class="card-info">
+          <h3>Seabourn</h3>
+          <p>Ultra-luxury expeditions to Kimberley.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2>About AussieSail Deals</h2>
+      <p>We're your go-to Aussie cruise specialists, offering the best 2026 deals on top lines like Carnival, Royal Caribbean & Princess. With group rates & exclusive perks, we beat direct prices – all in AUD with local support.</p>
+      <p>ATAS accredited | ABN: [Your ABN] | Based in Sydney.</p>
+    </div>
+  </section>
+
+  <section id="testimonials" class="container">
+    <h2>What Our Cruisers Say</h2>
+    <div class="testimonial">
+      <p>"Saved $300 on our Carnival Splendor trip – amazing service!" – Sarah, Sydney</p>
+    </div>
+    <div class="testimonial">
+      <p>"Best deals on Princess NZ cruise. Highly recommend!" – Mike, Brisbane</p>
+    </div>
+  </section>
+
+  <section id="contact" class="container">
+    <h2>Get in Touch</h2>
+    <form action="https://formspree.io/f/yourformid" method="POST"> <!-- Replace with your free Formspree ID for real submissions -->
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <select name="enquiry">
+        <option>Enquiry Type</option>
+        <option>Quote Request</option>
+        <option>Booking Help</option>
+        <option>General</option>
+      </select>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+    </form>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 AussieSail Deals • Cheapest Cruises from Australia • ABN: [Your ABN] • ATAS Accredited</p>
+      <div class="social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll effect for header
+    window.addEventListener('scroll', () => {
+      document.querySelector('header').classList.toggle('scrolled', window.scrollY > 100);
+    });
+
+    // Fake search submit
+    document.getElementById('search-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Searching for your perfect cruise... (This is a demo – results would show here in a full site!)');
+    });
+  </script>
+</body>
+</html>
