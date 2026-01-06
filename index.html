@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DownUnder Cruises • Premium Deals from Australia 2026+</title>
   <meta name="description" content="Best cruise deals departing Sydney, Brisbane, Melbourne, Perth & more. 2026 South Pacific, NZ, Barrier Reef on Carnival, Royal Caribbean, Princess & top lines."/>
-  
+
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-  
+
   <style>
     :root {
-      --primary: #006994;
-      --primary-dark: #004d6d;
+      --primary: #006b33;
+      --primary-dark: #004d26;
       --accent: #ffd700;
-      --dark: #001f3f;
+      --dark: #002f19;
       --light: #f8f9fa;
       --gray: #6c757d;
       --bubble-shadow: 0 8px 25px rgba(0,0,0,0.15);
@@ -44,13 +44,13 @@
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: rgba(0, 105, 148, 0.95);
+      background: rgba(0, 107, 51, 0.95);
       backdrop-filter: blur(12px);
       z-index: 1000;
       transition: all 0.4s ease;
       box-shadow: var(--bubble-shadow);
     }
-    header.scrolled { background: rgba(0, 105, 148, 1); }
+    header.scrolled { background: rgba(0, 107, 51, 1); }
 
     nav {
       display: flex;
@@ -132,7 +132,7 @@
       .nav-links {
         position: absolute;
         top: 100%; left: 0; right: 0;
-        background: rgba(0, 105, 148, 0.98);
+        background: rgba(0, 107, 51, 0.98);
         flex-direction: column;
         padding: 2.5rem;
         gap: 2rem;
@@ -223,7 +223,7 @@
     }
     button:hover { 
       transform: translateY(-5px); 
-      box-shadow: 0 15px 35px rgba(0,105,148,0.6); 
+      box-shadow: 0 15px 35px rgba(0,107,51,0.6); 
     }
 
     /* Results */
@@ -529,7 +529,7 @@
     <div class="hero-content">
       <h1>Set Sail Down Under</h1>
       <p>Exclusive 2026+ cruise deals from Australia. Tropical islands, fjords, reefs – unbeatable prices on Carnival, Royal Caribbean & more.</p>
-      
+
       <div class="search-box">
         <h3>Find Your Perfect Cruise</h3>
         <form class="form-grid" id="search-form">
@@ -581,8 +581,18 @@
             <option>10-14 Nights</option>
             <option>15+ Nights</option>
           </select>
-          <select id="passengers">
-            <option>Number of Passengers</option>
+          <select id="adultSearch">
+            <option>Adults</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+          </select>
+          <select id="childSearch">
+            <option>Children (Under 17)</option>
+            <option>0</option>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -670,23 +680,34 @@
         </div>
       </div>
 
-      <!-- Passenger Count Selector -->
-      <div class="passenger-selector">
-        <label for="passengerCount">Number of Passengers:</label>
-        <select id="passengerCount" onchange="generatePassengerFields()">
-          <option value="1">1 Adult</option>
-          <option value="2" selected>2 Adults</option>
-          <option value="3">3 Passengers</option>
-          <option value="4">4 Passengers</option>
-        </select>
-      </div>
-
-      <!-- Dynamic Passenger Fields -->
-      <div id="dynamicPassengers" class="passenger-form"></div>
-
-      <!-- Cabin Options -->
+      <!-- Available Cabin Types -->
       <h3 style="margin-top: 3rem; color: var(--primary);">Available Cabin Types</h3>
       <div class="cabin-grid" id="cabinGrid"></div>
+
+      <!-- Passenger Details (shown after cabin selection) -->
+      <div id="passengerSection" style="display:none;">
+        <h3 style="margin-top: 3rem; color: var(--primary);">Passenger Details</h3>
+        <div class="passenger-selector">
+          <label for="adultCount">Adults:</label>
+          <select id="adultCount" onchange="generatePassengerFields()">
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <label for="childCount" style="margin-left: 1rem;">Children (Under 17):</label>
+          <select id="childCount" onchange="generatePassengerFields()">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+        <div id="dynamicPassengers" class="passenger-form"></div>
+        <button onclick="addToCartWithInfo()" style="margin:2rem auto; display:block;">Add to Cart & Continue</button>
+      </div>
     </div>
   </div>
 
@@ -734,6 +755,54 @@
             <h3>South Pacific Islands</h3>
             <p>Crystal waters, island hopping – pure paradise.</p>
           </div>
+        </div>
+        <div class="card">
+          <img src="https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg" alt="Cruise ship in Milford Sound New Zealand fjords"/>
+          <div class="card-info">
+            <h3>New Zealand Fjords</h3>
+            <p>Majestic fjords, wildlife, and adventure.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://media.istockphoto.com/id/1077171172/photo/colourful-coral-scene-underwater-with-fish-and-divers.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=uwZuG1nojpkEF6s3ecqm74aXvIiIHi_eJZoox5_PsEk=" alt="Underwater coral reef with divers"/>
+          <div class="card-info">
+            <h3>Great Barrier Reef</h3>
+            <p>Colorful coral, tropical fish – diving paradise.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lines" class="container">
+    <h2>Our Cruise Lines</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x240?text=Carnival" alt="Carnival Cruise Line"/>
+        <div class="card-info">
+          <h3>Carnival Cruise Line</h3>
+          <p>Known for fun-filled voyages and large ships. Join the VIFP loyalty program for perks.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x240?text=Princess" alt="Princess Cruises"/>
+        <div class="card-info">
+          <h3>Princess Cruises</h3>
+          <p>Elegant ships and scenic itineraries. Earn rewards with the Crown & Anchor Club.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x240?text=Royal+Caribbean" alt="Royal Caribbean"/>
+        <div class="card-info">
+          <h3>Royal Caribbean</h3>
+          <p>Adventure-focused voyages and innovative ships. Loyalty rewarded through SeaPass.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/300x240?text=Celebrity" alt="Celebrity Cruises"/>
+        <div class="card-info">
+          <h3>Celebrity Cruises</h3>
+          <p>Upscale experiences on modern ships. Captain's Club members enjoy exclusive benefits.</p>
         </div>
       </div>
     </div>
@@ -800,6 +869,8 @@
 
     // Cart system
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let selectedLine = '';
+    let selectedCruiseTitle = '', selectedCabinType = '', selectedCabinPrice = '';
 
     function updateCartCount() {
       document.getElementById('cartCount').textContent = cart.length;
@@ -807,32 +878,34 @@
 
     // Dynamic Passenger Fields
     function generatePassengerFields() {
-      const count = document.getElementById('passengerCount').value;
+      const adultCount = parseInt(document.getElementById('adultCount').value);
+      const childCount = parseInt(document.getElementById('childCount').value);
       const container = document.getElementById('dynamicPassengers');
       container.innerHTML = '';
-
-      for (let i = 1; i <= count; i++) {
+      for (let i = 1; i <= adultCount; i++) {
         container.innerHTML += `
           <div style="grid-column: span 2; background:#f0f8ff; padding:1.5rem; border-radius:var(--bubble-radius);">
-            <h4 style="color:var(--primary); margin-bottom:1rem;">Passenger ${i} Details</h4>
+            <h4 style="color:var(--primary); margin-bottom:1rem;">Adult ${i} Details</h4>
             <div class="passenger-form">
               <input type="text" placeholder="Full Name (as on passport)" required/>
               <input type="date" placeholder="Date of Birth" required/>
-              <input type="text" placeholder="VIFP # (Carnival Loyalty, optional)"/>
-              <select>
-                <option>Gender</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-              </select>
+              <input type="text" placeholder="${selectedLine === 'Carnival Cruise Line' ? 'VIFP # (Carnival Loyalty, optional)' : (selectedLine === 'Princess Cruises' ? 'Crown & Anchor # (Princess Loyalty, optional)' : (selectedLine === 'Royal Caribbean' ? 'SeaPass # (Royal Caribbean Loyalty, optional)' : 'Loyalty # (optional)'))}"/>
+            </div>
+          </div>
+        `;
+      }
+      for (let i = 1; i <= childCount; i++) {
+        container.innerHTML += `
+          <div style="grid-column: span 2; background:#f0f8ff; padding:1.5rem; border-radius:var(--bubble-radius);">
+            <h4 style="color:var(--primary); margin-bottom:1rem;">Child ${i} Details</h4>
+            <div class="passenger-form">
+              <input type="text" placeholder="Full Name (as on passport)" required/>
+              <input type="number" placeholder="Age (max 17)" min="0" max="17" required/>
             </div>
           </div>
         `;
       }
     }
-
-    // Default to 2 passengers
-    generatePassengerFields();
 
     // Cabin Modal with Ship Highlights
     function openModal(modalId, cruise = null) {
@@ -840,8 +913,15 @@
       modal.style.display = 'block';
 
       if (modalId === 'cabinModal' && cruise) {
+        if (cruise === 'south-pacific') selectedLine = 'Paul Gauguin Cruises';
+        else if (cruise === 'nz-fjords') selectedLine = 'Princess Cruises';
+        else if (cruise === 'reef') selectedLine = 'Royal Caribbean';
+        else selectedLine = 'Carnival Cruise Line';
+
         const modalTitle = document.getElementById('modalTitle');
         const cabinGrid = document.getElementById('cabinGrid');
+        document.getElementById('cabinGrid').style.display = 'grid';
+        document.getElementById('passengerSection').style.display = 'none';
 
         let titleText = '';
         let cabins = [];
@@ -877,7 +957,7 @@
           ];
         }
 
-        modalTitle.textContent = titleText + ' – Select Cabin';
+        modalTitle.textContent = selectedLine + ' - ' + titleText + ' – Select Cabin';
 
         cabinGrid.innerHTML = '';
         cabins.forEach(c => {
@@ -886,11 +966,19 @@
               <h4>${c.type}</h4>
               <p><strong>From ${c.price}</strong></p>
               <p>${c.desc}</p>
-              <button onclick="addToCart('${titleText}', '${c.type}', '${c.price}')">Add to Cart & Continue</button>
+              <button onclick="selectCabin('${titleText}', '${c.type}', '${c.price}')">Select Cabin & Continue</button>
             </div>
           `;
         });
       }
+    }
+
+    function selectCabin(cruiseTitle, cabinType, price) {
+      selectedCruiseTitle = cruiseTitle;
+      selectedCabinType = cabinType;
+      selectedCabinPrice = price;
+      document.getElementById('cabinGrid').style.display = 'none';
+      document.getElementById('passengerSection').style.display = 'block';
     }
 
     function addToCart(cruise, cabin, price) {
@@ -900,6 +988,10 @@
       alert(`Added ${cabin} cabin for ${cruise} to your booking!`);
       closeModal('cabinModal');
       openModal('cartModal');
+    }
+
+    function addToCartWithInfo() {
+      addToCart(selectedCruiseTitle, selectedCabinType, selectedCabinPrice);
     }
 
     function openCart() {
