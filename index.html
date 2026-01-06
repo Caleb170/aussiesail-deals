@@ -20,6 +20,8 @@
       --dark: #001f3f;
       --light: #f8f9fa;
       --gray: #6c757d;
+      --bubble-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      --bubble-radius: 20px;
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -40,12 +42,13 @@
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: rgba(0, 105, 148, 0.92);
-      backdrop-filter: blur(10px);
+      background: rgba(0, 105, 148, 0.95);
+      backdrop-filter: blur(12px);
       z-index: 1000;
       transition: all 0.4s ease;
+      box-shadow: var(--bubble-shadow);
     }
-    header.scrolled { background: rgba(0, 105, 148, 1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    header.scrolled { background: rgba(0, 105, 148, 1); }
 
     nav {
       display: flex;
@@ -59,21 +62,24 @@
       font-size: clamp(1.8rem, 5vw, 2.4rem);
       color: white;
       text-decoration: none;
+      font-weight: 700;
     }
     .logo span { color: var(--accent); }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.2rem;
     }
     .nav-links a {
       color: white;
       text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: color 0.3s, transform 0.2s;
     }
-    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover { color: var(--accent); transform: translateY(-2px); }
 
+    /* Hamburger */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -81,11 +87,15 @@
       cursor: pointer;
     }
     .hamburger span {
-      width: 30px;
-      height: 3px;
+      width: 32px;
+      height: 4px;
       background: white;
+      border-radius: 2px;
       transition: all 0.3s;
     }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
 
     @media (max-width: 992px) {
       .nav-links {
@@ -93,9 +103,10 @@
         top: 100%; left: 0; right: 0;
         background: rgba(0, 105, 148, 0.98);
         flex-direction: column;
-        padding: 2rem;
-        gap: 1.5rem;
+        padding: 2.5rem;
+        gap: 2rem;
         display: none;
+        box-shadow: var(--bubble-shadow);
       }
       .nav-links.active { display: flex; }
       .hamburger { display: flex; }
@@ -105,7 +116,7 @@
     .hero {
       min-height: 90vh;
       background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
-                  url('https://www.princess.com/-/media/images/destinations/ports/apia-samoa/apia-samoa-hero.jpg') center/cover no-repeat fixed;
+                  url('https://images.pexels.com/photos/11820069/pexels-photo-11820069.jpeg') center/cover no-repeat fixed;
       color: white;
       display: flex;
       align-items: center;
@@ -114,138 +125,246 @@
 
     .hero-content { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
 
-    .hero h1 { font-size: clamp(2.8rem, 7vw, 4.8rem); margin-bottom: 1rem; text-shadow: 0 4px 12px rgba(0,0,0,0.7); }
+    .hero h1 { 
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 4.8rem); 
+      margin-bottom: 1rem; 
+      text-shadow: 0 4px 12px rgba(0,0,0,0.7);
+      font-weight: 700;
+    }
 
-    .hero p { font-size: clamp(1.1rem, 3vw, 1.4rem); margin-bottom: 2.5rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .hero p { 
+      font-size: clamp(1.1rem, 3vw, 1.4rem); 
+      margin-bottom: 2.5rem; 
+      max-width: 800px; 
+      margin-left: auto; 
+      margin-right: auto;
+      font-weight: 500;
+    }
 
-    /* Search Box */
+    /* Search Box - Enhanced Glassmorphism Bubble */
     .search-box {
-      background: rgba(255,255,255,0.18);
-      backdrop-filter: blur(16px);
-      border-radius: 20px;
-      padding: 2.5rem;
-      border: 1px solid rgba(255,255,255,0.25);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      background: rgba(255,255,255,0.22);
+      backdrop-filter: blur(18px);
+      border-radius: var(--bubble-radius);
+      padding: 3rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: var(--bubble-shadow);
       max-width: 1100px;
       margin: 2.5rem auto 0;
     }
 
-    .search-box h3 { margin-bottom: 2rem; color: white; font-size: 1.8rem; text-align: center; }
+    .search-box h3 { 
+      margin-bottom: 2rem; 
+      color: white; 
+      font-size: 2rem; 
+      text-align: center;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
 
-    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+    .form-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+      gap: 1.8rem; 
+    }
 
-    select, button { padding: 1rem; border: none; border-radius: 10px; font-size: 1rem; }
+    select, input, textarea, button {
+      padding: 1.2rem;
+      border: none;
+      border-radius: var(--bubble-radius);
+      font-size: 1.05rem;
+      background: rgba(255,255,255,0.9);
+      box-shadow: var(--bubble-shadow);
+      transition: all 0.3s;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255,215,0,0.4);
+    }
 
     button {
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: white;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.3s;
     }
-    button:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,105,148,0.5); }
+    button:hover { 
+      transform: translateY(-5px); 
+      box-shadow: 0 15px 35px rgba(0,105,148,0.6); 
+    }
 
-    /* Results & Cards */
-    #search-results { margin-top: 3rem; display: none; }
+    /* Results */
+    #search-results { margin-top: 4rem; display: none; animation: fadeInUp 0.8s ease; }
 
-    .result-grid, .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+    /* Cards */
+    .grid, .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
 
     .card {
       background: white;
-      border-radius: 16px;
+      border-radius: var(--bubble-radius);
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-      transition: all 0.4s ease;
+      box-shadow: var(--bubble-shadow);
+      transition: all 0.5s ease;
       cursor: pointer;
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(50px);
     }
 
-    .card.visible { opacity: 1; transform: translateY(0); }
+    .card.visible { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
 
-    .card:hover { transform: translateY(-12px); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+    .card:hover { transform: translateY(-15px); box-shadow: 0 25px 60px rgba(0,0,0,0.25); }
 
-    .card img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.6s; }
+    .card img { width: 100%; height: 240px; object-fit: cover; transition: transform 0.7s ease; }
 
-    .card:hover img { transform: scale(1.07); }
+    .card:hover img { transform: scale(1.1); }
 
-    .card-info { padding: 1.5rem; }
+    .card-info { padding: 2rem; }
 
-    .card-info h3 { color: var(--primary); margin-bottom: 0.6rem; font-size: 1.4rem; }
+    .card-info h3 { 
+      color: var(--primary); 
+      margin-bottom: 0.8rem; 
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
 
-    .price { font-size: 1.6rem; font-weight: 700; color: #c62828; margin: 0.8rem 0; }
+    .card-info p { 
+      margin-bottom: 1rem; 
+      font-weight: 500;
+    }
 
-    /* Modal for Cabin Details */
+    .price { 
+      font-size: 1.8rem; 
+      font-weight: 700; 
+      color: #c62828; 
+      margin: 1.2rem 0; 
+    }
+
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
       z-index: 2000;
       left: 0; top: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.75);
+      background: rgba(0,0,0,0.8);
       overflow: auto;
+      animation: fadeIn 0.5s;
     }
 
     .modal-content {
       background: white;
       margin: 5% auto;
-      padding: 2rem;
-      border-radius: 16px;
-      max-width: 900px;
-      width: 90%;
-      box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+      padding: 3rem;
+      border-radius: var(--bubble-radius);
+      max-width: 1000px;
+      width: 92%;
+      box-shadow: var(--bubble-shadow);
       position: relative;
     }
 
     .close {
       position: absolute;
-      right: 1.5rem;
-      top: 1rem;
-      font-size: 2rem;
+      right: 2rem;
+      top: 1.5rem;
+      font-size: 2.5rem;
       cursor: pointer;
       color: var(--gray);
+      transition: color 0.3s;
     }
 
     .close:hover { color: var(--primary); }
 
     .cabin-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
     }
 
     .cabin-card {
-      background: #f9f9f9;
-      border-radius: 12px;
-      padding: 1.2rem;
+      background: #f0f8ff;
+      border-radius: var(--bubble-radius);
+      padding: 1.8rem;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: var(--bubble-shadow);
+      transition: transform 0.3s;
     }
 
-    .cabin-card h4 { color: var(--primary); margin-bottom: 0.8rem; }
+    .cabin-card:hover { transform: translateY(-8px); }
 
-    /* Other sections */
-    h2 { text-align: center; font-size: clamp(2.2rem, 5vw, 3.5rem); margin-bottom: 3rem; color: var(--primary); font-family: 'Playfair Display', serif; position: relative; }
+    .cabin-card h4 { 
+      color: var(--primary); 
+      margin-bottom: 1rem; 
+      font-weight: 700; 
+      font-size: 1.4rem;
+    }
 
-    h2::after { content: ''; width: 100px; height: 4px; background: var(--accent); position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); }
+    /* Headings */
+    h2 { 
+      text-align: center; 
+      font-size: clamp(2.4rem, 5vw, 3.8rem); 
+      margin-bottom: 3.5rem; 
+      color: var(--primary); 
+      font-family: 'Playfair Display', serif; 
+      font-weight: 700;
+      position: relative;
+    }
 
-    footer { background: var(--dark); color: white; text-align: center; padding: 4rem 2rem 2rem; }
+    h2::after { 
+      content: ''; 
+      width: 120px; 
+      height: 5px; 
+      background: var(--accent); 
+      position: absolute; 
+      bottom: -15px; 
+      left: 50%; 
+      transform: translateX(-50%);
+      border-radius: 3px;
+    }
 
-    .social-icons a { color: white; font-size: 1.8rem; margin: 0 1.2rem; transition: color 0.3s; }
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, var(--dark), var(--primary-dark));
+      color: white;
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+    }
 
-    .social-icons a:hover { color: var(--accent); }
+    .social-icons a { 
+      color: white; 
+      font-size: 2rem; 
+      margin: 0 1.5rem; 
+      transition: all 0.3s;
+    }
+
+    .social-icons a:hover { 
+      color: var(--accent); 
+      transform: translateY(-5px);
+    }
 
     /* Animations */
-    @keyframes fadeInUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeInUp { 
+      from { opacity:0; transform:translateY(50px); } 
+      to { opacity:1; transform:translateY(0); } 
+    }
+
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
     @media (max-width: 768px) {
       section { padding: 4rem 1rem; }
       .hero { min-height: 80vh; background-attachment: scroll; }
-      .search-box { padding: 2rem; }
+      .search-box { padding: 2.2rem; border-radius: 18px; }
       .form-grid { grid-template-columns: 1fr; }
       .card img { height: 200px; }
-      h2 { font-size: 2.5rem; }
+      .modal-content { padding: 2rem; margin: 10% auto; }
+    }
+
+    @media (max-width: 480px) {
+      nav { padding: 1rem; }
+      .logo { font-size: 1.9rem; }
+      .search-box h3 { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -255,10 +374,10 @@
     <nav class="container">
       <a href="#" class="logo">Down<span>Under</span> Cruises</a>
       <div class="nav-links" id="navMenu">
-        <a href="#deals">Deals</a>
+        <a href="#deals">Hot Deals</a>
         <a href="#destinations">Destinations</a>
         <a href="#lines">Cruise Lines</a>
-        <a href="#about">About</a>
+        <a href="#about">About Us</a>
         <a href="#contact">Contact</a>
       </div>
       <div class="hamburger" id="hamburger">
@@ -269,11 +388,11 @@
 
   <section class="hero">
     <div class="hero-content">
-      <h1>Discover the World Down Under</h1>
-      <p>Premium 2026+ cruise deals from Australia. South Pacific, New Zealand, Great Barrier Reef & more on Carnival, Royal Caribbean & top lines.</p>
+      <h1>Set Sail Down Under</h1>
+      <p>Exclusive 2026+ cruise deals from Australia. Tropical islands, fjords, reefs – unbeatable prices on Carnival, Royal Caribbean & more.</p>
       
       <div class="search-box">
-        <h3>Search Your Dream Cruise</h3>
+        <h3>Find Your Perfect Cruise</h3>
         <form class="form-grid" id="search-form">
           <select id="depart">
             <option>Depart From</option>
@@ -327,19 +446,18 @@
         </form>
 
         <div id="search-results">
-          <h3 style="margin: 3rem 0 2rem; color: white; text-align:center;">Your Matching Cruises</h3>
+          <h3>Your Matching Cruises</h3>
           <div class="result-grid" id="results-grid"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Featured Deals -->
   <section id="deals" class="container">
     <h2>Featured 2026 Deals</h2>
     <div class="grid">
       <div class="card" onclick="openModal('south-pacific')">
-        <img src="https://www.princess.com/-/media/images/destinations/ports/apia-samoa/apia-samoa-hero.jpg" alt="South Pacific luxury cruise port"/>
+        <img src="https://img.cruisecritic.net/cms-sb/f/1005231/11a763f091/paul-gauguin_orientation-left_bow_scenic_2569.jpg?auto=format%2Cenhance&fit=crop&crop=entropy&q=50&w=2048&ixlib=react-9.10.0" alt="Luxury cruise ship in South Pacific tropical waters"/>
         <div class="card-info">
           <h3>9-Night South Pacific Escape</h3>
           <p>Sydney → Mystery Island → Lifou → Noumea</p>
@@ -349,17 +467,17 @@
       </div>
 
       <div class="card" onclick="openModal('nz-fjords')">
-        <img src="https://cdn-imgix.headout.com/media/images/2c2b33b2fab255f8ebca3a49150d8497-19609-MilfordSoundCruise---003.jpg" alt="Milford Sound New Zealand fjords cruise"/>
+        <img src="https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg" alt="Cruise ship in Milford Sound New Zealand fjords"/>
         <div class="card-info">
           <h3>12-Night NZ Fjords Adventure</h3>
-          <p>Roundtrip Sydney – Milford Sound</p>
+          <p>Roundtrip Sydney – Milford Sound & wildlife</p>
           <p><strong>Twin from $1,299 pp</strong> • Quad from $999 pp</p>
           <button>View Cabins</button>
         </div>
       </div>
 
       <div class="card" onclick="openModal('reef')">
-        <img src="https://media.istockphoto.com/id/1077171172/photo/colourful-coral-scene-underwater-with-fish-and-divers.jpg" alt="Great Barrier Reef colourful coral underwater"/>
+        <img src="https://media.istockphoto.com/id/1077171172/photo/colourful-coral-scene-underwater-with-fish-and-divers.jpg?s=612x612&w=0&k=20&c=uwZuG1nojpkEF6s3ecqm74aXvIiIHi_eJZoox5_PsEk=" alt="Vibrant Great Barrier Reef underwater coral and fish"/>
         <div class="card-info">
           <h3>7-Night Great Barrier Reef</h3>
           <p>Brisbane → Cairns → Whitsundays</p>
@@ -369,7 +487,7 @@
       </div>
 
       <div class="card" onclick="openModal('vanuatu')">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Carnival_Splendor_at_Sydney.jpg/1200px-Carnival_Splendor_at_Sydney.jpg" alt="Carnival Splendor in Sydney Harbour"/>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Carnival_Splendor_at_Sydney.jpg/1200px-Carnival_Splendor_at_Sydney.jpg" alt="Carnival Splendor cruise ship in Sydney Harbour"/>
         <div class="card-info">
           <h3>10-Night Vanuatu Escape</h3>
           <p>Brisbane departure • Carnival Splendor</p>
@@ -384,23 +502,38 @@
   <div id="cabinModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
-      <h2 id="modalTitle">Cabin Details</h2>
+      <h2 id="modalTitle">Cabin Options</h2>
       <div class="cabin-grid" id="cabinGrid"></div>
     </div>
   </div>
 
-  <!-- Rest of sections (About, Contact, Footer) -->
+  <section id="destinations">
+    <div class="container">
+      <h2>Popular Destinations</h2>
+      <div class="grid">
+        <div class="card">
+          <img src="https://www.jacadatravel.com/_next/image/?url=https%3A%2F%2Fcdn.jacadatravel.com%2Fwp-content%2Fuploads%2F2017%2F03%2Ffiji-princess-boat.jpg&w=3840&q=100" alt="South Pacific tropical cruise"/>
+          <div class="card-info">
+            <h3>South Pacific Islands</h3>
+            <p>Crystal waters, island hopping – pure paradise.</p>
+          </div>
+        </div>
+        <!-- More destination cards can be added -->
+      </div>
+    </div>
+  </section>
+
   <section id="about">
     <div class="container">
       <h2>About DownUnder Cruises</h2>
-      <p style="max-width:800px; margin:0 auto 2rem; text-align:center; font-size:1.1rem;">Australia's favourite cruise booking site. Exclusive deals, group rates, onboard credits, and expert advice on Carnival, Royal Caribbean, Princess & more.</p>
-      <p style="text-align:center; font-weight:600;">ATAS Accredited • ABN: [Your ABN]</p>
+      <p style="max-width:900px; margin:0 auto 2.5rem; text-align:center; font-size:1.15rem;">Your premier Australian cruise specialist. We secure exclusive group rates, onboard credits, and perks you won't find direct. Expert advice, all in AUD.</p>
+      <p style="text-align:center; font-weight:700;">ATAS Accredited • ABN: [Your ABN] • Australian Owned</p>
     </div>
   </section>
 
   <section id="contact" class="container">
-    <h2>Contact Us</h2>
-    <form action="https://formspree.io/f/yourformid" method="POST" style="max-width:700px; margin:0 auto; display:grid; gap:1.5rem;">
+    <h2>Get in Touch</h2>
+    <form action="https://formspree.io/f/yourformid" method="POST" style="max-width:800px; margin:0 auto; display:grid; gap:2rem;">
       <input type="text" name="name" placeholder="Your Name" required/>
       <input type="email" name="email" placeholder="Your Email" required/>
       <select name="enquiry">
@@ -409,16 +542,16 @@
         <option>Booking Help</option>
         <option>General</option>
       </select>
-      <textarea name="message" placeholder="Your Message" required rows="6"></textarea>
+      <textarea name="message" placeholder="Your Message" required rows="8"></textarea>
       <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
     </form>
   </section>
 
   <footer>
     <div class="container">
-      <p>© 2026 DownUnder Cruises • Best Deals from Australia</p>
-      <p>ABN: [Your ABN] • ATAS Accredited</p>
-      <div class="social-icons" style="margin-top:2rem;">
+      <p style="font-size:1.2rem;">© 2026 DownUnder Cruises • Australia's Best Cruise Deals</p>
+      <p style="margin:1.5rem 0;">ABN: [Your ABN] • ATAS Accredited</p>
+      <div class="social-icons">
         <a href="#"><i class="fab fa-facebook-f"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -428,7 +561,7 @@
   </footer>
 
   <script>
-    // Hamburger Menu
+    // Hamburger
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
     hamburger.addEventListener('click', () => {
@@ -436,20 +569,28 @@
       hamburger.classList.toggle('active');
     });
 
+    // Close on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+
     // Header scroll
     window.addEventListener('scroll', () => {
       document.querySelector('header').classList.toggle('scrolled', window.scrollY > 80);
     });
 
-    // Card reveal animation
+    // Card animations
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 });
     document.querySelectorAll('.card').forEach(card => observer.observe(card));
 
-    // Modal logic
+    // Modal
     const modal = document.getElementById('cabinModal');
     const modalTitle = document.getElementById('modalTitle');
     const cabinGrid = document.getElementById('cabinGrid');
@@ -457,33 +598,33 @@
     function openModal(cruise) {
       let cabins = [];
       if (cruise === 'south-pacific') {
-        modalTitle.textContent = '9-Night South Pacific Escape Cabins';
+        modalTitle.textContent = '9-Night South Pacific Escape – Cabin Options';
         cabins = [
-          {type:'Interior', twin:'$899 pp', quad:'$699 pp', desc:'Comfortable inside cabin with twin beds (convertible to queen), TV, safe.'},
-          {type:'Ocean View', twin:'$1,250 pp', quad:'$950 pp', desc:'Window view, twin beds, more space.'},
-          {type:'Balcony', twin:'$1,813 pp', quad:'N/A', desc:'Private balcony, twin beds, premium amenities.'},
-          {type:'Suite', twin:'$2,851 pp', quad:'$2,200 pp', desc:'Spacious suite with large balcony, whirlpool tub.'}
+          {type:'Interior', twin:'$899 pp', quad:'$699 pp', desc:'Twin beds (queen convertible), TV, safe, en-suite.'},
+          {type:'Ocean View', twin:'$1,299 pp', quad:'$999 pp', desc:'Picture window, more space, same amenities.'},
+          {type:'Balcony', twin:'$1,899 pp', quad:'N/A', desc:'Private balcony, seating area, premium views.'},
+          {type:'Suite', twin:'$2,999 pp', quad:'$2,399 pp', desc:'Separate living area, large balcony, luxury perks.'}
         ];
       } else if (cruise === 'nz-fjords') {
-        modalTitle.textContent = '12-Night NZ Fjords Adventure Cabins';
+        modalTitle.textContent = '12-Night NZ Fjords – Cabin Options';
         cabins = [
-          {type:'Interior', twin:'$1,299 pp', quad:'$999 pp', desc:'Cozy inside, twin beds.'},
-          {type:'Balcony', twin:'$1,800 pp', quad:'N/A', desc:'Stunning fjord views from private balcony.'},
-          {type:'Suite', twin:'$3,200 pp', quad:'$2,500 pp', desc:'Luxury suite with extras.'}
+          {type:'Interior', twin:'$1,299 pp', quad:'$999 pp', desc:'Comfortable twin beds.'},
+          {type:'Balcony', twin:'$1,999 pp', quad:'N/A', desc:'Private balcony with fjord views.'},
+          {type:'Suite', twin:'$3,499 pp', quad:'$2,799 pp', desc:'Spacious luxury suite.'}
         ];
       } else if (cruise === 'reef') {
-        modalTitle.textContent = '7-Night Great Barrier Reef Cabins';
+        modalTitle.textContent = '7-Night Great Barrier Reef – Cabin Options';
         cabins = [
-          {type:'Interior', twin:'$799 pp', quad:'$649 pp', desc:'Compact & affordable.'},
-          {type:'Ocean View', twin:'$1,050 pp', quad:'$850 pp', desc:'Reef glimpses from window.'},
-          {type:'Balcony', twin:'$1,500 pp', quad:'N/A', desc:'Private balcony for sunset views.'}
+          {type:'Interior', twin:'$799 pp', quad:'$649 pp', desc:'Great value twin cabin.'},
+          {type:'Ocean View', twin:'$1,099 pp', quad:'$899 pp', desc:'Window with ocean glimpses.'},
+          {type:'Balcony', twin:'$1,599 pp', quad:'N/A', desc:'Private balcony for reef sunsets.'}
         ];
       } else {
-        modalTitle.textContent = '10-Night Vanuatu Escape Cabins';
+        modalTitle.textContent = '10-Night Vanuatu Escape – Cabin Options';
         cabins = [
-          {type:'Interior', twin:'$949 pp', quad:'$749 pp', desc:'Twin beds, great value.'},
-          {type:'Balcony', twin:'$1,600 pp', quad:'N/A', desc:'Relax on your own balcony.'},
-          {type:'Suite', twin:'$2,500 pp', quad:'$1,950 pp', desc:'Spacious with premium perks.'}
+          {type:'Interior', twin:'$949 pp', quad:'$749 pp', desc:'Family-friendly twin.'},
+          {type:'Balcony', twin:'$1,699 pp', quad:'N/A', desc:'Private balcony relaxation.'},
+          {type:'Suite', twin:'$2,799 pp', quad:'$2,199 pp', desc:'Premium suite experience.'}
         ];
       }
 
@@ -491,9 +632,9 @@
       cabins.forEach(c => {
         cabinGrid.innerHTML += `
           <div class="cabin-card">
-            <h4>${c.type}</h4>
-            <p><strong>Twin: ${c.twin}</strong></p>
-            <p><strong>Quad: ${c.quad}</strong></p>
+            <h4>${c.type} Cabin</h4>
+            <p><strong>Twin Share: ${c.twin}</strong></p>
+            <p><strong>Quad Share: ${c.quad}</strong></p>
             <p>${c.desc}</p>
           </div>
         `;
@@ -502,22 +643,26 @@
       modal.style.display = 'block';
     }
 
-    function closeModal() { modal.style.display = 'none'; }
+    function closeModal() {
+      modal.style.display = 'none';
+    }
 
     window.onclick = function(event) {
       if (event.target == modal) closeModal();
     }
 
-    // Fake search
+    // Fake search demo
     const form = document.getElementById('search-form');
     const resultsDiv = document.getElementById('search-results');
     const resultsGrid = document.getElementById('results-grid');
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      resultsGrid.innerHTML = '<p style="text-align:center; color:white;">Demo results loading... (full site would show real matches)</p>';
+      resultsGrid.innerHTML = `
+        <div class="card"><div class="card-info"><h3>Demo Results</h3><p>Your search would show real-time matches here!</p></div></div>
+      `;
       resultsDiv.style.display = 'block';
-      resultsDiv.scrollIntoView({behavior:'smooth'});
+      resultsDiv.scrollIntoView({ behavior: 'smooth' });
     });
   </script>
 </body>
