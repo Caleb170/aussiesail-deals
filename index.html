@@ -22,8 +22,6 @@
       --gray: #6c757d;
       --bubble-shadow: 0 8px 25px rgba(0,0,0,0.15);
       --bubble-radius: 20px;
-      --success: #28a745;
-      --warning: #ffc107;
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -40,7 +38,7 @@
     section { padding: 5rem 1.5rem; }
     .container { max-width: 1400px; margin: 0 auto; padding: 0 1rem; }
 
-    /* Header with Cart Icon */
+    /* Header */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -71,7 +69,6 @@
     .nav-links {
       display: flex;
       gap: 2.2rem;
-      align-items: center;
     }
     .nav-links a {
       color: white;
@@ -81,30 +78,6 @@
       transition: color 0.3s, transform 0.2s;
     }
     .nav-links a:hover { color: var(--accent); transform: translateY(-2px); }
-
-    .cart-icon {
-      position: relative;
-      color: white;
-      font-size: 1.8rem;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-    .cart-icon:hover { color: var(--accent); }
-    .cart-count {
-      position: absolute;
-      top: -8px;
-      right: -12px;
-      background: var(--accent);
-      color: var(--dark);
-      font-size: 0.8rem;
-      font-weight: 700;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
 
     /* Hamburger */
     .hamburger {
@@ -143,7 +116,7 @@
     .hero {
       min-height: 90vh;
       background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
-                  url('https://images.pexels.com/photos/11820069/pexels-photo-11820069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat fixed;
+                  url('https://images.pexels.com/photos/11820069/pexels-photo-11820069.jpeg') center/cover no-repeat fixed;
       color: white;
       display: flex;
       align-items: center;
@@ -169,7 +142,7 @@
       font-weight: 500;
     }
 
-    /* Search Box */
+    /* Search Box - Enhanced Glassmorphism Bubble */
     .search-box {
       background: rgba(255,255,255,0.22);
       backdrop-filter: blur(18px);
@@ -222,6 +195,9 @@
       box-shadow: 0 15px 35px rgba(0,105,148,0.6); 
     }
 
+    /* Results */
+    #search-results { margin-top: 4rem; display: none; animation: fadeInUp 0.8s ease; }
+
     /* Cards */
     .grid, .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
 
@@ -265,7 +241,7 @@
       margin: 1.2rem 0; 
     }
 
-    /* Cabin Modal */
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -323,64 +299,6 @@
       margin-bottom: 1rem; 
       font-weight: 700; 
       font-size: 1.4rem;
-    }
-
-    .cabin-card button {
-      margin-top: 1rem;
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-    }
-
-    /* Cart Modal */
-    #cartModal .modal-content {
-      max-width: 1100px;
-    }
-
-    .cart-item {
-      display: grid;
-      grid-template-columns: 100px 1fr auto;
-      gap: 1.5rem;
-      padding: 1.5rem 0;
-      border-bottom: 1px solid #eee;
-      align-items: center;
-    }
-
-    .cart-item img {
-      width: 100px;
-      height: 70px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .cart-summary {
-      background: #f0f8ff;
-      padding: 2rem;
-      border-radius: var(--bubble-radius);
-      margin-top: 2rem;
-    }
-
-    .hold-note {
-      background: var(--warning);
-      color: var(--dark);
-      padding: 1.5rem;
-      border-radius: var(--bubble-radius);
-      margin: 2rem 0;
-      text-align: center;
-      font-weight: 600;
-    }
-
-    .passenger-form {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .checkout-btn {
-      width: 100%;
-      padding: 1.5rem;
-      font-size: 1.3rem;
-      margin-top: 2rem;
     }
 
     /* Headings */
@@ -441,7 +359,6 @@
       .form-grid { grid-template-columns: 1fr; }
       .card img { height: 200px; }
       .modal-content { padding: 2rem; margin: 10% auto; }
-      .cart-item { grid-template-columns: 80px 1fr; }
     }
 
     @media (max-width: 480px) {
@@ -462,10 +379,6 @@
         <a href="#lines">Cruise Lines</a>
         <a href="#about">About Us</a>
         <a href="#contact">Contact</a>
-        <div class="cart-icon" onclick="openCart()">
-          <i class="fas fa-shopping-cart"></i>
-          <span class="cart-count" id="cartCount">0</span>
-        </div>
       </div>
       <div class="hamburger" id="hamburger">
         <span></span><span></span><span></span>
@@ -543,130 +456,69 @@
   <section id="deals" class="container">
     <h2>Featured 2026 Deals</h2>
     <div class="grid">
-      <div class="card" onclick="openCabinModal('south-pacific')">
+      <div class="card" onclick="openModal('south-pacific')">
         <img src="https://img.cruisecritic.net/cms-sb/f/1005231/11a763f091/paul-gauguin_orientation-left_bow_scenic_2569.jpg?auto=format%2Cenhance&fit=crop&crop=entropy&q=50&w=2048&ixlib=react-9.10.0" alt="Luxury cruise ship in South Pacific tropical waters"/>
         <div class="card-info">
           <h3>9-Night South Pacific Escape</h3>
           <p>Sydney → Mystery Island → Lifou → Noumea</p>
           <p><strong>Twin from $899 pp</strong> • Quad from $699 pp</p>
-          <button>Select Cabin</button>
+          <button>View Cabins</button>
         </div>
       </div>
 
-      <div class="card" onclick="openCabinModal('nz-fjords')">
+      <div class="card" onclick="openModal('nz-fjords')">
         <img src="https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg" alt="Cruise ship in Milford Sound New Zealand fjords"/>
         <div class="card-info">
           <h3>12-Night NZ Fjords Adventure</h3>
           <p>Roundtrip Sydney – Milford Sound & wildlife</p>
           <p><strong>Twin from $1,299 pp</strong> • Quad from $999 pp</p>
-          <button>Select Cabin</button>
+          <button>View Cabins</button>
         </div>
       </div>
 
-      <div class="card" onclick="openCabinModal('reef')">
+      <div class="card" onclick="openModal('reef')">
         <img src="https://media.istockphoto.com/id/1077171172/photo/colourful-coral-scene-underwater-with-fish-and-divers.jpg?s=612x612&w=0&k=20&c=uwZuG1nojpkEF6s3ecqm74aXvIiIHi_eJZoox5_PsEk=" alt="Vibrant Great Barrier Reef underwater coral and fish"/>
         <div class="card-info">
           <h3>7-Night Great Barrier Reef</h3>
           <p>Brisbane → Cairns → Whitsundays</p>
           <p><strong>Twin from $799 pp</strong> • Quad from $649 pp</p>
-          <button>Select Cabin</button>
+          <button>View Cabins</button>
         </div>
       </div>
 
-      <div class="card" onclick="openCabinModal('vanuatu')">
+      <div class="card" onclick="openModal('vanuatu')">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Carnival_Splendor_at_Sydney.jpg/1200px-Carnival_Splendor_at_Sydney.jpg" alt="Carnival Splendor cruise ship in Sydney Harbour"/>
         <div class="card-info">
           <h3>10-Night Vanuatu Escape</h3>
           <p>Brisbane departure • Carnival Splendor</p>
           <p><strong>Twin from $949 pp</strong> • Quad from $749 pp</p>
-          <button>Select Cabin</button>
+          <button>View Cabins</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Cabin Selection Modal -->
+  <!-- Cabin Modal -->
   <div id="cabinModal" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal('cabinModal')">&times;</span>
-      <h2 id="cabinModalTitle">Select Your Cabin</h2>
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle">Cabin Options</h2>
       <div class="cabin-grid" id="cabinGrid"></div>
     </div>
   </div>
 
-  <!-- Cart Modal -->
-  <div id="cartModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('cartModal')">&times;</span>
-      <h2>Your Cart</h2>
-      <div id="cartItems"></div>
-
-      <div class="hold-note">
-        <strong>No Obligation Hold Policy</strong><br>
-        We can hold your selected cabin for 48 hours with no payment required. After 48 hours, the hold expires unless confirmed with deposit.
-      </div>
-
-      <h3 style="margin-top: 3rem;">Passenger Details (Required for Hold/Booking)</h3>
-      <form id="passengerForm" class="passenger-form">
-        <input type="text" placeholder="Full Name (Passenger 1)" required/>
-        <input type="date" placeholder="Date of Birth (Passenger 1)" required/>
-        <input type="text" placeholder="VIFP # (Carnival Loyalty, if applicable)"/>
-        <input type="text" placeholder="Full Name (Passenger 2)" />
-        <input type="date" placeholder="Date of Birth (Passenger 2)" />
-        <input type="text" placeholder="Full Name (Passenger 3)" />
-        <input type="date" placeholder="Date of Birth (Passenger 3)" />
-        <input type="text" placeholder="Full Name (Passenger 4)" />
-        <input type="date" placeholder="Date of Birth (Passenger 4)" />
-        <textarea placeholder="Special Requests or Dietary Needs" rows="4"></textarea>
-      </form>
-
-      <div class="cart-summary">
-        <p><strong>Total Estimate:</strong> <span id="cartTotal">$0</span></p>
-        <p>Taxes, port fees & gratuities included in estimate.</p>
-      </div>
-
-      <button class="checkout-btn" onclick="fakeCheckout()">Place 48-Hour Hold (No Payment)</button>
-      <button class="checkout-btn" style="background:var(--success); margin-top:1rem;" onclick="fakeCheckout(true)">Proceed to Secure Payment</button>
-    </div>
-  </div>
-
-  <!-- Success Modal -->
-  <div id="successModal" class="modal">
-    <div class="modal-content" style="text-align:center;">
-      <span class="close" onclick="closeModal('successModal')">&times;</span>
-      <i class="fas fa-check-circle" style="font-size:5rem; color:var(--success); margin:2rem 0;"></i>
-      <h2>Hold Confirmed!</h2>
-      <p>Your cabin is held for 48 hours with no obligation. We'll email confirmation shortly.</p>
-      <button onclick="closeModal('successModal')">Close</button>
-    </div>
-  </div>
-
-  <!-- Other Sections (Destinations, About, Contact, Footer) -->
   <section id="destinations">
     <div class="container">
       <h2>Popular Destinations</h2>
       <div class="grid">
         <div class="card">
-          <img src="https://www.jacadatravel.com/_next/image/?url=https%3A%2F%2Fcdn.jacadatravel.com%2Fwp-content%2Fuploads%2F2017%2F03%2Ffiji-princess-boat.jpg&w=3840&q=100" alt="South Pacific tropical cruise ship"/>
+          <img src="https://www.jacadatravel.com/_next/image/?url=https%3A%2F%2Fcdn.jacadatravel.com%2Fwp-content%2Fuploads%2F2017%2F03%2Ffiji-princess-boat.jpg&w=3840&q=100" alt="South Pacific tropical cruise"/>
           <div class="card-info">
             <h3>South Pacific Islands</h3>
             <p>Crystal waters, island hopping – pure paradise.</p>
           </div>
         </div>
-        <div class="card">
-          <img src="https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg" alt="New Zealand Milford Sound cruise"/>
-          <div class="card-info">
-            <h3>New Zealand Fjords</h3>
-            <p>Dramatic scenery & wildlife adventures.</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://media.istockphoto.com/id/1077171172/photo/colourful-coral-scene-underwater-with-fish-and-divers.jpg?s=612x612&w=0&k=20&c=uwZuG1nojpkEF6s3ecqm74aXvIiIHi_eJZoox5_PsEk=" alt="Great Barrier Reef coral reef"/>
-          <div class="card-info">
-            <h3>Great Barrier Reef</h3>
-            <p>Snorkel the world's largest coral system.</p>
-          </div>
-        </div>
+        <!-- More destination cards can be added -->
       </div>
     </div>
   </section>
@@ -709,134 +561,7 @@
   </footer>
 
   <script>
-    // Cart system using localStorage
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    function updateCartCount() {
-      document.getElementById('cartCount').textContent = cart.length;
-    }
-
-    function addToCart(cruise, cabin, price) {
-      cart.push({ cruise, cabin, price });
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCartCount();
-      alert(`Added ${cabin} for ${cruise} to cart!`);
-    }
-
-    function openCart() {
-      const modal = document.getElementById('cartModal');
-      const itemsDiv = document.getElementById('cartItems');
-      const totalSpan = document.getElementById('cartTotal');
-
-      itemsDiv.innerHTML = '';
-      let total = 0;
-
-      if (cart.length === 0) {
-        itemsDiv.innerHTML = '<p>Your cart is empty.</p>';
-      } else {
-        cart.forEach((item, index) => {
-          total += parseFloat(item.price.replace('$', '').replace(' pp', ''));
-          itemsDiv.innerHTML += `
-            <div class="cart-item">
-              <img src="https://via.placeholder.com/100x70?text=Cruise" alt="${item.cruise}"/>
-              <div>
-                <h4>${item.cruise}</h4>
-                <p>Cabin: ${item.cabin} • Price: ${item.price}</p>
-              </div>
-              <button onclick="removeFromCart(${index})" style="background:#c62828;">Remove</button>
-            </div>
-          `;
-        });
-      }
-
-      totalSpan.textContent = '$' + total.toFixed(2) + ' pp estimate';
-      modal.style.display = 'block';
-    }
-
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCartCount();
-      openCart();
-    }
-
-    function fakeCheckout(pay = false) {
-      document.getElementById('cartModal').style.display = 'none';
-      document.getElementById('successModal').style.display = 'block';
-      if (pay) {
-        alert('In a real site, this would redirect to secure payment gateway.');
-      }
-      cart = [];
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCartCount();
-    }
-
-    // Cabin Modal
-    function openCabinModal(cruise) {
-      const modal = document.getElementById('cabinModal');
-      const title = document.getElementById('modalTitle');
-      const grid = document.getElementById('cabinGrid');
-
-      title.textContent = cruise === 'south-pacific' ? '9-Night South Pacific Escape – Cabins' :
-                       cruise === 'nz-fjords' ? '12-Night NZ Fjords – Cabins' :
-                       cruise === 'reef' ? '7-Night Great Barrier Reef – Cabins' :
-                       '10-Night Vanuatu Escape – Cabins';
-
-      let cabins = [];
-      if (cruise === 'south-pacific') {
-        cabins = [
-          {type:'Interior', price:'$899 pp', desc:'Twin beds, TV, safe.'},
-          {type:'Ocean View', price:'$1,299 pp', desc:'Window view.'},
-          {type:'Balcony', price:'$1,899 pp', desc:'Private balcony.'},
-          {type:'Suite', price:'$2,999 pp', desc:'Luxury suite.'}
-        ];
-      } else if (cruise === 'nz-fjords') {
-        cabins = [
-          {type:'Interior', price:'$1,299 pp', desc:'Cozy twin.'},
-          {type:'Balcony', price:'$1,999 pp', desc:'Fjord views.'},
-          {type:'Suite', price:'$3,499 pp', desc:'Premium suite.'}
-        ];
-      } else if (cruise === 'reef') {
-        cabins = [
-          {type:'Interior', price:'$799 pp', desc:'Great value.'},
-          {type:'Ocean View', price:'$1,099 pp', desc:'Ocean glimpses.'},
-          {type:'Balcony', price:'$1,599 pp', desc:'Sunset balcony.'}
-        ];
-      } else {
-        cabins = [
-          {type:'Interior', price:'$949 pp', desc:'Family-friendly.'},
-          {type:'Balcony', price:'$1,699 pp', desc:'Private relaxation.'},
-          {type:'Suite', price:'$2,799 pp', desc:'Premium experience.'}
-        ];
-      }
-
-      grid.innerHTML = '';
-      cabins.forEach(c => {
-        grid.innerHTML += `
-          <div class="cabin-card">
-            <h4>${c.type}</h4>
-            <p><strong>From ${c.price}</strong></p>
-            <p>${c.desc}</p>
-            <button onclick="addToCart('${title.textContent}', '${c.type}', '${c.price}')">Add to Cart</button>
-          </div>
-        `;
-      });
-
-      modal.style.display = 'block';
-    }
-
-    function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
-    }
-
-    // General close
-    window.onclick = function(event) {
-      if (event.target.classList.contains('modal')) {
-        event.target.style.display = 'none';
-      }
-    }
-
-    // Other scripts (hamburger, scroll, animations) remain the same
+    // Hamburger
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
     hamburger.addEventListener('click', () => {
@@ -844,10 +569,20 @@
       hamburger.classList.toggle('active');
     });
 
+    // Close on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+
+    // Header scroll
     window.addEventListener('scroll', () => {
       document.querySelector('header').classList.toggle('scrolled', window.scrollY > 80);
     });
 
+    // Card animations
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -855,7 +590,82 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.card').forEach(card => observer.observe(card));
 
-    updateCartCount();
+    // Cabin Modal - Fixed to use single openModal function
+    const modal = document.getElementById('cabinModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const cabinGrid = document.getElementById('cabinGrid');
+
+    function openModal(cruise) {
+      let cabins = [];
+      if (cruise === 'south-pacific') {
+        modalTitle.textContent = '9-Night South Pacific Escape – Cabin Options';
+        cabins = [
+          {type:'Interior', twin:'$899 pp', quad:'$699 pp', desc:'Comfortable inside cabin with twin beds (convertible to queen), TV, safe.'},
+          {type:'Ocean View', twin:'$1,250 pp', quad:'$950 pp', desc:'Window view, twin beds, more space.'},
+          {type:'Balcony', twin:'$1,813 pp', quad:'N/A', desc:'Private balcony, twin beds, premium amenities.'},
+          {type:'Suite', twin:'$2,851 pp', quad:'$2,200 pp', desc:'Spacious suite with large balcony, whirlpool tub.'}
+        ];
+      } else if (cruise === 'nz-fjords') {
+        modalTitle.textContent = '12-Night NZ Fjords Adventure – Cabin Options';
+        cabins = [
+          {type:'Interior', twin:'$1,299 pp', quad:'$999 pp', desc:'Cozy inside, twin beds.'},
+          {type:'Balcony', twin:'$1,800 pp', quad:'N/A', desc:'Stunning fjord views from private balcony.'},
+          {type:'Suite', twin:'$3,200 pp', quad:'$2,500 pp', desc:'Luxury suite with extras.'}
+        ];
+      } else if (cruise === 'reef') {
+        modalTitle.textContent = '7-Night Great Barrier Reef – Cabin Options';
+        cabins = [
+          {type:'Interior', twin:'$799 pp', quad:'$649 pp', desc:'Compact & affordable.'},
+          {type:'Ocean View', twin:'$1,050 pp', quad:'$850 pp', desc:'Reef glimpses from window.'},
+          {type:'Balcony', twin:'$1,500 pp', quad:'N/A', desc:'Private balcony for sunset views.'}
+        ];
+      } else {
+        modalTitle.textContent = '10-Night Vanuatu Escape – Cabin Options';
+        cabins = [
+          {type:'Interior', twin:'$949 pp', quad:'$749 pp', desc:'Twin beds, great value.'},
+          {type:'Balcony', twin:'$1,600 pp', quad:'N/A', desc:'Relax on your own balcony.'},
+          {type:'Suite', twin:'$2,500 pp', quad:'$1,950 pp', desc:'Spacious with premium perks.'}
+        ];
+      }
+
+      cabinGrid.innerHTML = '';
+      cabins.forEach(c => {
+        cabinGrid.innerHTML += `
+          <div class="cabin-card">
+            <h4>${c.type}</h4>
+            <p><strong>Twin: ${c.twin}</strong></p>
+            <p><strong>Quad: ${c.quad}</strong></p>
+            <p>${c.desc}</p>
+          </div>
+        `;
+      });
+
+      modal.style.display = 'block';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+
+    // Fake search demo
+    const form = document.getElementById('search-form');
+    const resultsDiv = document.getElementById('search-results');
+    const resultsGrid = document.getElementById('results-grid');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      resultsGrid.innerHTML = `
+        <div class="card"><div class="card-info"><h3>Demo Results</h3><p>Your search would show real-time matches here!</p></div></div>
+      `;
+      resultsDiv.style.display = 'block';
+      resultsDiv.scrollIntoView({ behavior: 'smooth' });
+    });
   </script>
 </body>
 </html>
