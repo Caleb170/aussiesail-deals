@@ -40,7 +40,7 @@
     section { padding: 5rem 1.5rem; }
     .container { max-width: 1400px; margin: 0 auto; padding: 0 1rem; }
 
-    /* Header with Cart Icon */
+    /* Header with Logo Icon */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -65,7 +65,11 @@
       color: white;
       text-decoration: none;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
     }
+    .logo i { color: var(--accent); font-size: 1.8rem; }
     .logo span { color: var(--accent); }
 
     .nav-links {
@@ -285,7 +289,7 @@
       margin: 5% auto;
       padding: 3rem;
       border-radius: var(--bubble-radius);
-      max-width: 1000px;
+      max-width: 1200px;
       width: 92%;
       box-shadow: var(--bubble-shadow);
       position: relative;
@@ -303,11 +307,39 @@
 
     .close:hover { color: var(--primary); }
 
+    /* Ship Highlights */
+    .ship-highlights {
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .highlight-item {
+      background: #f0f8ff;
+      border-radius: var(--bubble-radius);
+      padding: 1.5rem;
+      box-shadow: var(--bubble-shadow);
+    }
+
+    .highlight-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: var(--bubble-radius);
+      margin-bottom: 1rem;
+    }
+
+    /* Cabin Grid */
     .cabin-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      margin-top: 2.5rem;
     }
 
     .cabin-card {
@@ -332,6 +364,18 @@
       margin-top: 1rem;
       padding: 0.8rem 1.5rem;
       font-size: 1rem;
+    }
+
+    /* Passenger Count Selector */
+    .passenger-selector {
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .passenger-selector label {
+      font-weight: 600;
+      margin-right: 1rem;
+      color: var(--primary);
     }
 
     /* Cart Modal */
@@ -376,6 +420,10 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .dynamic-passengers {
       margin-top: 2rem;
     }
 
@@ -445,6 +493,7 @@
       .card img { height: 200px; }
       .modal-content { padding: 2rem; margin: 10% auto; }
       .cart-item { grid-template-columns: 80px 1fr; }
+      .highlights-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 480px) {
@@ -458,7 +507,7 @@
 
   <header>
     <nav class="container">
-      <a href="#" class="logo">Down<span>Under</span> Cruises</a>
+      <a href="#" class="logo"><i class="fas fa-ship"></i> Down<span>Under</span> Cruises</a>
       <div class="nav-links" id="navMenu">
         <a href="#deals">Hot Deals</a>
         <a href="#destinations">Destinations</a>
@@ -532,6 +581,13 @@
             <option>10-14 Nights</option>
             <option>15+ Nights</option>
           </select>
+          <select id="passengers">
+            <option>Number of Passengers</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
           <button type="submit">Search Cruises <i class="fas fa-search"></i></button>
         </form>
 
@@ -552,7 +608,7 @@
           <h3>9-Night South Pacific Escape</h3>
           <p>Sydney → Mystery Island → Lifou → Noumea</p>
           <p><strong>Twin from $899 pp</strong> • Quad from $699 pp</p>
-          <button>View Cabins</button>
+          <button>Select Cabin & Passengers</button>
         </div>
       </div>
 
@@ -562,7 +618,7 @@
           <h3>12-Night NZ Fjords Adventure</h3>
           <p>Roundtrip Sydney – Milford Sound & wildlife</p>
           <p><strong>Twin from $1,299 pp</strong> • Quad from $999 pp</p>
-          <button>View Cabins</button>
+          <button>Select Cabin & Passengers</button>
         </div>
       </div>
 
@@ -572,7 +628,7 @@
           <h3>7-Night Great Barrier Reef</h3>
           <p>Brisbane → Cairns → Whitsundays</p>
           <p><strong>Twin from $799 pp</strong> • Quad from $649 pp</p>
-          <button>View Cabins</button>
+          <button>Select Cabin & Passengers</button>
         </div>
       </div>
 
@@ -582,17 +638,54 @@
           <h3>10-Night Vanuatu Escape</h3>
           <p>Brisbane departure • Carnival Splendor</p>
           <p><strong>Twin from $949 pp</strong> • Quad from $749 pp</p>
-          <button>View Cabins</button>
+          <button>Select Cabin & Passengers</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Cabin Modal -->
+  <!-- Cabin Modal with Ship Highlights & Dynamic Passengers -->
   <div id="cabinModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('cabinModal')">&times;</span>
-      <h2 id="modalTitle">Cabin Options</h2>
+      <h2 id="modalTitle">Select Cabin & Passengers</h2>
+
+      <!-- Ship Highlights & Interiors -->
+      <div class="ship-highlights">
+        <h3 style="margin-bottom: 2rem; color: var(--primary);">Ship Highlights & Interiors</h3>
+        <p style="max-width: 800px; margin: 0 auto 2rem; text-align: center;">Enjoy modern amenities, pools, dining, entertainment, and stunning views on this beautiful ship.</p>
+        <div class="highlights-grid">
+          <div class="highlight-item">
+            <img src="https://s3.amazonaws.com/a-us.storyblok.com/f/1005231/e51ea2078c/image_10355969.jpg" alt="Carnival Splendor luxury interior cabin"/>
+            <p>Luxury Balcony Cabin</p>
+          </div>
+          <div class="highlight-item">
+            <img src="https://s3.amazonaws.com/a-us.storyblok.com/f/1005231/18aea01fe0/image_10356356.jpg" alt="Carnival Splendor suite interior"/>
+            <p>Spacious Suite with Balcony</p>
+          </div>
+          <div class="highlight-item">
+            <img src="https://www.carnival.com/-/media/Images/explore/staterooms/overview/stateroom-mobile-3.jpg" alt="Carnival cruise ship interior room"/>
+            <p>Comfortable Interior Cabin</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passenger Count Selector -->
+      <div class="passenger-selector">
+        <label for="passengerCount">Number of Passengers:</label>
+        <select id="passengerCount" onchange="generatePassengerFields()">
+          <option value="1">1 Adult</option>
+          <option value="2" selected>2 Adults</option>
+          <option value="3">3 Passengers</option>
+          <option value="4">4 Passengers</option>
+        </select>
+      </div>
+
+      <!-- Dynamic Passenger Fields -->
+      <div id="dynamicPassengers" class="passenger-form"></div>
+
+      <!-- Cabin Options -->
+      <h3 style="margin-top: 3rem; color: var(--primary);">Available Cabin Types</h3>
       <div class="cabin-grid" id="cabinGrid"></div>
     </div>
   </div>
@@ -601,35 +694,21 @@
   <div id="cartModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('cartModal')">&times;</span>
-      <h2>Your Cart</h2>
+      <h2>Your Booking Summary</h2>
       <div id="cartItems"></div>
 
       <div class="hold-note">
         <strong>No Obligation Hold Policy</strong><br>
-        We can hold your selected cabin for 48 hours with no payment required. After 48 hours, the hold expires unless confirmed with deposit.
+        Secure your cabin for 48 hours with no payment required. Full payment due later if confirmed.
       </div>
-
-      <h3 style="margin-top: 3rem;">Passenger Details (Required for Hold/Booking)</h3>
-      <form id="passengerForm" class="passenger-form">
-        <input type="text" placeholder="Full Name (Passenger 1)" required/>
-        <input type="date" placeholder="Date of Birth (Passenger 1)" required/>
-        <input type="text" placeholder="VIFP # (Carnival Loyalty, if applicable)"/>
-        <input type="text" placeholder="Full Name (Passenger 2)" />
-        <input type="date" placeholder="Date of Birth (Passenger 2)" />
-        <input type="text" placeholder="Full Name (Passenger 3)" />
-        <input type="date" placeholder="Date of Birth (Passenger 3)" />
-        <input type="text" placeholder="Full Name (Passenger 4)" />
-        <input type="date" placeholder="Date of Birth (Passenger 4)" />
-        <textarea placeholder="Special Requests or Dietary Needs" rows="4"></textarea>
-      </form>
 
       <div class="cart-summary">
-        <p><strong>Total Estimate:</strong> <span id="cartTotal">$0</span></p>
-        <p>Taxes, port fees & gratuities included in estimate.</p>
+        <p><strong>Total Estimate (per person):</strong> <span id="cartTotal">$0</span></p>
+        <p>Includes taxes, port fees & gratuities.</p>
       </div>
 
-      <button class="checkout-btn" onclick="fakeCheckout()">Place 48-Hour Hold (No Payment)</button>
-      <button class="checkout-btn" style="background:var(--success); margin-top:1rem;" onclick="fakeCheckout(true)">Proceed to Secure Payment</button>
+      <button class="checkout-btn" onclick="fakeCheckout()">Place 48-Hour Hold</button>
+      <button class="checkout-btn" style="background:var(--success); margin-top:1rem;" onclick="fakeCheckout(true)">Proceed to Payment</button>
     </div>
   </div>
 
@@ -638,8 +717,8 @@
     <div class="modal-content" style="text-align:center;">
       <span class="close" onclick="closeModal('successModal')">&times;</span>
       <i class="fas fa-check-circle" style="font-size:5rem; color:var(--success); margin:2rem 0;"></i>
-      <h2>Hold Confirmed!</h2>
-      <p>Your cabin is held for 48 hours with no obligation. We'll email confirmation shortly.</p>
+      <h2>Booking Confirmed!</h2>
+      <p>Your cabin is held for 48 hours. We'll send confirmation and next steps to your email.</p>
       <button onclick="closeModal('successModal')">Close</button>
     </div>
   </div>
@@ -726,7 +805,36 @@
       document.getElementById('cartCount').textContent = cart.length;
     }
 
-    // Modal functions
+    // Dynamic Passenger Fields
+    function generatePassengerFields() {
+      const count = document.getElementById('passengerCount').value;
+      const container = document.getElementById('dynamicPassengers');
+      container.innerHTML = '';
+
+      for (let i = 1; i <= count; i++) {
+        container.innerHTML += `
+          <div style="grid-column: span 2; background:#f0f8ff; padding:1.5rem; border-radius:var(--bubble-radius);">
+            <h4 style="color:var(--primary); margin-bottom:1rem;">Passenger ${i} Details</h4>
+            <div class="passenger-form">
+              <input type="text" placeholder="Full Name (as on passport)" required/>
+              <input type="date" placeholder="Date of Birth" required/>
+              <input type="text" placeholder="VIFP # (Carnival Loyalty, optional)"/>
+              <select>
+                <option>Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // Default to 2 passengers
+    generatePassengerFields();
+
+    // Cabin Modal with Ship Highlights
     function openModal(modalId, cruise = null) {
       const modal = document.getElementById(modalId);
       modal.style.display = 'block';
@@ -739,29 +847,29 @@
         let cabins = [];
 
         if (cruise === 'south-pacific') {
-          titleText = '9-Night South Pacific Escape – Cabin Options';
+          titleText = '9-Night South Pacific Escape';
           cabins = [
-            {type:'Interior', price:'$899 pp', desc:'Twin beds, TV, safe.'},
-            {type:'Ocean View', price:'$1,299 pp', desc:'Window view.'},
-            {type:'Balcony', price:'$1,899 pp', desc:'Private balcony.'},
-            {type:'Suite', price:'$2,999 pp', desc:'Luxury suite.'}
+            {type:'Interior', price:'$899 pp', desc:'Twin beds, TV, safe, en-suite.'},
+            {type:'Ocean View', price:'$1,299 pp', desc:'Window with ocean views.'},
+            {type:'Balcony', price:'$1,899 pp', desc:'Private balcony, seating.'},
+            {type:'Suite', price:'$2,999 pp', desc:'Spacious with luxury amenities.'}
           ];
         } else if (cruise === 'nz-fjords') {
-          titleText = '12-Night NZ Fjords – Cabin Options';
+          titleText = '12-Night NZ Fjords Adventure';
           cabins = [
-            {type:'Interior', price:'$1,299 pp', desc:'Cozy twin.'},
-            {type:'Balcony', price:'$1,999 pp', desc:'Fjord views.'},
-            {type:'Suite', price:'$3,499 pp', desc:'Premium suite.'}
+            {type:'Interior', price:'$1,299 pp', desc:'Cozy twin cabin.'},
+            {type:'Balcony', price:'$1,999 pp', desc:'Stunning fjord views.'},
+            {type:'Suite', price:'$3,499 pp', desc:'Premium luxury suite.'}
           ];
         } else if (cruise === 'reef') {
-          titleText = '7-Night Great Barrier Reef – Cabin Options';
+          titleText = '7-Night Great Barrier Reef';
           cabins = [
             {type:'Interior', price:'$799 pp', desc:'Great value.'},
             {type:'Ocean View', price:'$1,099 pp', desc:'Ocean glimpses.'},
-            {type:'Balcony', price:'$1,599 pp', desc:'Sunset balcony.'}
+            {type:'Balcony', price:'$1,599 pp', desc:'Private balcony.'}
           ];
         } else {
-          titleText = '10-Night Vanuatu Escape – Cabin Options';
+          titleText = '10-Night Vanuatu Escape';
           cabins = [
             {type:'Interior', price:'$949 pp', desc:'Family-friendly.'},
             {type:'Balcony', price:'$1,699 pp', desc:'Private relaxation.'},
@@ -769,7 +877,8 @@
           ];
         }
 
-        modalTitle.textContent = titleText;
+        modalTitle.textContent = titleText + ' – Select Cabin';
+
         cabinGrid.innerHTML = '';
         cabins.forEach(c => {
           cabinGrid.innerHTML += `
@@ -777,36 +886,10 @@
               <h4>${c.type}</h4>
               <p><strong>From ${c.price}</strong></p>
               <p>${c.desc}</p>
-              <button onclick="addToCart('${titleText}', '${c.type}', '${c.price}')">Add to Cart</button>
+              <button onclick="addToCart('${titleText}', '${c.type}', '${c.price}')">Add to Cart & Continue</button>
             </div>
           `;
         });
-      } else if (modalId === 'cartModal') {
-        const itemsDiv = document.getElementById('cartItems');
-        const totalSpan = document.getElementById('cartTotal');
-
-        itemsDiv.innerHTML = '';
-        let total = 0;
-
-        if (cart.length === 0) {
-          itemsDiv.innerHTML = '<p style="text-align:center;">Your cart is empty.</p>';
-        } else {
-          cart.forEach((item, index) => {
-            total += parseFloat(item.price.replace('$', '').replace(' pp', ''));
-            itemsDiv.innerHTML += `
-              <div class="cart-item">
-                <img src="https://via.placeholder.com/100x70?text=Cruise" alt="${item.cruise}"/>
-                <div>
-                  <h4>${item.cruise}</h4>
-                  <p>Cabin: ${item.cabin} • Price: ${item.price}</p>
-                </div>
-                <button onclick="removeFromCart(${index})" style="background:#c62828;padding:0.8rem 1.2rem;">Remove</button>
-              </div>
-            `;
-          });
-        }
-
-        totalSpan.textContent = '$' + total.toFixed(2) + ' pp estimate';
       }
     }
 
@@ -814,38 +897,68 @@
       cart.push({ cruise, cabin, price });
       localStorage.setItem('cart', JSON.stringify(cart));
       updateCartCount();
-      alert(`Added ${cabin} for ${cruise} to cart!`);
+      alert(`Added ${cabin} cabin for ${cruise} to your booking!`);
       closeModal('cabinModal');
+      openModal('cartModal');
+    }
+
+    function openCart() {
+      openModal('cartModal');
+      const itemsDiv = document.getElementById('cartItems');
+      const totalSpan = document.getElementById('cartTotal');
+
+      itemsDiv.innerHTML = '';
+      let total = 0;
+
+      if (cart.length === 0) {
+        itemsDiv.innerHTML = '<p style="text-align:center; padding:2rem;">Your booking cart is empty.</p>';
+      } else {
+        cart.forEach((item, index) => {
+          total += parseFloat(item.price.replace('$', '').replace(' pp', ''));
+          itemsDiv.innerHTML += `
+            <div class="cart-item">
+              <img src="https://via.placeholder.com/100x70?text=Cruise" alt="${item.cruise}"/>
+              <div>
+                <h4>${item.cruise}</h4>
+                <p>Cabin: ${item.cabin} • Price: ${item.price}</p>
+              </div>
+              <button onclick="removeFromCart(${index})" style="background:#c62828;padding:0.8rem 1.2rem;">Remove</button>
+            </div>
+          `;
+        });
+      }
+
+      totalSpan.textContent = '$' + total.toFixed(2) + ' pp estimate';
     }
 
     function removeFromCart(index) {
       cart.splice(index, 1);
       localStorage.setItem('cart', JSON.stringify(cart));
       updateCartCount();
-      openModal('cartModal');
+      openCart();
+    }
+
+    function fakeCheckout(pay = false) {
+      closeModal('cartModal');
+      document.getElementById('successModal').style.display = 'block';
+      if (pay) {
+        alert('In a real site, this would redirect to secure payment.');
+      } else {
+        alert('Your 48-hour hold is confirmed!');
+      }
+      cart = [];
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
     }
 
     function closeModal(modalId) {
       document.getElementById(modalId).style.display = 'none';
     }
 
-    // Close modal when clicking outside
     window.onclick = function(event) {
       if (event.target.classList.contains('modal')) {
         event.target.style.display = 'none';
       }
-    }
-
-    // Fake checkout
-    function fakeCheckout(pay = false) {
-      closeModal('cartModal');
-      openModal('successModal');
-      if (pay) {
-        alert('In a real site, this would redirect to secure payment gateway.');
-      }
-      cart = [];
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCartCount();
     }
 
     // Fake search
@@ -856,7 +969,7 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       resultsGrid.innerHTML = `
-        <div class="card"><div class="card-info"><h3>Demo Results</h3><p>Your search would show real-time matches here!</p></div></div>
+        <div class="card"><div class="card-info"><h3>Demo Results</h3><p>Real-time matches would appear here based on your search!</p></div></div>
       `;
       resultsDiv.style.display = 'block';
       resultsDiv.scrollIntoView({ behavior: 'smooth' });
