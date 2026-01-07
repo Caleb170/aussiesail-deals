@@ -109,7 +109,12 @@
       color: white;
       font-size: 1.1rem;
       cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s;
     }
+    .user-menu button:hover { background: rgba(255,215,0,0.1); }
+
     .user-dropdown {
       display: none;
       position: absolute;
@@ -133,6 +138,7 @@
       color: #333;
       font-size: 1rem;
       transition: background 0.3s;
+      cursor: pointer;
     }
     .user-dropdown a:hover, .user-dropdown button:hover {
       background: #f0f8ff;
@@ -478,7 +484,7 @@
 
     .faq-answer.active {
       padding: 1.5rem;
-      max-height: 500px;
+      max-height: 800px;
     }
 
     .itinerary-section {
@@ -530,13 +536,14 @@
 
     .terms-checkbox {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 1rem;
       margin: 2rem 0;
       font-size: 1.1rem;
     }
 
     .terms-checkbox input {
+      margin-top: 0.3rem;
       transform: scale(1.3);
     }
 
@@ -563,6 +570,20 @@
     .social-icons a:hover { 
       color: var(--accent); 
       transform: translateY(-8px) scale(1.2);
+    }
+
+    /* Contact form */
+    #contact form {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 2.5rem;
+      padding-bottom: 5rem;
+    }
+
+    #contact textarea {
+      min-height: 250px;
+      resize: vertical;
     }
 
     @keyframes fadeInUp { 
@@ -599,9 +620,9 @@
         <div class="user-menu">
           <button id="userBtn">Login / Sign Up</button>
           <div class="user-dropdown" id="userDropdown">
-            <a href="#" onclick="openModal('loginModal')">Login</a>
-            <a href="#" onclick="openModal('signupModal')">Sign Up</a>
-            <button onclick="logout()">Logout</button>
+            <a onclick="openModal('loginModal'); closeDropdown()">Login</a>
+            <a onclick="openModal('signupModal'); closeDropdown()">Sign Up</a>
+            <button onclick="logout(); closeDropdown()">Logout</button>
           </div>
         </div>
         <div class="cart-icon" onclick="openModal('holdsModal')">
@@ -680,7 +701,7 @@
   <!-- Cabin Modal -->
   <div id="cabinModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span class="close" onclick="closeModal('cabinModal')">&times;</span>
       <h2 id="modalTitle">Select Cabin</h2>
 
       <div class="ship-highlights">
@@ -747,7 +768,6 @@
               <option value="+64">New Zealand (+64)</option>
               <option value="+1">USA/Canada (+1)</option>
               <option value="+44">UK (+44)</option>
-              <!-- Add more as needed -->
             </select>
             <input type="tel" id="mobileNumber" placeholder="Mobile Number" required>
           </div>
@@ -772,7 +792,7 @@
   <!-- Terms Modal -->
   <div id="termsModal" class="modal terms-modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span class="close" onclick="closeModal('termsModal')">&times;</span>
       <h2>Terms and Conditions</h2>
       <p>By using DownUnder Cruises and making a booking, you agree to be bound by these terms and conditions.</p>
       <p>We act as an agent for cruise lines and suppliers. We do not operate the cruises ourselves and are not responsible for services provided by third parties.</p>
@@ -789,9 +809,9 @@
   <!-- Login Modal -->
   <div id="loginModal" class="modal">
     <div class="modal-content" style="max-width:500px;">
-      <span class="close">&times;</span>
+      <span class="close" onclick="closeModal('loginModal')">&times;</span>
       <h2>Login</h2>
-      <form onsubmit="login(event)">
+      <form id="loginForm">
         <input type="email" id="loginEmail" placeholder="Email" required>
         <input type="password" id="loginPassword" placeholder="Password" required>
         <button type="submit">Login</button>
@@ -803,9 +823,9 @@
   <!-- Signup Modal -->
   <div id="signupModal" class="modal">
     <div class="modal-content" style="max-width:500px;">
-      <span class="close">&times;</span>
+      <span class="close" onclick="closeModal('signupModal')">&times;</span>
       <h2>Sign Up</h2>
-      <form onsubmit="signup(event)">
+      <form id="signupForm">
         <input type="text" id="signupName" placeholder="Full Name" required>
         <input type="email" id="signupEmail" placeholder="Email" required>
         <input type="password" id="signupPassword" placeholder="Password" required>
@@ -818,10 +838,10 @@
   <!-- Forgot Password Modal -->
   <div id="forgotModal" class="modal">
     <div class="modal-content" style="max-width:500px;">
-      <span class="close">&times;</span>
+      <span class="close" onclick="closeModal('forgotModal')">&times;</span>
       <h2>Forgot Password</h2>
-      <p>Enter your email and we'll send a reset link (demo - check console).</p>
-      <form onsubmit="forgotPassword(event)">
+      <p>Enter your email and we'll send a reset link.</p>
+      <form id="forgotForm">
         <input type="email" id="forgotEmail" placeholder="Email" required>
         <button type="submit">Send Reset Link</button>
       </form>
@@ -831,7 +851,7 @@
   <!-- Holds Modal -->
   <div id="holdsModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span class="close" onclick="closeModal('holdsModal')">&times;</span>
       <h2>Your Active Holds</h2>
       <div id="holdsItems"></div>
       <div class="hold-note">
@@ -844,7 +864,7 @@
   <!-- Success Modal -->
   <div id="successModal" class="modal">
     <div class="modal-content" style="text-align:center; max-width:600px;">
-      <span class="close">&times;</span>
+      <span class="close" onclick="closeModal('successModal')">&times;</span>
       <i class="fas fa-check-circle" style="font-size:6rem; color:var(--success); margin:3rem 0;"></i>
       <h2>Hold Placed Successfully!</h2>
       <p>Your cabin is now reserved for 48 hours.<br>We have emailed you and our team with the details.</p>
@@ -996,43 +1016,38 @@
   </footer>
 
   <script>
-    // User system (simple localStorage - demo only, not secure for production)
+    // Close dropdown when clicking outside
+    function closeDropdown() {
+      document.getElementById('userDropdown').classList.remove('active');
+    }
+
+    window.addEventListener('click', (e) => {
+      if (!e.target.closest('.user-menu')) {
+        closeDropdown();
+      }
+    });
+
+    // User system (demo localStorage)
     let currentUser = null;
     const users = JSON.parse(localStorage.getItem('downunderUsers')) || {};
 
     function updateUserUI() {
-      const btn = $('userBtn');
-      const dropdown = $('userDropdown');
+      const btn = document.getElementById('userBtn');
       if (currentUser) {
         btn.textContent = `Hi, ${currentUser.name.split(' ')[0]}`;
-        dropdown.querySelector('button').style.display = 'block';
-        dropdown.querySelectorAll('a').forEach(a => a.style.display = 'none');
+        document.querySelector('#userDropdown button').style.display = 'block';
+        document.querySelectorAll('#userDropdown a').forEach(a => a.style.display = 'none');
       } else {
         btn.textContent = 'Login / Sign Up';
-        dropdown.querySelector('button').style.display = 'none';
-        dropdown.querySelectorAll('a').forEach(a => a.style.display = 'block');
+        document.querySelector('#userDropdown button').style.display = 'none';
+        document.querySelectorAll('#userDropdown a').forEach(a => a.style.display = 'block');
       }
     }
 
-    function signup(e) {
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      const name = $('signupName').value.trim();
-      const email = $('signupEmail').value.trim().toLowerCase();
-      const pass = $('signupPassword').value;
-      const confirm = $('signupPasswordConfirm').value;
-      if (pass !== confirm) return alert('Passwords do not match');
-      if (users[email]) return alert('Email already registered');
-      users[email] = {name, password: pass}; // Plain text - demo only
-      localStorage.setItem('downunderUsers', JSON.stringify(users));
-      alert('Account created! Please login.');
-      closeModal('signupModal');
-      openModal('loginModal');
-    }
-
-    function login(e) {
-      e.preventDefault();
-      const email = $('loginEmail').value.trim().toLowerCase();
-      const pass = $('loginPassword').value;
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('loginPassword').value;
       if (users[email] && users[email].password === pass) {
         currentUser = {email, name: users[email].name};
         updateUserUI();
@@ -1041,28 +1056,35 @@
       } else {
         alert('Invalid credentials');
       }
-    }
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('signupName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('signupPassword').value;
+      const confirm = document.getElementById('signupPasswordConfirm').value;
+      if (pass !== confirm) return alert('Passwords do not match');
+      if (users[email]) return alert('Email already registered');
+      users[email] = {name, password: pass};
+      localStorage.setItem('downunderUsers', JSON.stringify(users));
+      alert('Account created! Please login.');
+      closeModal('signupModal');
+      openModal('loginModal');
+    });
+
+    document.getElementById('forgotForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Reset link sent (demo)');
+      closeModal('forgotModal');
+    });
 
     function logout() {
       currentUser = null;
       updateUserUI();
-      alert('Logged out');
     }
 
-    function forgotPassword(e) {
-      e.preventDefault();
-      const email = $('forgotEmail').value.trim();
-      alert(`Password reset link sent to ${email} (demo - check console)`);
-      console.log('Reset for:', email);
-      closeModal('forgotModal');
-    }
-
-    // Dropdown toggle
-    $('userBtn').addEventListener('click', () => {
-      $('userDropdown').classList.toggle('active');
-    });
-
-    // Cruises data - easy to add new ones from partners here
+    // Cruises data
     const allCruises = [
       {
         key: 'south-pacific',
@@ -1116,12 +1138,11 @@
         basePP: 949,
         bonus: '+ $250 onboard credit per cabin'
       }
-      // Add more cruises from partners here - just copy object and change details
     ];
 
     // Render cruises
     function renderCruises(containerId, cruisesList) {
-      const container = $(containerId);
+      const container = document.getElementById(containerId);
       container.innerHTML = '';
       cruisesList.forEach(cruise => {
         const card = document.createElement('div');
@@ -1139,41 +1160,10 @@
         `;
         container.appendChild(card);
       });
-      // Re-observe for animations
-      document.querySelectorAll('.card').forEach(c => obs.observe(c));
+      document.querySelectorAll('#' + containerId + ' .card').forEach(c => obs.observe(c));
     }
 
-    renderCruises('dealsGrid', allCruises);
-
-    // Search functionality
-    $('search-form').addEventListener('submit', e => {
-      e.preventDefault();
-      const depart = $('searchDepart').value;
-      const line = $('searchLine').value;
-      const month = $('searchMonth').value;
-      const nights = $('searchNights').value;
-
-      let results = allCruises;
-      if (depart) results = results.filter(c => c.depart.includes(depart));
-      if (line) results = results.filter(c => c.line.includes(line));
-      if (month) results = results.filter(c => c.month.includes(month));
-      if (nights) results = results.filter(c => c.nights === nights);
-
-      renderCruises('resultsGrid', results);
-      $('searchResults').style.display = results.length ? 'block' : 'none';
-      if (results.length === 0) $('resultsGrid').innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:3rem;">No cruises match your search. Try different filters!</p>';
-      $('searchResults').scrollIntoView({behavior: 'smooth'});
-    });
-
-    // FAQ toggle
-    function toggleFAQ(el) {
-      el.classList.toggle('active');
-      const answer = el.nextElementSibling;
-      answer.classList.toggle('active');
-    }
-
-    // Rest of script (state, modals, hold, etc.) same as previous with small fixes
-
+    // State
     const state = {
       holds: JSON.parse(localStorage.getItem('downunderHolds')) || [],
       currentCruise: null,
@@ -1298,6 +1288,17 @@
       $('totalPrice').textContent = `$${total.toLocaleString()} AUD`;
     }
 
+    function validateForms() {
+      const required = document.querySelectorAll('#passengerForms input[required]');
+      for (const field of required) {
+        if (!field.value.trim()) {
+          alert('Please fill all required passenger details');
+          return false;
+        }
+      }
+      return true;
+    }
+
     function validateContact() {
       const email = $('contactEmail').value.trim();
       const confirm = $('contactEmailConfirm').value.trim();
@@ -1349,28 +1350,6 @@
       updateCartCount();
       renderHolds();
 
-      // Send emails via EmailJS - replace with your service/template IDs
-      const templateParams = {
-        to_email: contact.email,
-        admin_email: 'your@email.com', // Your email
-        cruise_name: cruise.name,
-        cabin_type: state.currentCabin.toUpperCase(),
-        guests: totalGuests,
-        total_price: `$${total.toLocaleString()} AUD`,
-        customer_email: contact.email,
-        customer_phone: contact.phone
-      };
-
-      // User confirmation email
-      emailjs.send('YOUR_SERVICE_ID', 'YOUR_USER_TEMPLATE_ID', templateParams)
-        .then(() => console.log('User email sent'))
-        .catch(err => console.error('Email error:', err));
-
-      // Admin notification
-      emailjs.send('YOUR_SERVICE_ID', 'YOUR_ADMIN_TEMPLATE_ID', templateParams)
-        .then(() => console.log('Admin email sent'))
-        .catch(err => console.error('Email error:', err));
-
       closeModal('cabinModal');
       openModal('successModal');
     }
@@ -1390,52 +1369,4 @@
         <div class="holds-item">
           <div>
             <strong>${hold.cruise} - ${hold.cabin.toUpperCase()} Cabin</strong><br>
-            ${hold.guests} Guest${hold.guests > 1 ? 's' : ''} • Contact: ${hold.email}<br>
-            <small>Expires: ${new Date(hold.expires).toLocaleString()}</small>
-          </div>
-          <div style="text-align:right;">
-            <strong>$${hold.total.toLocaleString()} AUD</strong><br>
-            <button onclick="removeHold(${i})" style="color:#c00;margin-top:0.8rem;padding:0.6rem 1.2rem;border-radius:12px;">Remove Hold</button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function removeHold(index) {
-      if (confirm('Remove this hold?')) {
-        state.holds.splice(index, 1);
-        localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
-        updateCartCount();
-        renderHolds();
-      }
-    }
-
-    // Hamburger
-    $('hamburger').addEventListener('click', () => {
-      $('navMenu').classList.toggle('active');
-      $('hamburger').classList.toggle('active');
-    });
-
-    // Scroll header
-    window.addEventListener('scroll', () => {
-      document.querySelector('header').classList.toggle('scrolled', window.scrollY > 80);
-    });
-
-    // Card animations
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
-    }, {threshold: 0.15});
-    document.querySelectorAll('.card').forEach(c => obs.observe(c));
-
-    // Init
-    document.addEventListener('DOMContentLoaded', () => {
-      updateUserUI();
-      const now = Date.now();
-      state.holds = state.holds.filter(h => h.expires > now);
-      localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
-      updateCartCount();
-      renderHolds();
-    });
-  </script>
-</body>
-</html>
+            ${hold.guests} Guest
