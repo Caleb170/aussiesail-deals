@@ -12,12 +12,11 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-  <!-- EmailJS for booking emails (sign up at emailjs.com for free, get user ID, service ID, template ID) -->
+  <!-- EmailJS -->
   <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
   <script type="text/javascript">
     (function(){
-      // Replace with your EmailJS user ID
-      emailjs.init("YOUR_EMAILJS_USER_ID");
+      emailjs.init("thAWGlhV_hgMrC1cX"); // Your Public Key
     })();
   </script>
 
@@ -1084,7 +1083,7 @@
       updateUserUI();
     }
 
-    // Cruises data
+    // Cruises data - easy to add new ones
     const allCruises = [
       {
         key: 'south-pacific',
@@ -1160,6 +1159,7 @@
         `;
         container.appendChild(card);
       });
+      // Re-observe new cards for animation
       document.querySelectorAll('#' + containerId + ' .card').forEach(c => obs.observe(c));
     }
 
@@ -1201,6 +1201,7 @@
 
     function openCabinModal(key) {
       const cruise = allCruises.find(c => c.key === key);
+      if (!cruise) return;
       state.currentCruise = key;
       $('modalTitle').textContent = cruise.name;
 
@@ -1350,6 +1351,26 @@
       updateCartCount();
       renderHolds();
 
+      // EmailJS sends
+      const templateParams = {
+        cruise_name: cruise.name,
+        cabin_type: state.currentCabin.toUpperCase(),
+        guests: totalGuests,
+        total_price: `$${total.toLocaleString()} AUD`,
+        customer_email: contact.email,
+        customer_phone: contact.phone
+      };
+
+      // Customer confirmation
+      emailjs.send('service_ua229ob', 'Hold Confirmation', templateParams)
+        .then(() => console.log('Customer email sent'))
+        .catch(err => console.error('Error:', err));
+
+      // Admin notification (replace with your email in template or add param)
+      emailjs.send('service_ua229ob', 'NewHoldBooking', templateParams)
+        .then(() => console.log('Admin email sent'))
+        .catch(err => console.error('Error:', err));
+
       closeModal('cabinModal');
       openModal('successModal');
     }
@@ -1369,4 +1390,79 @@
         <div class="holds-item">
           <div>
             <strong>${hold.cruise} - ${hold.cabin.toUpperCase()} Cabin</strong><br>
-            ${hold.guests} Guest
+            ${hold.guests} Guest${hold.guests > 1 ? 's' : ''} • Contact: ${hold.email}<br>
+            <small>Expires: ${new Date(hold.expires).toLocaleString()}</small>
+          </div>
+          <div style="text-align:right;">
+            <strong>$${hold.total.toLocaleString()} AUD</strong><br>
+            <button onclick="removeHold(${i})" style="color:#c00;margin-top:0.8rem;padding:0.6rem 1.2rem;border-radius:12px;">Remove Hold</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function removeHold(index) {
+      if (confirm('Remove this hold?')) {
+        state.holds.splice(index, 1);
+        localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
+        updateCartCount();
+        renderHolds();
+      }
+    }
+
+    // Hamburger
+    $('hamburger').addEventListener('click', () => {
+      $('navMenu').classList.toggle('active');
+      $('hamburger').classList.toggle('active');
+    });
+
+    // Scroll header
+    window.addEventListener('scroll', () => {
+      document.querySelector('header').classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    // Card animations
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+    }, {threshold: 0.15});
+
+    // FAQ toggle
+    function toggleFAQ(el) {
+      el.classList.toggle('active');
+      const answer = el.nextElementSibling;
+      answer.classList.toggle('active');
+    }
+
+    // Search
+    $('search-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const depart = $('searchDepart').value;
+      const line = $('searchLine').value;
+      const month = $('searchMonth').value;
+      const nights = $('searchNights').value;
+
+      let results = allCruises;
+      if (depart) results = results.filter(c => c.depart.toLowerCase().includes(depart.toLowerCase()));
+      if (line) results = results.filter(c => c.line.toLowerCase().includes(line.toLowerCase()));
+      if (month) results = results.filter(c => c.month.includes(month));
+      if (nights) results = results.filter(c => c.nights === nights);
+
+      renderCruises('resultsGrid', results);
+      $('searchResults').style.display = results.length ? 'block' : 'none';
+      if (results.length === 0) $('resultsGrid').innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:3rem;">No matching cruises. Try different filters!</p>';
+      $('searchResults').scrollIntoView({behavior: 'smooth'});
+    });
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      updateUserUI();
+      renderCruises('dealsGrid', allCruises);
+      const now = Date.now();
+      state.holds = state.holds.filter(h => h.expires > now);
+      localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
+      updateCartCount();
+      renderHolds();
+    });
+  </script>
+</body>
+</html>
