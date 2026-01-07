@@ -12,11 +12,11 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-  <!-- EmailJS -->
+  <!-- EmailJS SDK -->
   <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
   <script type="text/javascript">
     (function(){
-      emailjs.init("thAWGlhV_hgMrC1cX");
+      emailjs.init("thAWGlhV_hgMrC1cX"); // Your Public Key
     })();
   </script>
 
@@ -711,7 +711,7 @@
     <div class="grid" id="dealsGrid"></div>
   </section>
 
-  <!-- Cabin Modal - Clean Layout -->
+  <!-- Cabin Modal - Clean & Focused -->
   <div id="cabinModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('cabinModal')">&times;</span>
@@ -760,10 +760,10 @@
             <input type="email" id="contactEmailConfirm" placeholder="Confirm Email Address" required>
             <select id="countryCode" required>
               <option value="">Country Code</option>
-              <option value="+1">United States (+1)</option>
-              <option value="+44">United Kingdom (+44)</option>
               <option value="+61">Australia (+61)</option>
               <option value="+64">New Zealand (+64)</option>
+              <option value="+1">United States (+1)</option>
+              <option value="+44">United Kingdom (+44)</option>
               <option value="+33">France (+33)</option>
               <option value="+49">Germany (+49)</option>
               <option value="+81">Japan (+81)</option>
@@ -780,7 +780,16 @@
               <option value="+66">Thailand (+66)</option>
               <option value="+31">Netherlands (+31)</option>
               <option value="+46">Sweden (+46)</option>
-              <!-- Add more if needed -->
+              <option value="+41">Switzerland (+41)</option>
+              <option value="+47">Norway (+47)</option>
+              <option value="+45">Denmark (+45)</option>
+              <option value="+32">Belgium (+32)</option>
+              <option value="+351">Portugal (+351)</option>
+              <option value="+30">Greece (+30)</option>
+              <option value="+90">Turkey (+90)</option>
+              <option value="+971">UAE (+971)</option>
+              <option value="+65">Singapore (+65)</option>
+              <option value="+60">Malaysia (+60)</option>
             </select>
             <input type="tel" id="mobileNumber" placeholder="Mobile Number" required>
           </div>
@@ -802,7 +811,7 @@
     </div>
   </div>
 
-  <!-- Success Modal - Improved -->
+  <!-- Success Modal -->
   <div id="successModal" class="modal success-modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('successModal')">&times;</span>
@@ -1259,17 +1268,18 @@
     function generatePassengerForms() {
       const adults = parseInt($('adultCount').value) || 1;
       const children = parseInt($('childCount').value) || 0;
-      const totalPassengers = adults + children;
+      const total = adults + children;
       const container = $('passengerForms');
       container.innerHTML = '';
 
       const titles = ['Mr', 'Mrs', 'Ms', 'Miss', 'Dr', 'Prof'];
 
-      for (let i = 1; i <= totalPassengers; i++) {
+      for (let i = 1; i <= total; i++) {
         const type = i <= adults ? 'Adult' : 'Child';
+        const num = i <= adults ? i : i - adults;
         container.innerHTML += `
           <div class="passenger-block">
-            <h4>${type} ${i <= adults ? i : i - adults}</h4>
+            <h4>${type} ${num}</h4>
             <div class="passenger-form-grid">
               <select required>
                 <option value="">Title</option>
@@ -1373,16 +1383,40 @@
         customer_phone: contact.phone
       };
 
+      let customerSuccess = false;
+      let adminSuccess = false;
+
       emailjs.send('service_ua229ob', 'Hold Confirmation', templateParams)
-        .then(() => console.log('Customer email sent'))
-        .catch(err => console.error('Customer email error:', err));
+        .then(() => {
+          customerSuccess = true;
+          checkEmailStatus();
+        })
+        .catch(err => {
+          console.error('Customer email failed:', err);
+          alert('Hold placed, but customer email failed. Check EmailJS logs.');
+          checkEmailStatus();
+        });
 
       emailjs.send('service_ua229ob', 'NewHoldBooking', templateParams)
-        .then(() => console.log('Admin email sent'))
-        .catch(err => console.error('Admin email error:', err));
+        .then(() => {
+          adminSuccess = true;
+          checkEmailStatus();
+        })
+        .catch(err => {
+          console.error('Admin email failed:', err);
+          alert('Hold placed, but admin email failed. Check EmailJS logs.');
+          checkEmailStatus();
+        });
 
-      closeModal('cabinModal');
-      openModal('successModal');
+      function checkEmailStatus() {
+        if (customerSuccess && adminSuccess) {
+          closeModal('cabinModal');
+          openModal('successModal');
+        } else {
+          closeModal('cabinModal');
+          openModal('successModal');
+        }
+      }
     }
 
     function updateCartCount() {
