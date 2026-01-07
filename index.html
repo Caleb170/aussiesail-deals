@@ -476,17 +476,17 @@
       transform: translateY(-5px);
     }
 
-    /* Contact form spacing fix */
+    /* Contact form improvements */
     #contact form {
       max-width: 800px;
       margin: 0 auto;
       display: grid;
       gap: 2rem;
-      padding-bottom: 3rem;
+      padding-bottom: 4rem;
     }
 
     #contact textarea {
-      min-height: 200px;
+      min-height: 220px;
       resize: vertical;
     }
 
@@ -585,41 +585,45 @@
     <h2>Featured 2026 Deals</h2>
     <div class="grid">
       <div class="card" onclick="openCabinModal('south-pacific')">
-        <img src="https://images.pexels.com/photos/3822903/pexels-photo-3822903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="South Pacific tropical islands">
+        <img src="https://img.cruisecritic.net/cms-sb/f/1005231/11a763f091/paul-gauguin_orientation-left_bow_scenic_2569.jpg?auto=format%2Cenhance&fit=crop&crop=entropy&q=50&w=2048&ixlib=react-9.10.0" alt="Paul Gauguin cruise ship in South Pacific tropical waters">
         <div class="card-info">
           <h3>9-Night South Pacific Escape</h3>
           <p>Sydney → Mystery Island → Lifou → Noumea → Sydney</p>
           <p class="twin-quad"><strong>Twin from $899 pp</strong> • Quad from $699 pp</p>
+          <p style="font-size:0.9rem; color:#666;">+ $100 onboard credit per cabin</p>
           <button>Select Cabin</button>
         </div>
       </div>
 
       <div class="card" onclick="openCabinModal('nz-fjords')">
-        <img src="https://images.pexels.com/photos/1670187/pexels-photo-1670187.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="New Zealand fjords">
+        <img src="https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg" alt="Cruise ship in Milford Sound New Zealand fjords">
         <div class="card-info">
           <h3>12-Night NZ Fjords Adventure</h3>
           <p>Roundtrip Sydney – Milford, Doubtful & Dusky Sounds</p>
           <p class="twin-quad"><strong>Twin from $1,299 pp</strong> • Quad from $999 pp</p>
+          <p style="font-size:0.9rem; color:#666;">+ Free drinks package on select cabins</p>
           <button>Select Cabin</button>
         </div>
       </div>
 
       <div class="card" onclick="openCabinModal('reef')">
-        <img src="https://images.pexels.com/photos/1076752/pexels-photo-1076752.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Great Barrier Reef underwater">
+        <img src="https://cdn.sailing-whitsundays.com/web/images/articles/2702/reefworld-aerial1.jpg" alt="Great Barrier Reef aerial view with pontoon and coral">
         <div class="card-info">
           <h3>7-Night Great Barrier Reef</h3>
           <p>Brisbane → Airlie Beach → Cairns → Willis Island → Brisbane</p>
           <p class="twin-quad"><strong>Twin from $799 pp</strong> • Quad from $649 pp</p>
+          <p style="font-size:0.9rem; color:#666;">+ Kids sail free on family cabins</p>
           <button>Select Cabin</button>
         </div>
       </div>
 
       <div class="card" onclick="openCabinModal('vanuatu')">
-        <img src="https://images.pexels.com/photos/2583852/pexels-photo-2583852.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Vanuatu tropical beach">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Carnival_Splendor_at_Sydney.jpg/1200px-Carnival_Splendor_at_Sydney.jpg" alt="Carnival Splendor cruise ship in Sydney Harbour">
         <div class="card-info">
           <h3>10-Night Vanuatu Escape</h3>
           <p>Brisbane → Noumea → Mystery Island → Port Vila → Brisbane</p>
           <p class="twin-quad"><strong>Twin from $949 pp</strong> • Quad from $749 pp</p>
+          <p style="font-size:0.9rem; color:#666;">+ $200 onboard credit per cabin</p>
           <button>Select Cabin</button>
         </div>
       </div>
@@ -637,15 +641,15 @@
         <p>Modern amenities, pools, dining, entertainment, and stunning ocean views.</p>
         <div class="highlights-grid">
           <div class="highlight-item">
-            <img src="https://images.pexels.com/photos/2506988/pexels-photo-2506988.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Luxury balcony cabin">
+            <img src="https://s3.amazonaws.com/a-us.storyblok.com/f/1005231/e51ea2078c/image_10355969.jpg" alt="Luxury balcony cabin">
             <p>Luxury Balcony Cabin</p>
           </div>
           <div class="highlight-item">
-            <img src="https://images.pexels.com/photos/1579739/pexels-photo-1579739.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Spacious suite">
+            <img src="https://s3.amazonaws.com/a-us.storyblok.com/f/1005231/18aea01fe0/image_10356356.jpg" alt="Spacious suite">
             <p>Spacious Suite</p>
           </div>
           <div class="highlight-item">
-            <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Comfort interior cabin">
+            <img src="https://www.carnival.com/-/media/Images/explore/staterooms/overview/stateroom-mobile-3.jpg" alt="Comfort interior cabin">
             <p>Comfort Interior Cabin</p>
           </div>
         </div>
@@ -681,13 +685,13 @@
               <option value="3">3</option>
             </select>
           </div>
-          <button onclick="updatePassengerForms()" style="padding:0.8rem 1.5rem; margin-left:1rem;">Update Details</button>
+          <button onclick="updatePassengerForms()" style="padding:0.8rem 1.5rem;">Update Details</button>
         </div>
 
         <div class="price-preview" id="pricePreview">
           <p>Price per person: <strong id="ppPrice">$0 AUD</strong></p>
           <p>Total for <span id="totalGuests">2</span> guests: <strong id="totalPrice">$0 AUD</strong></p>
-          <small>* Single supplement applies for solo travellers</small>
+          <small>* Single supplement applies for solo travellers • Includes taxes & fees</small>
         </div>
 
         <div id="passengerForms" class="passenger-form"></div>
@@ -724,21 +728,21 @@
     <h2>Popular Destinations</h2>
     <div class="grid">
       <div class="card">
-        <img src="https://images.pexels.com/photos/2583852/pexels-photo-2583852.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="South Pacific">
+        <img src="https://www.jacadatravel.com/_next/image/?url=https%3A%2F%2Fcdn.jacadatravel.com%2Fwp-content%2Fuploads%2F2017%2F03%2Ffiji-princess-boat.jpg&w=3840&q=100" alt="South Pacific tropical cruise">
         <div class="card-info">
           <h3>South Pacific Islands</h3>
           <p>Crystal waters, island hopping – pure paradise.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://images.pexels.com/photos/1670187/pexels-photo-1670187.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="New Zealand">
+        <img src="https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg" alt="Cruise ship in Milford Sound New Zealand fjords">
         <div class="card-info">
           <h3>New Zealand Fjords</h3>
           <p>Majestic fjords, wildlife, and adventure.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://images.pexels.com/photos/1076752/pexels-photo-1076752.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Great Barrier Reef">
+        <img src="https://cdn.sailing-whitsundays.com/web/images/articles/2702/reefworld-aerial1.jpg" alt="Great Barrier Reef aerial view">
         <div class="card-info">
           <h3>Great Barrier Reef</h3>
           <p>Colorful coral, tropical fish – diving paradise.</p>
@@ -789,7 +793,7 @@
 
   <section id="contact" class="container">
     <h2>Get in Touch</h2>
-    <form style="max-width:800px; margin:0 auto; display:grid; gap:2rem; padding-bottom:3rem;">
+    <form style="max-width:800px; margin:0 auto; display:grid; gap:2rem; padding-bottom:4rem;">
       <input type="text" placeholder="Your Name" required/>
       <input type="email" placeholder="Your Email" required/>
       <select>
@@ -829,29 +833,25 @@
       'south-pacific': {
         name: '9-Night South Pacific Escape',
         basePP: 899,
-        quadPP: 699,
-        map: 'https://images.pexels.com/photos/3822903/pexels-photo-3822903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        map: 'https://www.cruisemapper.com/images/itineraries/2025/1051-2025-south-pacific-9-days-sydney-roundtrip.jpg',
         ports: 'Day 1: Sydney • Day 3: Mystery Island • Day 4: Lifou • Day 5: Noumea • Day 9: Sydney'
       },
       'nz-fjords': {
         name: '12-Night NZ Fjords Adventure',
         basePP: 1299,
-        quadPP: 999,
-        map: 'https://images.pexels.com/photos/1670187/pexels-photo-1670187.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        map: 'https://www.princess.com/images/itinerary-maps/new-zealand-fjords-map.jpg',
         ports: 'Day 1-2: Sydney • Day 5: Milford Sound • Day 6: Doubtful Sound • Day 7: Dusky Sound • Day 12: Sydney'
       },
       'reef': {
         name: '7-Night Great Barrier Reef',
         basePP: 799,
-        quadPP: 649,
-        map: 'https://images.pexels.com/photos/1076752/pexels-photo-1076752.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        map: 'https://cdn.sailing-whitsundays.com/web/images/articles/2702/reefworld-aerial1.jpg',
         ports: 'Day 1: Brisbane • Day 3: Airlie Beach • Day 5: Cairns • Day 6: Willis Island • Day 7: Brisbane'
       },
       'vanuatu': {
         name: '10-Night Vanuatu Escape',
         basePP: 949,
-        quadPP: 749,
-        map: 'https://images.pexels.com/photos/2583852/pexels-photo-2583852.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        map: 'https://www.carnival.com.au/content/dam/carnival/destinations/vanuatu/vanuatu-map.jpg',
         ports: 'Day 1: Brisbane • Day 4: Noumea • Day 6: Mystery Island • Day 7: Port Vila • Day 10: Brisbane'
       }
     };
