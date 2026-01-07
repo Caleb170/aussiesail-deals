@@ -16,7 +16,7 @@
   <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
   <script type="text/javascript">
     (function(){
-      emailjs.init("thAWGlhV_hgMrC1cX");
+      emailjs.init("thAWGlhV_hgMrC1cX"); // Your Public Key
     })();
   </script>
 
@@ -386,9 +386,9 @@
     .modal-content {
       background: white;
       margin: 4% auto;
-      padding: 3rem;
+      padding: 4rem;
       border-radius: var(--bubble-radius);
-      max-width: 1100px;
+      max-width: 1300px;
       width: 94%;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
       position: relative;
@@ -396,142 +396,41 @@
 
     .close {
       position: absolute;
-      right: 2rem;
-      top: 1.5rem;
+      right: 2.5rem;
+      top: 2rem;
       font-size: 3rem;
       cursor: pointer;
       color: var(--gray);
       transition: all 0.3s;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.05);
+      border-radius: 50%;
     }
 
     .close:hover {
       color: var(--primary);
+      background: rgba(0,107,51,0.1);
       transform: scale(1.1);
     }
 
-    .itinerary-section {
-      margin: 3rem 0;
-      text-align: center;
-      background: #f0f8ff;
-      padding: 2.5rem;
-      border-radius: var(--bubble-radius);
+    .terms-modal .modal-content {
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 3rem;
     }
 
-    .itinerary-map img {
-      max-width: 100%;
-      max-height: 500px;
-      object-fit: contain;
-      border-radius: var(--bubble-radius);
-      box-shadow: var(--bubble-shadow);
-    }
-
-    #itineraryPorts {
-      margin-top: 1.5rem;
-      font-size: 1.2rem;
-      color: var(--primary-dark);
-      font-weight: 600;
-    }
-
-    .cabin-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
-    }
-
-    .cabin-card {
-      background: #f0f8ff;
-      padding: 2rem;
-      text-align: center;
-      border-radius: var(--bubble-radius);
-      box-shadow: var(--bubble-shadow);
-      transition: transform 0.3s;
-    }
-
-    .cabin-card:hover {
-      transform: translateY(-10px);
-    }
-
-    .passenger-form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
-    }
-
-    .passenger-block {
-      background: #f0f8ff;
-      padding: 2rem;
-      border-radius: var(--bubble-radius);
-      box-shadow: var(--bubble-shadow);
-    }
-
-    .contact-info-section {
-      margin: 3rem 0 2rem;
-      padding: 2.5rem;
-      background: #f0f8ff;
-      border-radius: var(--bubble-radius);
-      box-shadow: var(--bubble-shadow);
-    }
-
-    .contact-info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .terms-checkbox {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 2rem 0;
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
-    .terms-checkbox input {
-      transform: scale(1.4);
-    }
-
-    .terms-checkbox a {
-      color: var(--primary);
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    .price-preview {
-      text-align: center;
-      padding: 2.5rem;
-      background: #e8f5e8;
-      border-radius: var(--bubble-radius);
-      margin: 2.5rem 0;
-      font-size: 1.5rem;
-      box-shadow: var(--bubble-shadow);
-    }
-
-    .price-preview strong {
-      font-size: 2.2rem;
-      color: var(--primary-dark);
-    }
-
-    .checkout-btn {
-      width: 100%;
-      padding: 1.8rem;
-      font-size: 1.5rem;
-      border-radius: 30px;
-      margin-top: 1rem;
-      box-shadow: 0 10px 30px rgba(0,107,51,0.4);
-    }
-
-    .success-modal .modal-content {
-      text-align: center;
-      max-width: 600px;
-      padding: 4rem;
-    }
-
-    .success-modal i {
-      font-size: 7rem;
-      color: var(--success);
+    .terms-modal h2 {
       margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .terms-modal p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
     }
 
     .faq-section {
@@ -587,6 +486,72 @@
       max-height: 800px;
     }
 
+    .itinerary-section {
+      margin: 4rem 0;
+      text-align: center;
+      background: linear-gradient(to bottom, #f0f8ff, #e8f4ff);
+      padding: 3rem;
+      border-radius: var(--bubble-radius);
+      box-shadow: inset 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .itinerary-map {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .itinerary-map img {
+      max-width: 100%;
+      max-height: 550px;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin: 2rem auto 0;
+      border-radius: var(--bubble-radius);
+      box-shadow: var(--bubble-shadow);
+    }
+
+    #itineraryPorts {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-top: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .contact-info-section {
+      margin: 3rem 0;
+      padding: 2.5rem;
+      background: #f0f8ff;
+      border-radius: var(--bubble-radius);
+      box-shadow: var(--bubble-shadow);
+    }
+
+    .contact-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .terms-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin: 2rem 0;
+      font-size: 1.1rem;
+    }
+
+    .terms-checkbox input {
+      margin-top: 0.3rem;
+      transform: scale(1.3);
+    }
+
+    .terms-checkbox a {
+      color: var(--primary);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
     footer {
       background: linear-gradient(135deg, var(--dark), var(--primary-dark));
       color: white;
@@ -606,15 +571,36 @@
       transform: translateY(-8px) scale(1.2);
     }
 
+    /* Contact form */
+    #contact form {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 2.5rem;
+      padding-bottom: 5rem;
+    }
+
+    #contact textarea {
+      min-height: 250px;
+      resize: vertical;
+    }
+
+    @keyframes fadeInUp { 
+      from { opacity:0; transform:translateY(50px); } 
+      to { opacity:1; transform:translateY(0); } 
+    }
+
     @media (max-width: 768px) {
       section { padding: 5rem 1rem; }
       .hero { min-height: 85vh; }
       .search-box { padding: 3rem; }
       .form-grid { grid-template-columns: 1fr; }
       .card img { height: 220px; }
-      .modal-content { padding: 2rem; margin: 8% auto; }
-      .passenger-form-grid { grid-template-columns: 1fr; }
-      .itinerary-map img { max-height: 350px; }
+      .modal-content { padding: 2.5rem; margin: 8% auto; }
+      .highlights-grid { grid-template-columns: 1fr; }
+      .passenger-selector { flex-direction: column; gap: 2rem; }
+      button { grid-column: 1 / -1; }
+      .itinerary-map img { max-height: 400px; }
     }
   </style>
 </head>
@@ -715,7 +701,26 @@
   <div id="cabinModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('cabinModal')">&times;</span>
-      <h2 id="modalTitle">Booking Details</h2>
+      <h2 id="modalTitle">Select Cabin</h2>
+
+      <div class="ship-highlights">
+        <h3>Ship Highlights & Interiors</h3>
+        <p>Experience luxury at sea with world-class amenities, dining, and entertainment.</p>
+        <div class="highlights-grid">
+          <div class="highlight-item">
+            <img src="https://www.celebritycruises.com/blog/content/uploads/2020/02/best-rooms-on-a-cruise-ship-balcony-1024x683.jpg" alt="Luxury balcony cabin">
+            <p>Luxury Balcony Cabin</p>
+          </div>
+          <div class="highlight-item">
+            <img src="https://media.cnn.com/api/v1/images/stellar/prod/220412104916-03-body-most-luxurious-cruise-cabins.jpg?q=w_1110,c_fill" alt="Spacious suite">
+            <p>Spacious Suite</p>
+          </div>
+          <div class="highlight-item">
+            <img src="https://www.royalcaribbeanblog.com/sites/default/files/styles/wide_1200_/public/blog-images/Inside%20Cabin%20Why%20I%20like.png.webp?itok=Er4chSTc" alt="Comfort interior cabin">
+            <p>Comfort Interior Cabin</p>
+          </div>
+        </div>
+      </div>
 
       <div class="itinerary-section">
         <h3>Itinerary & Ports</h3>
@@ -751,76 +756,35 @@
           </div>
         </div>
 
-        <div id="passengerForms"></div>
-
         <div class="contact-info-section">
           <h3>Contact Information</h3>
           <div class="contact-info-grid">
             <input type="email" id="contactEmail" placeholder="Email Address" required>
             <input type="email" id="contactEmailConfirm" placeholder="Confirm Email Address" required>
-            <select id="countryCode" required>
+            <select id="countryCode">
               <option value="">Country Code</option>
-              <option value="+1">United States (+1)</option>
-              <option value="+44">United Kingdom (+44)</option>
               <option value="+61">Australia (+61)</option>
               <option value="+64">New Zealand (+64)</option>
-              <option value="+33">France (+33)</option>
-              <option value="+49">Germany (+49)</option>
-              <option value="+81">Japan (+81)</option>
-              <option value="+86">China (+86)</option>
-              <option value="+91">India (+91)</option>
-              <option value="+55">Brazil (+55)</option>
-              <option value="+7">Russia (+7)</option>
-              <option value="+34">Spain (+34)</option>
-              <option value="+39">Italy (+39)</option>
-              <option value="+27">South Africa (+27)</option>
-              <option value="+82">South Korea (+82)</option>
-              <option value="+52">Mexico (+52)</option>
-              <option value="+20">Egypt (+20)</option>
-              <option value="+66">Thailand (+66)</option>
-              <option value="+31">Netherlands (+31)</option>
-              <option value="+46">Sweden (+46)</option>
-              <option value="+41">Switzerland (+41)</option>
-              <option value="+47">Norway (+47)</option>
-              <option value="+45">Denmark (+45)</option>
-              <option value="+32">Belgium (+32)</option>
-              <option value="+351">Portugal (+351)</option>
-              <option value="+30">Greece (+30)</option>
-              <option value="+90">Turkey (+90)</option>
-              <option value="+971">UAE (+971)</option>
-              <option value="+65">Singapore (+65)</option>
-              <option value="+60">Malaysia (+60)</option>
+              <option value="+1">USA/Canada (+1)</option>
+              <option value="+44">UK (+44)</option>
             </select>
             <input type="tel" id="mobileNumber" placeholder="Mobile Number" required>
           </div>
-
           <div class="terms-checkbox">
             <input type="checkbox" id="agreeTerms" required>
-            <label for="agreeTerms">I have read and agree to the <a onclick="openModal('termsModal')">Terms and Conditions</a></label>
+            <label for="agreeTerms">I agree to the <a onclick="openModal('termsModal')">Terms and Conditions</a></label>
           </div>
         </div>
 
         <div class="price-preview" id="pricePreview">
           <p>Price per person: <strong id="ppPrice">$0 AUD</strong></p>
           <p>Total for <span id="totalGuests">2</span> guests: <strong id="totalPrice">$0 AUD</strong></p>
-          <small>* Single supplement may apply • Includes taxes, fees & gratuities</small>
+          <small>* Single supplement applies for solo travellers • Includes taxes, fees & gratuities</small>
         </div>
 
+        <div id="passengerForms" class="passenger-form"></div>
         <button class="checkout-btn" onclick="placeHold()">Place 48-Hour Hold</button>
       </div>
-    </div>
-  </div>
-
-  <!-- Success Modal -->
-  <div id="successModal" class="modal success-modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('successModal')">&times;</span>
-      <i class="fas fa-check-circle"></i>
-      <h2>Hold Placed Successfully!</h2>
-      <p>Your 48-hour cabin hold is confirmed.</p>
-      <p>A confirmation email has been sent to you with full details.</p>
-      <p>Our team has also been notified and will contact you shortly with payment options.</p>
-      <button onclick="closeModal('successModal')">Close</button>
     </div>
   </div>
 
@@ -841,15 +805,663 @@
     </div>
   </div>
 
-  <!-- Login/Signup/Forgot/Holds modals same as previous -->
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content" style="max-width:500px;">
+      <span class="close" onclick="closeModal('loginModal')">&times;</span>
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Email" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button type="submit">Login</button>
+        <p style="text-align:center;margin-top:1rem;"><a onclick="openModal('forgotModal'); closeModal('loginModal')">Forgot Password?</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div id="signupModal" class="modal">
+    <div class="modal-content" style="max-width:500px;">
+      <span class="close" onclick="closeModal('signupModal')">&times;</span>
+      <h2>Sign Up</h2>
+      <form id="signupForm">
+        <input type="text" id="signupName" placeholder="Full Name" required>
+        <input type="email" id="signupEmail" placeholder="Email" required>
+        <input type="password" id="signupPassword" placeholder="Password" required>
+        <input type="password" id="signupPasswordConfirm" placeholder="Confirm Password" required>
+        <button type="submit">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div id="forgotModal" class="modal">
+    <div class="modal-content" style="max-width:500px;">
+      <span class="close" onclick="closeModal('forgotModal')">&times;</span>
+      <h2>Forgot Password</h2>
+      <p>Enter your email and we'll send a reset link.</p>
+      <form id="forgotForm">
+        <input type="email" id="forgotEmail" placeholder="Email" required>
+        <button type="submit">Send Reset Link</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Holds Modal -->
+  <div id="holdsModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('holdsModal')">&times;</span>
+      <h2>Your Active Holds</h2>
+      <div id="holdsItems"></div>
+      <div class="hold-note">
+        Your cabins are securely held for 48 hours.<br>
+        Check your email for confirmation and deposit payment instructions.
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal">
+    <div class="modal-content" style="text-align:center; max-width:600px;">
+      <span class="close" onclick="closeModal('successModal')">&times;</span>
+      <i class="fas fa-check-circle" style="font-size:6rem; color:var(--success); margin:3rem 0;"></i>
+      <h2>Hold Placed Successfully!</h2>
+      <p>Your cabin is now reserved for 48 hours.<br>We have emailed you and our team with the details.</p>
+      <button onclick="closeModal('successModal')" style="padding:1.2rem 2.5rem; margin-top:2rem;">Close</button>
+    </div>
+  </div>
+
+  <section id="destinations" class="container">
+    <h2>Popular Destinations</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://www.tahititourisme.com/app/uploads/iris-images/22639/dji-0285-2-n060722-borabora-gauguina-ponant-julien-fabro-scaled-1-1920x1080-f50_50.jpg" alt="South Pacific luxury cruise">
+        <div class="card-info">
+          <h3>South Pacific Islands</h3>
+          <p>Crystal waters, island hopping – pure paradise.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg" alt="New Zealand fjords cruise">
+        <div class="card-info">
+          <h3>New Zealand Fjords</h3>
+          <p>Majestic fjords, wildlife, and adventure.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://greatbarrierreeftours.com/files/2022/03/reef-train-and-skyrail-scaled.jpg" alt="Great Barrier Reef aerial view">
+        <div class="card-info">
+          <h3>Great Barrier Reef</h3>
+          <p>Colorful coral, tropical fish – diving paradise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lines" class="container">
+    <h2>Popular Cruise Lines</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://www.carnival.com/-/media/Images/Ships/SL/carnival-splendor-mobile-4.jpg" alt="Carnival Splendor">
+        <div class="card-info">
+          <h3>Carnival Cruise Line</h3>
+          <p>Fun-filled family cruising with entertainment and activities for all ages.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://www.royalcaribbeanpresscenter.com/media_photos/1667045067_October-2022-Ovation-of-the-Seas-Sydney-Opera-House-background.jpg" alt="Royal Caribbean Ovation of the Seas">
+        <div class="card-info">
+          <h3>Royal Caribbean</h3>
+          <p>Innovative ships with adventure activities, shows, and dining.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://assets.princess.com/is/image/princesscruises/grand-princess-at-sea-exterior-full-cabo-san-lucas-header-gradient?qlt=82&ts=1748374395059" alt="Princess Cruises Grand Princess">
+        <div class="card-info">
+          <h3>Princess Cruises</h3>
+          <p>Elegant ships and scenic itineraries with premium service.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://www.celebritycruises.com/content/dam/celebrity/new-images/destination-pages/australia-new-zealand/edge-sydney-australia-evening-2560x1440.jpg" alt="Celebrity Edge in Sydney">
+        <div class="card-info">
+          <h3>Celebrity Cruises</h3>
+          <p>Modern luxury with upscale dining and stylish design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            How do I book a cruise?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Select a deal, choose cabin type, fill passenger and contact details, agree to terms, and place a 48-hour hold. We'll email you confirmation and payment link.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            Are deposits refundable?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Deposits are non-refundable. Cancellations follow cruise line policies plus our fees.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            Do I need travel insurance?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Strongly recommended. It covers cancellation, medical, and more. Medicare doesn't cover overseas or onboard.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            What documents do I need?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Valid passport (6+ months validity), visas if required, and vaccinations. Check with embassies.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            Can I change my booking?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Possible with fees, subject to availability and cruise line approval.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="container">
+    <h2>About DownUnder Cruises</h2>
+    <p style="max-width:900px; margin:0 auto 3rem; text-align:center; font-size:1.2rem;">Your premier Australian cruise specialist. We secure exclusive group rates, onboard credits, and perks you won't find booking direct. Expert advice, prices in AUD.</p>
+    <p style="text-align:center; font-weight:700; font-size:1.1rem;">ATAS Accredited • ABN: [Your ABN] • Australian Owned & Operated</p>
+  </section>
+
+  <section id="contact" class="container">
+    <h2>Get in Touch</h2>
+    <form style="max-width:900px; margin:0 auto; display:grid; gap:2.5rem; padding-bottom:5rem;">
+      <input type="text" placeholder="Your Name" required/>
+      <input type="email" placeholder="Your Email" required/>
+      <select>
+        <option>Enquiry Type</option>
+        <option>Quote Request</option>
+        <option>Booking Help</option>
+        <option>General Enquiry</option>
+      </select>
+      <textarea placeholder="Your Message" required rows="14"></textarea>
+      <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+    </form>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p style="font-size:1.4rem;">© 2026 DownUnder Cruises • Australia's Best Cruise Deals</p>
+      <p style="margin:2rem 0; font-size:1.1rem;">ABN: [Your ABN] • ATAS Accredited • Australian Owned</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </footer>
 
   <script>
-    // (Full script same as last version – with email fixes, passenger forms with Title/First/Middle/Last/DOB/Nationality, clean modal, etc.)
-    // Cruises show on load
+    // Close dropdown when clicking outside
+    function closeDropdown() {
+      document.getElementById('userDropdown').classList.remove('active');
+    }
+
+    window.addEventListener('click', (e) => {
+      if (!e.target.closest('.user-menu')) {
+        closeDropdown();
+      }
+    });
+
+    // User system (demo localStorage)
+    let currentUser = null;
+    const users = JSON.parse(localStorage.getItem('downunderUsers')) || {};
+
+    function updateUserUI() {
+      const btn = document.getElementById('userBtn');
+      if (currentUser) {
+        btn.textContent = `Hi, ${currentUser.name.split(' ')[0]}`;
+        document.querySelector('#userDropdown button').style.display = 'block';
+        document.querySelectorAll('#userDropdown a').forEach(a => a.style.display = 'none');
+      } else {
+        btn.textContent = 'Login / Sign Up';
+        document.querySelector('#userDropdown button').style.display = 'none';
+        document.querySelectorAll('#userDropdown a').forEach(a => a.style.display = 'block');
+      }
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('loginPassword').value;
+      if (users[email] && users[email].password === pass) {
+        currentUser = {email, name: users[email].name};
+        updateUserUI();
+        alert('Logged in successfully!');
+        closeModal('loginModal');
+      } else {
+        alert('Invalid credentials');
+      }
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('signupName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('signupPassword').value;
+      const confirm = document.getElementById('signupPasswordConfirm').value;
+      if (pass !== confirm) return alert('Passwords do not match');
+      if (users[email]) return alert('Email already registered');
+      users[email] = {name, password: pass};
+      localStorage.setItem('downunderUsers', JSON.stringify(users));
+      alert('Account created! Please login.');
+      closeModal('signupModal');
+      openModal('loginModal');
+    });
+
+    document.getElementById('forgotForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Reset link sent (demo)');
+      closeModal('forgotModal');
+    });
+
+    function logout() {
+      currentUser = null;
+      updateUserUI();
+    }
+
+    // Cruises data - easy to add new ones
+    const allCruises = [
+      {
+        key: 'south-pacific',
+        name: '9-Night South Pacific Escape',
+        depart: 'Sydney',
+        line: 'Paul Gauguin',
+        month: 'March 2026',
+        nights: '6-9 Nights',
+        image: 'https://www.tahititourisme.com/app/uploads/iris-images/22639/dji-0285-2-n060722-borabora-gauguina-ponant-julien-fabro-scaled-1-1920x1080-f50_50.jpg',
+        map: 'https://www.tahititourisme.com/app/uploads/iris-images/22639/dji-0285-2-n060722-borabora-gauguina-ponant-julien-fabro-scaled-1-1920x1080-f50_50.jpg',
+        ports: 'Day 1: Sydney • Day 3: Mystery Island • Day 4: Lifou • Day 5: Noumea • Day 9: Sydney',
+        basePP: 899,
+        bonus: '+ $150 onboard credit per cabin'
+      },
+      {
+        key: 'nz-fjords',
+        name: '12-Night NZ Fjords Adventure',
+        depart: 'Sydney',
+        line: 'Princess',
+        month: 'February 2026',
+        nights: '10-14 Nights',
+        image: 'https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg',
+        map: 'https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg',
+        ports: 'Day 1-2: Sydney • Day 5: Milford Sound • Day 6: Doubtful Sound • Day 7: Dusky Sound • Day 12: Sydney',
+        basePP: 1299,
+        bonus: '+ Free premium drinks package'
+      },
+      {
+        key: 'reef',
+        name: '7-Night Great Barrier Reef',
+        depart: 'Brisbane',
+        line: 'Carnival',
+        month: 'April 2026',
+        nights: '6-9 Nights',
+        image: 'https://greatbarrierreeftours.com/files/2022/03/reef-train-and-skyrail-scaled.jpg',
+        map: 'https://greatbarrierreeftours.com/files/2022/03/reef-train-and-skyrail-scaled.jpg',
+        ports: 'Day 1: Brisbane • Day 3: Airlie Beach • Day 5: Cairns • Day 6: Willis Island • Day 7: Brisbane',
+        basePP: 799,
+        bonus: '+ Kids sail free on family cabins'
+      },
+      {
+        key: 'vanuatu',
+        name: '10-Night Vanuatu Escape',
+        depart: 'Brisbane',
+        line: 'Carnival',
+        month: 'May 2026',
+        nights: '10-14 Nights',
+        image: 'https://www.carnival.com/-/media/Images/Ships/SL/carnival-splendor-mobile-4.jpg',
+        map: 'https://www.carnival.com/-/media/Images/Ships/SL/carnival-splendor-mobile-4.jpg',
+        ports: 'Day 1: Brisbane • Day 4: Noumea • Day 6: Mystery Island • Day 7: Port Vila • Day 10: Brisbane',
+        basePP: 949,
+        bonus: '+ $250 onboard credit per cabin'
+      }
+    ];
+
+    // Render cruises
+    function renderCruises(containerId, cruisesList) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      cruisesList.forEach(cruise => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.onclick = () => openCabinModal(cruise.key);
+        card.innerHTML = `
+          <img src="${cruise.image}" alt="${cruise.name}">
+          <div class="card-info">
+            <h3>${cruise.name}</h3>
+            <p>${cruise.depart} departure • ${cruise.line}</p>
+            <p class="twin-quad"><strong>Twin from $${cruise.basePP} pp</strong></p>
+            <p class="bonus-offer">${cruise.bonus}</p>
+            <button>Select Cabin</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      // Re-observe new cards for animation
+      document.querySelectorAll('#' + containerId + ' .card').forEach(c => obs.observe(c));
+    }
+
+    // State
+    const state = {
+      holds: JSON.parse(localStorage.getItem('downunderHolds')) || [],
+      currentCruise: null,
+      currentCabin: null,
+      currentPP: 0
+    };
+
+    const cabinTypes = [
+      {id:'interior', name:'Interior', mult:1.0},
+      {id:'ocean', name:'Ocean View', mult:1.35},
+      {id:'balcony', name:'Balcony', mult:1.7},
+      {id:'suite', name:'Suite', mult:2.8}
+    ];
+
+    const $ = id => document.getElementById(id);
+    const cartCount = $('cartCount');
+
+    function openModal(id) {
+      const modal = $(id);
+      if (modal) modal.style.display = 'block';
+    }
+
+    function closeModal(id) {
+      const modal = $(id);
+      if (modal) modal.style.display = 'none';
+    }
+
+    document.querySelectorAll('.close').forEach(btn => {
+      btn.onclick = () => closeModal(btn.closest('.modal').id);
+    });
+
+    window.onclick = e => {
+      if (e.target.classList.contains('modal')) closeModal(e.target.id);
+    };
+
+    function openCabinModal(key) {
+      const cruise = allCruises.find(c => c.key === key);
+      if (!cruise) return;
+      state.currentCruise = key;
+      $('modalTitle').textContent = cruise.name;
+
+      $('itineraryMap').src = cruise.map;
+      $('itineraryPorts').textContent = cruise.ports;
+
+      const grid = $('cabinGrid');
+      grid.innerHTML = '';
+      const base = cruise.basePP;
+      cabinTypes.forEach(c => {
+        const pp = Math.round(base * c.mult);
+        const card = document.createElement('div');
+        card.className = 'cabin-card';
+        card.innerHTML = `
+          <h4>${c.name}</h4>
+          <p><strong>from $${pp.toLocaleString()} AUD pp</strong></p>
+          <p>${c.name === 'Interior' ? 'Great value' : c.name === 'Ocean View' ? 'Window views' : c.name === 'Balcony' ? 'Private balcony' : 'Luxury suite'}</p>
+          <button onclick="selectCabin('${c.id}', ${pp})">Select</button>
+        `;
+        grid.appendChild(card);
+      });
+
+      $('passengerSection').style.display = 'none';
+      openModal('cabinModal');
+    }
+
+    function selectCabin(id, pp) {
+      state.currentCabin = id;
+      state.currentPP = pp;
+      $('cabinGrid').style.display = 'none';
+      $('passengerSection').style.display = 'block';
+      updatePassengerForms();
+    }
+
+    function updatePassengerForms() {
+      generatePassengerForms();
+      updatePricePreview();
+    }
+
+    function generatePassengerForms() {
+      const adults = parseInt($('adultCount').value) || 1;
+      const children = parseInt($('childCount').value) || 0;
+      const container = $('passengerForms');
+      container.innerHTML = '';
+
+      for (let i = 1; i <= adults; i++) {
+        container.innerHTML += `
+          <div style="background:#f0f8ff;padding:2rem;border-radius:var(--bubble-radius);box-shadow:var(--bubble-shadow);">
+            <h4>Adult ${i}</h4>
+            <div class="passenger-form">
+              <input type="text" placeholder="Full Name (as on passport)" required>
+              <input type="date" placeholder="Date of Birth" required>
+              <input type="email" placeholder="Email" required>
+              <input type="tel" placeholder="Phone" required>
+            </div>
+          </div>
+        `;
+      }
+
+      for (let i = 1; i <= children; i++) {
+        container.innerHTML += `
+          <div style="background:#f0f8ff;padding:2rem;border-radius:var(--bubble-radius);box-shadow:var(--bubble-shadow);">
+            <h4>Child ${i}</h4>
+            <div class="passenger-form">
+              <input type="text" placeholder="Full Name (as on passport)" required>
+              <input type="number" placeholder="Age (0-17)" min="0" max="17" required>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function updatePricePreview() {
+      const adults = parseInt($('adultCount').value) || 1;
+      const children = parseInt($('childCount').value) || 0;
+      const totalGuests = adults + children;
+
+      let pp = state.currentPP;
+      if (totalGuests === 1) pp = Math.round(pp * 1.75);
+
+      const total = pp * totalGuests;
+
+      $('ppPrice').textContent = `$${pp.toLocaleString()} AUD`;
+      $('totalGuests').textContent = totalGuests;
+      $('totalPrice').textContent = `$${total.toLocaleString()} AUD`;
+    }
+
+    function validateForms() {
+      const required = document.querySelectorAll('#passengerForms input[required]');
+      for (const field of required) {
+        if (!field.value.trim()) {
+          alert('Please fill all required passenger details');
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function validateContact() {
+      const email = $('contactEmail').value.trim();
+      const confirm = $('contactEmailConfirm').value.trim();
+      const code = $('countryCode').value;
+      const mobile = $('mobileNumber').value.trim();
+      const terms = $('agreeTerms').checked;
+
+      if (!email || !confirm || email !== confirm) {
+        alert('Emails must match and be valid');
+        return false;
+      }
+      if (!code || !mobile) {
+        alert('Please enter country code and mobile number');
+        return false;
+      }
+      if (!terms) {
+        alert('You must agree to terms');
+        return false;
+      }
+      return {email, phone: code + mobile};
+    }
+
+    function placeHold() {
+      if (!validateForms() || !validateContact()) return;
+
+      const contact = validateContact();
+      const adults = parseInt($('adultCount').value);
+      const children = parseInt($('childCount').value);
+      const totalGuests = adults + children;
+      let pp = state.currentPP;
+      if (totalGuests === 1) pp = Math.round(pp * 1.75);
+      const total = pp * totalGuests;
+
+      const cruise = allCruises.find(c => c.key === state.currentCruise);
+
+      const holdData = {
+        id: Date.now(),
+        cruise: cruise.name,
+        cabin: state.currentCabin,
+        guests: totalGuests,
+        total: total,
+        email: contact.email,
+        phone: contact.phone,
+        expires: Date.now() + 48*60*60*1000
+      };
+
+      state.holds.push(holdData);
+      localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
+      updateCartCount();
+      renderHolds();
+
+      // EmailJS sends
+      const templateParams = {
+        cruise_name: cruise.name,
+        cabin_type: state.currentCabin.toUpperCase(),
+        guests: totalGuests,
+        total_price: `$${total.toLocaleString()} AUD`,
+        customer_email: contact.email,
+        customer_phone: contact.phone
+      };
+
+      // Customer confirmation
+      emailjs.send('service_ua229ob', 'Hold Confirmation', templateParams)
+        .then(() => console.log('Customer email sent'))
+        .catch(err => console.error('Error:', err));
+
+      // Admin notification (replace with your email in template or add param)
+      emailjs.send('service_ua229ob', 'NewHoldBooking', templateParams)
+        .then(() => console.log('Admin email sent'))
+        .catch(err => console.error('Error:', err));
+
+      closeModal('cabinModal');
+      openModal('successModal');
+    }
+
+    function updateCartCount() {
+      cartCount.textContent = state.holds.length;
+    }
+
+    function renderHolds() {
+      const container = $('holdsItems');
+      if (state.holds.length === 0) {
+        container.innerHTML = '<p style="text-align:center;padding:3rem;font-size:1.2rem;">No active holds yet. Start booking your dream cruise!</p>';
+        return;
+      }
+
+      container.innerHTML = state.holds.map((hold, i) => `
+        <div class="holds-item">
+          <div>
+            <strong>${hold.cruise} - ${hold.cabin.toUpperCase()} Cabin</strong><br>
+            ${hold.guests} Guest${hold.guests > 1 ? 's' : ''} • Contact: ${hold.email}<br>
+            <small>Expires: ${new Date(hold.expires).toLocaleString()}</small>
+          </div>
+          <div style="text-align:right;">
+            <strong>$${hold.total.toLocaleString()} AUD</strong><br>
+            <button onclick="removeHold(${i})" style="color:#c00;margin-top:0.8rem;padding:0.6rem 1.2rem;border-radius:12px;">Remove Hold</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function removeHold(index) {
+      if (confirm('Remove this hold?')) {
+        state.holds.splice(index, 1);
+        localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
+        updateCartCount();
+        renderHolds();
+      }
+    }
+
+    // Hamburger
+    $('hamburger').addEventListener('click', () => {
+      $('navMenu').classList.toggle('active');
+      $('hamburger').classList.toggle('active');
+    });
+
+    // Scroll header
+    window.addEventListener('scroll', () => {
+      document.querySelector('header').classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    // Card animations
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+    }, {threshold: 0.15});
+
+    // FAQ toggle
+    function toggleFAQ(el) {
+      el.classList.toggle('active');
+      const answer = el.nextElementSibling;
+      answer.classList.toggle('active');
+    }
+
+    // Search
+    $('search-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const depart = $('searchDepart').value;
+      const line = $('searchLine').value;
+      const month = $('searchMonth').value;
+      const nights = $('searchNights').value;
+
+      let results = allCruises;
+      if (depart) results = results.filter(c => c.depart.toLowerCase().includes(depart.toLowerCase()));
+      if (line) results = results.filter(c => c.line.toLowerCase().includes(line.toLowerCase()));
+      if (month) results = results.filter(c => c.month.includes(month));
+      if (nights) results = results.filter(c => c.nights === nights);
+
+      renderCruises('resultsGrid', results);
+      $('searchResults').style.display = results.length ? 'block' : 'none';
+      if (results.length === 0) $('resultsGrid').innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:3rem;">No matching cruises. Try different filters!</p>';
+      $('searchResults').scrollIntoView({behavior: 'smooth'});
+    });
+
+    // Init
     document.addEventListener('DOMContentLoaded', () => {
       updateUserUI();
       renderCruises('dealsGrid', allCruises);
-      // ... rest of init
+      const now = Date.now();
+      state.holds = state.holds.filter(h => h.expires > now);
+      localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
+      updateCartCount();
+      renderHolds();
     });
   </script>
 </body>
