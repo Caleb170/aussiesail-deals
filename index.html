@@ -29,6 +29,8 @@
 
     * { margin:0; padding:0; box-sizing:border-box; }
 
+    html { scroll-behavior: smooth; }
+
     body {
       font-family: 'Poppins', sans-serif;
       color: #333;
@@ -180,6 +182,23 @@
       opacity: 0.95;
     }
 
+    .hero-btn {
+      background: linear-gradient(135deg, var(--accent), #e6c200);
+      color: var(--dark);
+      padding: 1.2rem 2.5rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(255,215,0,0.4);
+      transition: all 0.3s;
+    }
+    .hero-btn:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(255,215,0,0.5);
+    }
+
     .search-box {
       background: rgba(255,255,255,0.25);
       backdrop-filter: blur(20px);
@@ -310,7 +329,7 @@
       left: 0; top: 0;
       width: 100%; height: 100%;
       background: rgba(0,0,0,0.85);
-      overflow: auto;
+      overflow-y: auto;
     }
 
     .modal-content {
@@ -341,8 +360,8 @@
       border-radius: 50%;
     }
 
-    .close:hover { 
-      color: var(--primary); 
+    .close:hover {
+      color: var(--primary);
       background: rgba(0,107,51,0.1);
       transform: scale(1.1);
     }
@@ -383,10 +402,28 @@
       box-shadow: inset 0 4px 15px rgba(0,0,0,0.05);
     }
 
+    .itinerary-map {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
     .itinerary-map img {
       max-width: 100%;
+      max-height: 550px;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin: 2rem auto 0;
       border-radius: var(--bubble-radius);
       box-shadow: var(--bubble-shadow);
+    }
+
+    #itineraryPorts {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-top: 1.5rem;
+      line-height: 1.8;
     }
 
     .cabin-grid {
@@ -404,15 +441,15 @@
       transition: all 0.4s;
     }
 
-    .cabin-card:hover { 
-      transform: translateY(-12px); 
+    .cabin-card:hover {
+      transform: translateY(-12px);
       box-shadow: 0 25px 50px rgba(0,0,0,0.2);
     }
 
-    .cabin-card h4 { 
-      color: var(--primary); 
-      margin-bottom: 1.2rem; 
-      font-weight: 700; 
+    .cabin-card h4 {
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+      font-weight: 700;
       font-size: 1.6rem;
     }
 
@@ -464,6 +501,10 @@
       padding: 2rem;
       margin-bottom: 1.5rem;
       box-shadow: var(--bubble-shadow);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
     }
 
     .hold-note {
@@ -563,6 +604,7 @@
       .highlights-grid { grid-template-columns: 1fr; }
       .passenger-selector { flex-direction: column; gap: 2rem; }
       button { grid-column: 1 / -1; }
+      .itinerary-map img { max-height: 400px; }
     }
   </style>
 </head>
@@ -592,6 +634,7 @@
     <div class="hero-content">
       <h1>Set Sail Down Under</h1>
       <p>Exclusive 2026+ cruise deals from Australia. Tropical islands, fjords, reefs – unbeatable prices on Carnival, Royal Caribbean & more.</p>
+      <button class="hero-btn" onclick="document.getElementById('deals').scrollIntoView({behavior:'smooth'})">View Hot Deals</button>
 
       <div class="search-box">
         <h3>Find Your Perfect Cruise</h3>
@@ -644,7 +687,7 @@
     <h2>Featured 2026 Deals</h2>
     <div class="grid">
       <div class="card" onclick="openCabinModal('south-pacific')">
-        <img src="https://www.tahititourisme.com/app/uploads/iris-images/22639/dji-0285-2-n060722-borabora-gauguina-ponant-julien-fabro-scaled-1-1920x1080-f50_50.jpg" alt="Paul Gauguin luxury cruise ship in South Pacific">
+        <img src="https://www.tahititourisme.com/app/uploads/iris-images/22639/dji-0285-2-n060722-borabora-gauguina-ponant-julien-fabro-scaled-1-1920x1080-f50_50.jpg" alt="Luxury cruise ship in South Pacific islands">
         <div class="card-info">
           <h3>9-Night South Pacific Escape</h3>
           <p>Sydney → Mystery Island → Lifou → Noumea → Sydney</p>
@@ -655,7 +698,7 @@
       </div>
 
       <div class="card" onclick="openCabinModal('nz-fjords')">
-        <img src="https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg" alt="Cruise ship sailing through New Zealand fjords">
+        <img src="https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg" alt="Cruise ship in Milford Sound fjords">
         <div class="card-info">
           <h3>12-Night NZ Fjords Adventure</h3>
           <p>Roundtrip Sydney – Milford, Doubtful & Dusky Sounds</p>
@@ -666,7 +709,7 @@
       </div>
 
       <div class="card" onclick="openCabinModal('reef')">
-        <img src="https://greatbarrierreeftours.com/files/2022/03/reef-train-and-skyrail-scaled.jpg" alt="Stunning aerial view of Great Barrier Reef with pontoon">
+        <img src="https://greatbarrierreeftours.com/files/2022/03/reef-train-and-skyrail-scaled.jpg" alt="Aerial view of Great Barrier Reef pontoon">
         <div class="card-info">
           <h3>7-Night Great Barrier Reef</h3>
           <p>Brisbane → Airlie Beach → Cairns → Willis Island → Brisbane</p>
@@ -700,23 +743,25 @@
         <p>Experience luxury at sea with world-class amenities, dining, and entertainment.</p>
         <div class="highlights-grid">
           <div class="highlight-item">
-            <img src="https://www.celebritycruises.com/blog/content/uploads/2020/02/best-rooms-on-a-cruise-ship-balcony-1024x683.jpg" alt="Luxury balcony cabin with ocean view">
+            <img src="https://www.celebritycruises.com/blog/content/uploads/2020/02/best-rooms-on-a-cruise-ship-balcony-1024x683.jpg" alt="Luxury balcony cabin">
             <p>Luxury Balcony Cabin</p>
           </div>
           <div class="highlight-item">
-            <img src="https://media.cnn.com/api/v1/images/stellar/prod/220412104916-03-body-most-luxurious-cruise-cabins.jpg?q=w_1110,c_fill" alt="Spacious luxury suite interior">
+            <img src="https://media.cnn.com/api/v1/images/stellar/prod/220412104916-03-body-most-luxurious-cruise-cabins.jpg?q=w_1110,c_fill" alt="Spacious suite">
             <p>Spacious Suite</p>
           </div>
           <div class="highlight-item">
-            <img src="https://www.royalcaribbeanblog.com/sites/default/files/styles/wide_1200_/public/blog-images/Inside%20Cabin%20Why%20I%20like.png.webp?itok=Er4chSTc" alt="Comfortable interior cabin">
+            <img src="https://www.royalcaribbeanblog.com/sites/default/files/styles/wide_1200_/public/blog-images/Inside%20Cabin%20Why%20I%20like.png.webp?itok=Er4chSTc" alt="Comfort interior cabin">
             <p>Comfort Interior Cabin</p>
           </div>
         </div>
       </div>
 
-      <div class="itinerary-section" id="itinerarySection">
+      <div class="itinerary-section">
         <h3>Itinerary & Ports</h3>
-        <img id="itineraryMap" src="" alt="Cruise route map">
+        <div class="itinerary-map">
+          <img id="itineraryMap" src="" alt="Cruise route map">
+        </div>
         <p id="itineraryPorts"></p>
       </div>
 
@@ -728,7 +773,7 @@
         <div class="passenger-selector">
           <div>
             <label>Adults:</label>
-            <select id="adultCount">
+            <select id="adultCount" onchange="updatePassengerForms()">
               <option value="1">1</option>
               <option value="2" selected>2</option>
               <option value="3">3</option>
@@ -737,14 +782,13 @@
           </div>
           <div>
             <label>Children (Under 17):</label>
-            <select id="childCount">
+            <select id="childCount" onchange="updatePassengerForms()">
               <option value="0">0</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
             </select>
           </div>
-          <button onclick="updatePassengerForms()" style="padding:1rem 2rem; font-size:1.1rem;">Update Details</button>
         </div>
 
         <div class="price-preview" id="pricePreview">
@@ -814,28 +858,28 @@
     <h2>Popular Cruise Lines</h2>
     <div class="grid">
       <div class="card">
-        <img src="https://www.carnival.com/-/media/Images/Ships/SL/carnival-splendor-mobile-4.jpg" alt="Carnival Splendor cruise ship">
+        <img src="https://www.carnival.com/-/media/Images/Ships/SL/carnival-splendor-mobile-4.jpg" alt="Carnival Splendor">
         <div class="card-info">
           <h3>Carnival Cruise Line</h3>
           <p>Fun-filled family cruising with entertainment and activities for all ages.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://www.royalcaribbeanpresscenter.com/media_photos/1667045067_October-2022-Ovation-of-the-Seas-Sydney-Opera-House-background.jpg" alt="Royal Caribbean Ovation of the Seas in Sydney">
+        <img src="https://www.royalcaribbeanpresscenter.com/media_photos/1667045067_October-2022-Ovation-of-the-Seas-Sydney-Opera-House-background.jpg" alt="Royal Caribbean Ovation of the Seas">
         <div class="card-info">
           <h3>Royal Caribbean</h3>
           <p>Innovative ships with adventure activities, shows, and dining.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://assets.princess.com/is/image/princesscruises/grand-princess-at-sea-exterior-full-cabo-san-lucas-header-gradient?qlt=82&ts=1748374395059" alt="Princess Cruises Grand Princess at sea">
+        <img src="https://assets.princess.com/is/image/princesscruises/grand-princess-at-sea-exterior-full-cabo-san-lucas-header-gradient?qlt=82&ts=1748374395059" alt="Princess Cruises Grand Princess">
         <div class="card-info">
           <h3>Princess Cruises</h3>
           <p>Elegant ships and scenic itineraries with premium service.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://www.celebritycruises.com/content/dam/celebrity/new-images/destination-pages/australia-new-zealand/edge-sydney-australia-evening-2560x1440.jpg" alt="Celebrity Edge in Sydney at evening">
+        <img src="https://www.celebritycruises.com/content/dam/celebrity/new-images/destination-pages/australia-new-zealand/edge-sydney-australia-evening-2560x1440.jpg" alt="Celebrity Edge in Sydney">
         <div class="card-info">
           <h3>Celebrity Cruises</h3>
           <p>Modern luxury with upscale dining and stylish design.</p>
