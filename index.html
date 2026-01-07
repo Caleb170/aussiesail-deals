@@ -16,7 +16,7 @@
   <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
   <script type="text/javascript">
     (function(){
-      emailjs.init("thAWGlhV_hgMrC1cX");
+      emailjs.init("thAWGlhV_hgMrC1cX"); // Your Public Key
     })();
   </script>
 
@@ -386,9 +386,9 @@
     .modal-content {
       background: white;
       margin: 4% auto;
-      padding: 3rem;
+      padding: 4rem;
       border-radius: var(--bubble-radius);
-      max-width: 1100px;
+      max-width: 1300px;
       width: 94%;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
       position: relative;
@@ -396,142 +396,41 @@
 
     .close {
       position: absolute;
-      right: 2rem;
-      top: 1.5rem;
+      right: 2.5rem;
+      top: 2rem;
       font-size: 3rem;
       cursor: pointer;
       color: var(--gray);
       transition: all 0.3s;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.05);
+      border-radius: 50%;
     }
 
     .close:hover {
       color: var(--primary);
+      background: rgba(0,107,51,0.1);
       transform: scale(1.1);
     }
 
-    .itinerary-section {
-      margin: 3rem 0;
-      text-align: center;
-      background: #f0f8ff;
-      padding: 2.5rem;
-      border-radius: var(--bubble-radius);
+    .terms-modal .modal-content {
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 3rem;
     }
 
-    .itinerary-map img {
-      max-width: 100%;
-      max-height: 500px;
-      object-fit: contain;
-      border-radius: var(--bubble-radius);
-      box-shadow: var(--bubble-shadow);
-    }
-
-    #itineraryPorts {
-      margin-top: 1.5rem;
-      font-size: 1.2rem;
-      color: var(--primary-dark);
-      font-weight: 600;
-    }
-
-    .cabin-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
-    }
-
-    .cabin-card {
-      background: #f0f8ff;
-      padding: 2rem;
-      text-align: center;
-      border-radius: var(--bubble-radius);
-      box-shadow: var(--bubble-shadow);
-      transition: transform 0.3s;
-    }
-
-    .cabin-card:hover {
-      transform: translateY(-10px);
-    }
-
-    .passenger-form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
-    }
-
-    .passenger-block {
-      background: #f0f8ff;
-      padding: 2rem;
-      border-radius: var(--bubble-radius);
-      box-shadow: var(--bubble-shadow);
-    }
-
-    .contact-info-section {
-      margin: 3rem 0 2rem;
-      padding: 2.5rem;
-      background: #f0f8ff;
-      border-radius: var(--bubble-radius);
-      box-shadow: var(--bubble-shadow);
-    }
-
-    .contact-info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .terms-checkbox {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 2rem 0;
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
-    .terms-checkbox input {
-      transform: scale(1.4);
-    }
-
-    .terms-checkbox a {
-      color: var(--primary);
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    .price-preview {
-      text-align: center;
-      padding: 2.5rem;
-      background: #e8f5e8;
-      border-radius: var(--bubble-radius);
-      margin: 2.5rem 0;
-      font-size: 1.5rem;
-      box-shadow: var(--bubble-shadow);
-    }
-
-    .price-preview strong {
-      font-size: 2.2rem;
-      color: var(--primary-dark);
-    }
-
-    .checkout-btn {
-      width: 100%;
-      padding: 1.8rem;
-      font-size: 1.5rem;
-      border-radius: 30px;
-      margin-top: 1rem;
-      box-shadow: 0 10px 30px rgba(0,107,51,0.4);
-    }
-
-    .success-modal .modal-content {
-      text-align: center;
-      max-width: 600px;
-      padding: 4rem;
-    }
-
-    .success-modal i {
-      font-size: 7rem;
-      color: var(--success);
+    .terms-modal h2 {
       margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .terms-modal p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
     }
 
     .faq-section {
@@ -587,6 +486,72 @@
       max-height: 800px;
     }
 
+    .itinerary-section {
+      margin: 4rem 0;
+      text-align: center;
+      background: linear-gradient(to bottom, #f0f8ff, #e8f4ff);
+      padding: 3rem;
+      border-radius: var(--bubble-radius);
+      box-shadow: inset 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .itinerary-map {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .itinerary-map img {
+      max-width: 100%;
+      max-height: 550px;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin: 2rem auto 0;
+      border-radius: var(--bubble-radius);
+      box-shadow: var(--bubble-shadow);
+    }
+
+    #itineraryPorts {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-top: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .contact-info-section {
+      margin: 3rem 0;
+      padding: 2.5rem;
+      background: #f0f8ff;
+      border-radius: var(--bubble-radius);
+      box-shadow: var(--bubble-shadow);
+    }
+
+    .contact-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .terms-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin: 2rem 0;
+      font-size: 1.1rem;
+    }
+
+    .terms-checkbox input {
+      margin-top: 0.3rem;
+      transform: scale(1.3);
+    }
+
+    .terms-checkbox a {
+      color: var(--primary);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
     footer {
       background: linear-gradient(135deg, var(--dark), var(--primary-dark));
       color: white;
@@ -606,15 +571,36 @@
       transform: translateY(-8px) scale(1.2);
     }
 
+    /* Contact form */
+    #contact form {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 2.5rem;
+      padding-bottom: 5rem;
+    }
+
+    #contact textarea {
+      min-height: 250px;
+      resize: vertical;
+    }
+
+    @keyframes fadeInUp { 
+      from { opacity:0; transform:translateY(50px); } 
+      to { opacity:1; transform:translateY(0); } 
+    }
+
     @media (max-width: 768px) {
       section { padding: 5rem 1rem; }
       .hero { min-height: 85vh; }
       .search-box { padding: 3rem; }
       .form-grid { grid-template-columns: 1fr; }
       .card img { height: 220px; }
-      .modal-content { padding: 2rem; margin: 8% auto; }
-      .passenger-form-grid { grid-template-columns: 1fr; }
-      .itinerary-map img { max-height: 350px; }
+      .modal-content { padding: 2.5rem; margin: 8% auto; }
+      .highlights-grid { grid-template-columns: 1fr; }
+      .passenger-selector { flex-direction: column; gap: 2rem; }
+      button { grid-column: 1 / -1; }
+      .itinerary-map img { max-height: 400px; }
     }
   </style>
 </head>
@@ -711,11 +697,30 @@
     <div class="grid" id="dealsGrid"></div>
   </section>
 
-  <!-- Cabin Modal - Clean Layout -->
+  <!-- Cabin Modal -->
   <div id="cabinModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('cabinModal')">&times;</span>
-      <h2 id="modalTitle">Booking Details</h2>
+      <h2 id="modalTitle">Select Cabin</h2>
+
+      <div class="ship-highlights">
+        <h3>Ship Highlights & Interiors</h3>
+        <p>Experience luxury at sea with world-class amenities, dining, and entertainment.</p>
+        <div class="highlights-grid">
+          <div class="highlight-item">
+            <img src="https://www.celebritycruises.com/blog/content/uploads/2020/02/best-rooms-on-a-cruise-ship-balcony-1024x683.jpg" alt="Luxury balcony cabin">
+            <p>Luxury Balcony Cabin</p>
+          </div>
+          <div class="highlight-item">
+            <img src="https://media.cnn.com/api/v1/images/stellar/prod/220412104916-03-body-most-luxurious-cruise-cabins.jpg?q=w_1110,c_fill" alt="Spacious suite">
+            <p>Spacious Suite</p>
+          </div>
+          <div class="highlight-item">
+            <img src="https://www.royalcaribbeanblog.com/sites/default/files/styles/wide_1200_/public/blog-images/Inside%20Cabin%20Why%20I%20like.png.webp?itok=Er4chSTc" alt="Comfort interior cabin">
+            <p>Comfort Interior Cabin</p>
+          </div>
+        </div>
+      </div>
 
       <div class="itinerary-section">
         <h3>Itinerary & Ports</h3>
@@ -751,67 +756,35 @@
           </div>
         </div>
 
-        <div id="passengerForms"></div>
-
         <div class="contact-info-section">
           <h3>Contact Information</h3>
           <div class="contact-info-grid">
             <input type="email" id="contactEmail" placeholder="Email Address" required>
             <input type="email" id="contactEmailConfirm" placeholder="Confirm Email Address" required>
-            <select id="countryCode" required>
+            <select id="countryCode">
               <option value="">Country Code</option>
-              <option value="+1">United States (+1)</option>
-              <option value="+44">United Kingdom (+44)</option>
               <option value="+61">Australia (+61)</option>
               <option value="+64">New Zealand (+64)</option>
-              <option value="+33">France (+33)</option>
-              <option value="+49">Germany (+49)</option>
-              <option value="+81">Japan (+81)</option>
-              <option value="+86">China (+86)</option>
-              <option value="+91">India (+91)</option>
-              <option value="+55">Brazil (+55)</option>
-              <option value="+7">Russia (+7)</option>
-              <option value="+34">Spain (+34)</option>
-              <option value="+39">Italy (+39)</option>
-              <option value="+27">South Africa (+27)</option>
-              <option value="+82">South Korea (+82)</option>
-              <option value="+52">Mexico (+52)</option>
-              <option value="+20">Egypt (+20)</option>
-              <option value="+66">Thailand (+66)</option>
-              <option value="+31">Netherlands (+31)</option>
-              <option value="+46">Sweden (+46)</option>
-              <!-- Add more if needed -->
+              <option value="+1">USA/Canada (+1)</option>
+              <option value="+44">UK (+44)</option>
             </select>
             <input type="tel" id="mobileNumber" placeholder="Mobile Number" required>
           </div>
-
           <div class="terms-checkbox">
             <input type="checkbox" id="agreeTerms" required>
-            <label for="agreeTerms">I have read and agree to the <a onclick="openModal('termsModal')">Terms and Conditions</a></label>
+            <label for="agreeTerms">I agree to the <a onclick="openModal('termsModal')">Terms and Conditions</a></label>
           </div>
         </div>
 
         <div class="price-preview" id="pricePreview">
           <p>Price per person: <strong id="ppPrice">$0 AUD</strong></p>
           <p>Total for <span id="totalGuests">2</span> guests: <strong id="totalPrice">$0 AUD</strong></p>
-          <small>* Single supplement may apply • Includes taxes, fees & gratuities</small>
+          <small>* Single supplement applies for solo travellers • Includes taxes, fees & gratuities</small>
         </div>
 
+        <div id="passengerForms" class="passenger-form"></div>
         <button class="checkout-btn" onclick="placeHold()">Place 48-Hour Hold</button>
       </div>
-    </div>
-  </div>
-
-  <!-- Success Modal - Improved -->
-  <div id="successModal" class="modal success-modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('successModal')">&times;</span>
-      <i class="fas fa-check-circle"></i>
-      <h2>Hold Placed Successfully!</h2>
-      <p>Your 48-hour cabin hold is confirmed.</p>
-      <p>A confirmation email has been sent to you with full details.</p>
-      <p>Our team has also been notified and will contact you shortly with payment options.</p>
-      <button onclick="closeModal('successModal')">Close</button>
     </div>
   </div>
 
@@ -884,6 +857,17 @@
         Your cabins are securely held for 48 hours.<br>
         Check your email for confirmation and deposit payment instructions.
       </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal">
+    <div class="modal-content" style="text-align:center; max-width:600px;">
+      <span class="close" onclick="closeModal('successModal')">&times;</span>
+      <i class="fas fa-check-circle" style="font-size:6rem; color:var(--success); margin:3rem 0;"></i>
+      <h2>Hold Placed Successfully!</h2>
+      <p>Your cabin is now reserved for 48 hours.<br>We have emailed you and our team with the details.</p>
+      <button onclick="closeModal('successModal')" style="padding:1.2rem 2.5rem; margin-top:2rem;">Close</button>
     </div>
   </div>
 
@@ -1099,7 +1083,7 @@
       updateUserUI();
     }
 
-    // Cruises data
+    // Cruises data - easy to add new ones
     const allCruises = [
       {
         key: 'south-pacific',
@@ -1175,6 +1159,7 @@
         `;
         container.appendChild(card);
       });
+      // Re-observe new cards for animation
       document.querySelectorAll('#' + containerId + ' .card').forEach(c => obs.observe(c));
     }
 
@@ -1259,27 +1244,30 @@
     function generatePassengerForms() {
       const adults = parseInt($('adultCount').value) || 1;
       const children = parseInt($('childCount').value) || 0;
-      const totalPassengers = adults + children;
       const container = $('passengerForms');
       container.innerHTML = '';
 
-      const titles = ['Mr', 'Mrs', 'Ms', 'Miss', 'Dr', 'Prof'];
-
-      for (let i = 1; i <= totalPassengers; i++) {
-        const type = i <= adults ? 'Adult' : 'Child';
+      for (let i = 1; i <= adults; i++) {
         container.innerHTML += `
-          <div class="passenger-block">
-            <h4>${type} ${i <= adults ? i : i - adults}</h4>
-            <div class="passenger-form-grid">
-              <select required>
-                <option value="">Title</option>
-                ${titles.map(t => `<option>${t}</option>`).join('')}
-              </select>
-              <input type="text" placeholder="First Name" required>
-              <input type="text" placeholder="Middle Name">
-              <input type="text" placeholder="Last Name" required>
+          <div style="background:#f0f8ff;padding:2rem;border-radius:var(--bubble-radius);box-shadow:var(--bubble-shadow);">
+            <h4>Adult ${i}</h4>
+            <div class="passenger-form">
+              <input type="text" placeholder="Full Name (as on passport)" required>
               <input type="date" placeholder="Date of Birth" required>
-              <input type="text" placeholder="Nationality" required>
+              <input type="email" placeholder="Email" required>
+              <input type="tel" placeholder="Phone" required>
+            </div>
+          </div>
+        `;
+      }
+
+      for (let i = 1; i <= children; i++) {
+        container.innerHTML += `
+          <div style="background:#f0f8ff;padding:2rem;border-radius:var(--bubble-radius);box-shadow:var(--bubble-shadow);">
+            <h4>Child ${i}</h4>
+            <div class="passenger-form">
+              <input type="text" placeholder="Full Name (as on passport)" required>
+              <input type="number" placeholder="Age (0-17)" min="0" max="17" required>
             </div>
           </div>
         `;
@@ -1302,7 +1290,7 @@
     }
 
     function validateForms() {
-      const required = document.querySelectorAll('#passengerForms input[required], #passengerForms select[required]');
+      const required = document.querySelectorAll('#passengerForms input[required]');
       for (const field of required) {
         if (!field.value.trim()) {
           alert('Please fill all required passenger details');
@@ -1363,8 +1351,8 @@
       updateCartCount();
       renderHolds();
 
+      // EmailJS sends
       const templateParams = {
-        to_email: contact.email,
         cruise_name: cruise.name,
         cabin_type: state.currentCabin.toUpperCase(),
         guests: totalGuests,
@@ -1373,13 +1361,15 @@
         customer_phone: contact.phone
       };
 
+      // Customer confirmation
       emailjs.send('service_ua229ob', 'Hold Confirmation', templateParams)
         .then(() => console.log('Customer email sent'))
-        .catch(err => console.error('Customer email error:', err));
+        .catch(err => console.error('Error:', err));
 
+      // Admin notification (replace with your email in template or add param)
       emailjs.send('service_ua229ob', 'NewHoldBooking', templateParams)
         .then(() => console.log('Admin email sent'))
-        .catch(err => console.error('Admin email error:', err));
+        .catch(err => console.error('Error:', err));
 
       closeModal('cabinModal');
       openModal('successModal');
