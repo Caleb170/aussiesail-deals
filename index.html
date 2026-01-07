@@ -267,8 +267,8 @@
     }
 
     .twin-quad {
-      font-size: 1.1rem;
-      font-weight: 600;
+      font-size: 1.2rem;
+      font-weight: 700;
       color: #c62828;
       margin: 1rem 0;
     }
@@ -333,6 +333,9 @@
     .itinerary-section {
       margin: 3rem 0;
       text-align: center;
+      background: #f0f8ff;
+      padding: 2rem;
+      border-radius: var(--bubble-radius);
     }
 
     .itinerary-map img {
@@ -366,14 +369,38 @@
     }
 
     .passenger-selector {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
       margin: 2rem 0;
-      text-align: center;
+    }
+
+    .passenger-selector div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .passenger-selector label {
       font-weight: 600;
-      margin-right: 1rem;
       color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .price-preview {
+      text-align: center;
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: #e8f5e8;
+      border-radius: var(--bubble-radius);
+      font-size: 1.4rem;
+    }
+
+    .price-preview strong {
+      color: var(--primary);
+      font-size: 1.8rem;
     }
 
     .cart-item {
@@ -462,6 +489,7 @@
       .card img { height: 200px; }
       .modal-content { padding: 2rem; margin: 10% auto; }
       .highlights-grid { grid-template-columns: 1fr; }
+      .passenger-selector { flex-direction: column; gap: 1rem; }
     }
   </style>
 </head>
@@ -476,7 +504,7 @@
         <a href="#lines">Cruise Lines</a>
         <a href="#about">About Us</a>
         <a href="#contact">Contact</a>
-        <div class="cart-icon" onclick="openModal('cartModal')">
+        <div class="cart-icon" onclick="openModal('holdsModal')">
           <i class="fas fa-shopping-cart"></i>
           <span class="cart-count" id="cartCount">0</span>
         </div>
@@ -553,7 +581,7 @@
       </div>
 
       <div class="card" onclick="openCabinModal('nz-fjords')">
-        <img src="https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg" alt="NZ Fjords cruise">
+        <img src="https://images.pexels.com/photos/1670187/pexels-photo-1670187.jpeg" alt="NZ Fjords cruise">
         <div class="card-info">
           <h3>12-Night NZ Fjords Adventure</h3>
           <p>Roundtrip Sydney – Milford, Doubtful & Dusky Sounds</p>
@@ -563,7 +591,7 @@
       </div>
 
       <div class="card" onclick="openCabinModal('reef')">
-        <img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7" alt="Great Barrier Reef cruise">
+        <img src="https://images.pexels.com/photos/1076752/pexels-photo-1076752.jpeg" alt="Great Barrier Reef cruise">
         <div class="card-info">
           <h3>7-Night Great Barrier Reef</h3>
           <p>Brisbane → Airlie Beach → Cairns → Willis Island → Brisbane</p>
@@ -595,24 +623,24 @@
         <p>Modern amenities, pools, dining, entertainment, and stunning ocean views.</p>
         <div class="highlights-grid">
           <div class="highlight-item">
-            <img src="https://media.cnn.com/api/v1/images/stellar/prod/220419080338-19-most-luxurious-cruise-cabins-viking-expeditions.jpg" alt="Luxury balcony cabin">
+            <img src="https://images.unsplash.com/photo-1569261676777-5a0c0a5e5d3e" alt="Luxury balcony cabin">
             <p>Luxury Balcony Cabin</p>
           </div>
           <div class="highlight-item">
-            <img src="https://www.royalcaribbean.com/content/dam/royal/ships/utopia/microsite/utopia-royal-loft-suite-main-balcony-cgi.jpg" alt="Spacious suite">
+            <img src="https://images.unsplash.com/photo-1571896349842-97cd6c351e3e" alt="Spacious suite">
             <p>Spacious Suite</p>
           </div>
           <div class="highlight-item">
-            <img src="https://assets.princess.com/is/image/princesscruises/inside-interior-stateroom-caribbean-princess" alt="Comfort interior cabin">
+            <img src="https://images.unsplash.com/photo-1564507592333-cb7b4a2e9b2a" alt="Comfort interior cabin">
             <p>Comfort Interior Cabin</p>
           </div>
         </div>
       </div>
 
       <div class="itinerary-section" id="itinerarySection">
-        <h3>Itinerary Map & Ports</h3>
-        <img id="itineraryMap" src="" alt="Cruise route map" style="max-width:100%; border-radius:var(--bubble-radius); box-shadow:var(--bubble-shadow);">
-        <p id="itineraryPorts" style="margin-top:1rem; font-style:italic;"></p>
+        <h3>Itinerary & Ports</h3>
+        <img id="itineraryMap" src="" alt="Cruise route map">
+        <p id="itineraryPorts"></p>
       </div>
 
       <h3>Available Cabin Types</h3>
@@ -621,21 +649,32 @@
       <div id="passengerSection" style="display:none;">
         <h3>Passenger Details</h3>
         <div class="passenger-selector">
-          <label>Adults:</label>
-          <select id="adultCount">
-            <option value="1">1</option>
-            <option value="2" selected>2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-          <label style="margin-left:1.5rem;">Children (Under 17):</label>
-          <select id="childCount">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
+          <div>
+            <label>Adults:</label>
+            <select id="adultCount" onchange="updatePreview()">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+          <div>
+            <label>Children (Under 17):</label>
+            <select id="childCount" onchange="updatePreview()">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
         </div>
+
+        <div class="price-preview" id="pricePreview">
+          <p>Price per person: <strong id="ppPrice">$0 AUD</strong></p>
+          <p>Total for <span id="totalGuests">2</span> guests: <strong id="totalPrice">$0 AUD</strong></p>
+          <small>* Prices based on twin share. Single supplement may apply for 1 guest.</small>
+        </div>
+
         <div id="passengerForms" class="passenger-form"></div>
         <button class="checkout-btn" onclick="placeHold()">Place 48-Hour Hold</button>
       </div>
@@ -643,11 +682,11 @@
   </div>
 
   <!-- Holds Modal -->
-  <div id="cartModal" class="modal">
+  <div id="holdsModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
       <h2>Your Active Holds</h2>
-      <div id="cartItems"></div>
+      <div id="holdsItems"></div>
       <div class="hold-note">
         Your cabins are held for 48 hours.<br>
         Check your email for confirmation and deposit payment instructions.
@@ -661,7 +700,7 @@
       <span class="close">&times;</span>
       <i class="fas fa-check-circle" style="font-size:5rem; color:var(--success); margin:2rem 0;"></i>
       <h2>Hold Placed Successfully!</h2>
-      <p>Your cabin is now reserved for 48 hours.<br>Check your email for confirmation and next steps to pay the deposit.</p>
+      <p>Your cabin is now reserved for 48 hours.<br>Check your email for confirmation and deposit payment instructions.</p>
       <button onclick="closeModal('successModal')">Close</button>
     </div>
   </div>
@@ -677,14 +716,14 @@
         </div>
       </div>
       <div class="card">
-        <img src="https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg" alt="New Zealand">
+        <img src="https://images.pexels.com/photos/1670187/pexels-photo-1670187.jpeg" alt="New Zealand">
         <div class="card-info">
           <h3>New Zealand Fjords</h3>
           <p>Majestic fjords, wildlife, and adventure.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7" alt="Great Barrier Reef">
+        <img src="https://images.pexels.com/photos/1076752/pexels-photo-1076752.jpeg" alt="Great Barrier Reef">
         <div class="card-info">
           <h3>Great Barrier Reef</h3>
           <p>Colorful coral, tropical fish – diving paradise.</p>
@@ -697,31 +736,31 @@
     <h2>Popular Cruise Lines</h2>
     <div class="grid">
       <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Carnival_Splendor_at_Sydney.jpg" alt="Carnival">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Carnival_Splendor_at_Sydney.jpg" alt="Carnival Cruise Line">
         <div class="card-info">
           <h3>Carnival Cruise Line</h3>
-          <p>Fun-focused family cruising with great entertainment.</p>
+          <p>Fun-filled family cruising with entertainment and activities for all ages.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Royal_Caribbean_International_ship.jpg" alt="Royal Caribbean">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Ovation_of_the_Seas_in_Sydney.jpg" alt="Royal Caribbean">
         <div class="card-info">
           <h3>Royal Caribbean</h3>
-          <p>Adventure and innovation on mega-ships.</p>
+          <p>Innovative ships with adventure activities, shows, and dining.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Princess_Cruises_ship.jpg" alt="Princess">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Grand_Princess_in_Ketchikan.jpg" alt="Princess Cruises">
         <div class="card-info">
           <h3>Princess Cruises</h3>
-          <p>Classic premium cruising experience.</p>
+          <p>Premium cruising with elegant dining and scenic destinations.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Celebrity_Cruises_ship.jpg" alt="Celebrity">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Celebrity_Edge_in_Sydney.jpg" alt="Celebrity Cruises">
         <div class="card-info">
           <h3>Celebrity Cruises</h3>
-          <p>Modern luxury at sea.</p>
+          <p>Modern luxury with upscale dining and stylish design.</p>
         </div>
       </div>
     </div>
@@ -764,27 +803,40 @@
   <script>
     // State
     const state = {
-      cart: JSON.parse(localStorage.getItem('downunderHolds')) || [],
+      holds: JSON.parse(localStorage.getItem('downunderHolds')) || [],
       currentCruise: null,
-      currentCabin: null
+      currentCabin: null,
+      currentPP: 0
     };
 
-    // Maps & Itineraries
-    const itineraries = {
+    // Itineraries & Pricing
+    const cruises = {
       'south-pacific': {
-        map: 'https://cruiseweb.com/_next/image?url=https%3A%2F%2Fbooking.sigtn.com%2Fcontent%2Fimages%2FItineraries%2FSYD_NOU_MYS_LIF_SYD.jpg&w=1920&q=75',
+        name: '9-Night South Pacific Escape',
+        basePP: 899,
+        quadPP: 699,
+        map: 'https://www.cruisemapper.com/images/ships/1051-itinerary-map-2024-2025-2026-3e9e5f7d.jpg',
         ports: 'Day 1: Sydney • Day 3: Mystery Island • Day 4: Lifou • Day 5: Noumea • Day 9: Sydney'
       },
       'nz-fjords': {
-        map: 'https://images.docs.travel/maps/royal_caribbean/115407.jpg?v=1&height=750',
+        name: '12-Night NZ Fjords Adventure',
+        basePP: 1299,
+        quadPP: 999,
+        map: 'https://www.princess.com/images/itinerary-maps/au-nz-fjords.jpg',
         ports: 'Day 1-2: Sydney • Day 5: Milford Sound • Day 6: Doubtful Sound • Day 7: Dusky Sound • Day 12: Sydney'
       },
       'reef': {
-        map: 'https://images.docs.travel/maps/carnival/137509.jpg?v=1&height=750',
+        name: '7-Night Great Barrier Reef',
+        basePP: 799,
+        quadPP: 649,
+        map: 'https://www.carnival.com.au/content/dam/carnival/destinations/great-barrier-reef/map.jpg',
         ports: 'Day 1: Brisbane • Day 3: Airlie Beach • Day 5: Cairns • Day 6: Willis Island • Day 7: Brisbane'
       },
       'vanuatu': {
-        map: 'https://images.docs.travel/maps/carnival/140302.jpg?v=1&height=750',
+        name: '10-Night Vanuatu Escape',
+        basePP: 949,
+        quadPP: 749,
+        map: 'https://www.carnival.com.au/content/dam/carnival/destinations/vanuatu/map.jpg',
         ports: 'Day 1: Brisbane • Day 4: Noumea • Day 6: Mystery Island • Day 7: Port Vila • Day 10: Brisbane'
       }
     };
@@ -795,13 +847,6 @@
       {id:'balcony', name:'Balcony', mult:1.7},
       {id:'suite', name:'Suite', mult:2.8}
     ];
-
-    const basePrices = {
-      'south-pacific': 899,
-      'nz-fjords': 1299,
-      'reef': 799,
-      'vanuatu': 949
-    };
 
     // DOM
     const $ = id => document.getElementById(id);
@@ -818,36 +863,37 @@
       if (modal) modal.style.display = 'none';
     }
 
-    // Close on X or background
+    // Close handlers
     document.querySelectorAll('.close').forEach(btn => {
-      btn.addEventListener('click', () => closeModal(btn.closest('.modal').id));
+      btn.onclick = () => closeModal(btn.closest('.modal').id);
     });
 
-    window.addEventListener('click', e => {
+    window.onclick = e => {
       if (e.target.classList.contains('modal')) closeModal(e.target.id);
-    });
+    };
 
     // Cabin Modal
     function openCabinModal(key) {
+      const cruise = cruises[key];
       state.currentCruise = key;
-      $('modalTitle').textContent = itineraries[key].ports.split(' • ')[1] + ' – Select Cabin';
+      $('modalTitle').textContent = cruise.name;
 
-      // Itinerary map
-      $('itineraryMap').src = itineraries[key].map;
-      $('itineraryPorts').textContent = itineraries[key].ports;
+      // Itinerary
+      $('itineraryMap').src = cruise.map;
+      $('itineraryPorts').textContent = cruise.ports;
 
       // Cabins
       const grid = $('cabinGrid');
       grid.innerHTML = '';
-      const base = basePrices[key];
       cabinTypes.forEach(c => {
-        const price = Math.round(base * c.mult);
+        const pp = Math.round(cruise.basePP * c.mult);
         const card = document.createElement('div');
         card.className = 'cabin-card';
         card.innerHTML = `
           <h4>${c.name}</h4>
-          <p><strong>from $${price.toLocaleString()} AUD pp</strong></p>
-          <button onclick="selectCabin('${c.id}', ${price})">Select</button>
+          <p><strong>from $${pp.toLocaleString()} AUD pp</strong></p>
+          <p>${c.name === 'Interior' ? 'Great value' : c.name === 'Ocean View' ? 'Window views' : c.name === 'Balcony' ? 'Private balcony' : 'Luxury suite'}</p>
+          <button onclick="selectCabin('${c.id}', ${pp})">Select</button>
         `;
         grid.appendChild(card);
       });
@@ -856,11 +902,28 @@
       openModal('cabinModal');
     }
 
-    function selectCabin(id, price) {
-      state.currentCabin = {id, price};
+    function selectCabin(id, pp) {
+      state.currentCabin = id;
+      state.currentPP = pp;
       $('cabinGrid').style.display = 'none';
       $('passengerSection').style.display = 'block';
       generatePassengerForms();
+      updatePreview();
+    }
+
+    function updatePreview() {
+      const adults = parseInt($('adultCount').value) || 1;
+      const children = parseInt($('childCount').value) || 0;
+      const totalGuests = adults + children;
+
+      let pp = state.currentPP;
+      if (totalGuests === 1) pp = Math.round(pp * 1.75); // Single supplement
+
+      const total = pp * totalGuests;
+
+      $('ppPrice').textContent = `$${pp.toLocaleString()} AUD`;
+      $('totalGuests').textContent = totalGuests;
+      $('totalPrice').textContent = `$${total.toLocaleString()} AUD`;
     }
 
     function generatePassengerForms() {
@@ -878,7 +941,6 @@
               <input type="date" placeholder="Date of Birth" required>
               <input type="email" placeholder="Email" required>
               <input type="tel" placeholder="Phone" required>
-              <input type="text" placeholder="Loyalty Number (optional)">
             </div>
           </div>
         `;
@@ -901,7 +963,7 @@
       const required = document.querySelectorAll('#passengerForms input[required]');
       for (const field of required) {
         if (!field.value.trim()) {
-          alert('Please complete all required fields');
+          alert('Please fill all required passenger details');
           return false;
         }
       }
@@ -913,18 +975,21 @@
 
       const adults = parseInt($('adultCount').value);
       const children = parseInt($('childCount').value);
-      const total = state.currentCabin.price * (adults + children);
+      const totalGuests = adults + children;
+      let pp = state.currentPP;
+      if (totalGuests === 1) pp = Math.round(pp * 1.75);
+      const total = pp * totalGuests;
 
-      state.cart.push({
+      state.holds.push({
         id: Date.now(),
-        cruise: state.currentCruise,
-        cabin: state.currentCabin.id,
-        adults, children,
-        total,
+        cruise: cruises[state.currentCruise].name,
+        cabin: state.currentCabin,
+        guests: totalGuests,
+        total: total,
         expires: Date.now() + 48*60*60*1000
       });
 
-      localStorage.setItem('downunderHolds', JSON.stringify(state.cart));
+      localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
       updateCartCount();
       renderHolds();
 
@@ -933,21 +998,21 @@
     }
 
     function updateCartCount() {
-      cartCount.textContent = state.cart.length;
+      cartCount.textContent = state.holds.length;
     }
 
     function renderHolds() {
-      const container = $('cartItems');
-      if (state.cart.length === 0) {
+      const container = $('holdsItems');
+      if (state.holds.length === 0) {
         container.innerHTML = '<p style="text-align:center;padding:2rem;">No active holds.</p>';
         return;
       }
 
-      container.innerHTML = state.cart.map((hold, i) => `
+      container.innerHTML = state.holds.map((hold, i) => `
         <div class="cart-item">
           <div>
-            <strong>${hold.cruise.toUpperCase().replace('-',' ')} - ${hold.cabin.toUpperCase()} Cabin</strong><br>
-            ${hold.adults} Adult${hold.adults>1?'s':''} ${hold.children > 0 ? `+ ${hold.children} Child${hold.children>1?'ren':''}` : ''}<br>
+            <strong>${hold.cruise} - ${hold.cabin.toUpperCase()} Cabin</strong><br>
+            ${hold.guests} Guest${hold.guests > 1 ? 's' : ''}<br>
             <small>Expires: ${new Date(hold.expires).toLocaleString()}</small>
           </div>
           <div style="text-align:right;">
@@ -960,8 +1025,8 @@
 
     function removeHold(index) {
       if (confirm('Remove this hold?')) {
-        state.cart.splice(index, 1);
-        localStorage.setItem('downunderHolds', JSON.stringify(state.cart));
+        state.holds.splice(index, 1);
+        localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
         updateCartCount();
         renderHolds();
       }
@@ -987,8 +1052,8 @@
     // Init
     document.addEventListener('DOMContentLoaded', () => {
       const now = Date.now();
-      state.cart = state.cart.filter(h => h.expires > now);
-      localStorage.setItem('downunderHolds', JSON.stringify(state.cart));
+      state.holds = state.holds.filter(h => h.expires > now);
+      localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
       updateCartCount();
       renderHolds();
     });
@@ -996,7 +1061,7 @@
     // Fake search
     $('search-form').addEventListener('submit', e => {
       e.preventDefault();
-      alert('In a live site, this would show real-time cruise matches!');
+      alert('Search functionality would show real results in production!');
     });
   </script>
 </body>
