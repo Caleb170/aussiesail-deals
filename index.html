@@ -12,6 +12,15 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
+  <!-- EmailJS for booking emails (sign up at emailjs.com for free, get user ID, service ID, template ID) -->
+  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      // Replace with your EmailJS user ID
+      emailjs.init("YOUR_EMAILJS_USER_ID");
+    })();
+  </script>
+
   <style>
     :root {
       --primary: #006b33;
@@ -77,7 +86,7 @@
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 2rem;
       align-items: center;
     }
     .nav-links a {
@@ -90,6 +99,44 @@
       border-radius: 8px;
     }
     .nav-links a:hover { color: var(--accent); background: rgba(255,215,0,0.1); transform: translateY(-3px); }
+
+    .user-menu {
+      position: relative;
+    }
+    .user-menu button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+    .user-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background: white;
+      min-width: 200px;
+      box-shadow: var(--bubble-shadow);
+      border-radius: var(--bubble-radius);
+      overflow: hidden;
+      z-index: 100;
+    }
+    .user-dropdown.active { display: block; }
+    .user-dropdown a, .user-dropdown button {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      text-align: left;
+      background: none;
+      border: none;
+      color: #333;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    .user-dropdown a:hover, .user-dropdown button:hover {
+      background: #f0f8ff;
+    }
 
     .cart-icon {
       position: relative;
@@ -247,7 +294,6 @@
       font-weight: 700;
       cursor: pointer;
       font-size: 1.2rem;
-      grid-column: span 2;
     }
     button:hover { 
       transform: translateY(-8px); 
@@ -366,31 +412,73 @@
       transform: scale(1.1);
     }
 
-    .ship-highlights { margin-bottom: 4rem; text-align: center; }
-
-    .highlights-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2.5rem;
-      margin-top: 2.5rem;
+    .terms-modal .modal-content {
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 3rem;
     }
 
-    .highlight-item {
-      background: linear-gradient(to bottom, #f0f8ff, #e6f3ff);
+    .terms-modal h2 {
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .terms-modal p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .faq-section {
+      background: #f0f8ff;
+      padding: 4rem 0;
+    }
+
+    .faq-accordion {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
       border-radius: var(--bubble-radius);
-      padding: 2rem;
+      overflow: hidden;
       box-shadow: var(--bubble-shadow);
+    }
+
+    .faq-question {
+      background: white;
+      padding: 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+
+    .faq-question:hover {
+      background: #f0f8ff;
+    }
+
+    .faq-question i {
       transition: transform 0.3s;
     }
 
-    .highlight-item:hover { transform: translateY(-10px); }
+    .faq-question.active i {
+      transform: rotate(180deg);
+    }
 
-    .highlight-item img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: var(--bubble-radius);
-      margin-bottom: 1.2rem;
+    .faq-answer {
+      background: #f8f9fa;
+      padding: 0 1.5rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .faq-answer.active {
+      padding: 1.5rem;
+      max-height: 500px;
     }
 
     .itinerary-section {
@@ -426,134 +514,36 @@
       line-height: 1.8;
     }
 
-    .cabin-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2.5rem;
-    }
-
-    .cabin-card {
-      background: linear-gradient(to bottom, #f0f8ff, #e8f4ff);
-      border-radius: var(--bubble-radius);
-      padding: 2.2rem;
-      text-align: center;
-      box-shadow: var(--bubble-shadow);
-      transition: all 0.4s;
-    }
-
-    .cabin-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-    }
-
-    .cabin-card h4 {
-      color: var(--primary);
-      margin-bottom: 1.2rem;
-      font-weight: 700;
-      font-size: 1.6rem;
-    }
-
-    .passenger-selector {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 4rem;
-      flex-wrap: wrap;
-      margin: 3rem 0;
-    }
-
-    .passenger-selector > div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: #f0f8ff;
-      padding: 1.5rem 2.5rem;
-      border-radius: var(--bubble-radius);
-      box-shadow: var(--bubble-shadow);
-    }
-
-    .passenger-selector label {
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 0.8rem;
-      font-size: 1.2rem;
-    }
-
-    .price-preview {
-      text-align: center;
+    .contact-info-section {
       margin: 3rem 0;
       padding: 2.5rem;
-      background: linear-gradient(to bottom, #e8f5e8, #d8f0d8);
+      background: #f0f8ff;
       border-radius: var(--bubble-radius);
-      font-size: 1.6rem;
       box-shadow: var(--bubble-shadow);
     }
 
-    .price-preview strong {
-      color: var(--primary-dark);
-      font-size: 2.2rem;
-      font-weight: 800;
-    }
-
-    .holds-item {
-      background: #f8f9fa;
-      border-radius: var(--bubble-radius);
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      box-shadow: var(--bubble-shadow);
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 1.5rem;
-      align-items: center;
-    }
-
-    .hold-note {
-      background: linear-gradient(135deg, var(--warning), #ffb84d);
-      color: var(--dark);
-      padding: 2rem;
-      border-radius: var(--bubble-radius);
-      margin: 3rem 0;
-      text-align: center;
-      font-weight: 700;
-      font-size: 1.2rem;
-      box-shadow: var(--bubble-shadow);
-    }
-
-    .passenger-form {
+    .contact-info-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
     }
 
-    .checkout-btn {
-      width: 100%;
-      padding: 1.8rem;
-      font-size: 1.5rem;
-      margin-top: 3rem;
-      border-radius: 30px;
-      box-shadow: 0 10px 30px rgba(0,107,51,0.4);
+    .terms-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      font-size: 1.1rem;
     }
 
-    h2 { 
-      text-align: center; 
-      font-size: clamp(2.8rem, 6vw, 4.5rem); 
-      margin-bottom: 4rem; 
-      color: var(--primary); 
-      font-family: 'Playfair Display', serif; 
-      font-weight: 700;
-      position: relative;
+    .terms-checkbox input {
+      transform: scale(1.3);
     }
 
-    h2::after { 
-      content: ''; 
-      width: 150px; 
-      height: 6px; 
-      background: linear-gradient(to right, var(--accent), transparent);
-      position: absolute; 
-      bottom: -20px; 
-      left: 50%; 
-      transform: translateX(-50%);
-      border-radius: 3px;
+    .terms-checkbox a {
+      color: var(--primary);
+      text-decoration: underline;
+      cursor: pointer;
     }
 
     footer {
@@ -573,20 +563,6 @@
     .social-icons a:hover { 
       color: var(--accent); 
       transform: translateY(-8px) scale(1.2);
-    }
-
-    /* Contact form */
-    #contact form {
-      max-width: 900px;
-      margin: 0 auto;
-      display: grid;
-      gap: 2.5rem;
-      padding-bottom: 5rem;
-    }
-
-    #contact textarea {
-      min-height: 250px;
-      resize: vertical;
     }
 
     @keyframes fadeInUp { 
@@ -617,8 +593,17 @@
         <a href="#deals">Hot Deals</a>
         <a href="#destinations">Destinations</a>
         <a href="#lines">Cruise Lines</a>
+        <a href="#faq">FAQ</a>
         <a href="#about">About Us</a>
         <a href="#contact">Contact</a>
+        <div class="user-menu">
+          <button id="userBtn">Login / Sign Up</button>
+          <div class="user-dropdown" id="userDropdown">
+            <a href="#" onclick="openModal('loginModal')">Login</a>
+            <a href="#" onclick="openModal('signupModal')">Sign Up</a>
+            <button onclick="logout()">Logout</button>
+          </div>
+        </div>
         <div class="cart-icon" onclick="openModal('holdsModal')">
           <i class="fas fa-shopping-cart"></i>
           <span class="cart-count" id="cartCount">0</span>
@@ -639,24 +624,24 @@
       <div class="search-box">
         <h3>Find Your Perfect Cruise</h3>
         <form class="form-grid" id="search-form">
-          <select>
-            <option>Depart From</option>
+          <select id="searchDepart">
+            <option value="">Depart From</option>
             <option>Sydney</option>
             <option>Brisbane</option>
             <option>Melbourne</option>
             <option>Perth</option>
             <option>Any Australian Port</option>
           </select>
-          <select>
-            <option>Cruise Line</option>
+          <select id="searchLine">
+            <option value="">Cruise Line</option>
             <option>Carnival</option>
             <option>Royal Caribbean</option>
             <option>Princess</option>
             <option>Celebrity</option>
             <option>Norwegian</option>
           </select>
-          <select>
-            <option>Departure Month</option>
+          <select id="searchMonth">
+            <option value="">Departure Month</option>
             <option>January 2026</option>
             <option>February 2026</option>
             <option>March 2026</option>
@@ -670,8 +655,8 @@
             <option>November 2026</option>
             <option>December 2026</option>
           </select>
-          <select>
-            <option>Nights</option>
+          <select id="searchNights">
+            <option value="">Nights</option>
             <option>3-5 Nights</option>
             <option>6-9 Nights</option>
             <option>10-14 Nights</option>
@@ -679,57 +664,17 @@
           </select>
           <button type="submit">Search Cruises <i class="fas fa-search"></i></button>
         </form>
+        <div id="searchResults" style="margin-top:3rem;display:none;">
+          <h3>Search Results</h3>
+          <div class="grid" id="resultsGrid"></div>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="deals" class="container">
     <h2>Featured 2026 Deals</h2>
-    <div class="grid">
-      <div class="card" onclick="openCabinModal('south-pacific')">
-        <img src="https://www.tahititourisme.com/app/uploads/iris-images/22639/dji-0285-2-n060722-borabora-gauguina-ponant-julien-fabro-scaled-1-1920x1080-f50_50.jpg" alt="Luxury cruise ship in South Pacific islands">
-        <div class="card-info">
-          <h3>9-Night South Pacific Escape</h3>
-          <p>Sydney → Mystery Island → Lifou → Noumea → Sydney</p>
-          <p class="twin-quad"><strong>Twin from $899 pp</strong> • Quad from $699 pp</p>
-          <p class="bonus-offer">+ $150 onboard credit per cabin</p>
-          <button>Select Cabin</button>
-        </div>
-      </div>
-
-      <div class="card" onclick="openCabinModal('nz-fjords')">
-        <img src="https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg" alt="Cruise ship in Milford Sound fjords">
-        <div class="card-info">
-          <h3>12-Night NZ Fjords Adventure</h3>
-          <p>Roundtrip Sydney – Milford, Doubtful & Dusky Sounds</p>
-          <p class="twin-quad"><strong>Twin from $1,299 pp</strong> • Quad from $999 pp</p>
-          <p class="bonus-offer">+ Free premium drinks package</p>
-          <button>Select Cabin</button>
-        </div>
-      </div>
-
-      <div class="card" onclick="openCabinModal('reef')">
-        <img src="https://greatbarrierreeftours.com/files/2022/03/reef-train-and-skyrail-scaled.jpg" alt="Aerial view of Great Barrier Reef pontoon">
-        <div class="card-info">
-          <h3>7-Night Great Barrier Reef</h3>
-          <p>Brisbane → Airlie Beach → Cairns → Willis Island → Brisbane</p>
-          <p class="twin-quad"><strong>Twin from $799 pp</strong> • Quad from $649 pp</p>
-          <p class="bonus-offer">+ Kids sail free on family cabins</p>
-          <button>Select Cabin</button>
-        </div>
-      </div>
-
-      <div class="card" onclick="openCabinModal('vanuatu')">
-        <img src="https://www.carnival.com/-/media/Images/Ships/SL/carnival-splendor-mobile-4.jpg" alt="Carnival Splendor cruise ship">
-        <div class="card-info">
-          <h3>10-Night Vanuatu Escape</h3>
-          <p>Brisbane → Noumea → Mystery Island → Port Vila → Brisbane</p>
-          <p class="twin-quad"><strong>Twin from $949 pp</strong> • Quad from $749 pp</p>
-          <p class="bonus-offer">+ $250 onboard credit per cabin</p>
-          <button>Select Cabin</button>
-        </div>
-      </div>
-    </div>
+    <div class="grid" id="dealsGrid"></div>
   </section>
 
   <!-- Cabin Modal -->
@@ -791,6 +736,27 @@
           </div>
         </div>
 
+        <div class="contact-info-section">
+          <h3>Contact Information</h3>
+          <div class="contact-info-grid">
+            <input type="email" id="contactEmail" placeholder="Email Address" required>
+            <input type="email" id="contactEmailConfirm" placeholder="Confirm Email Address" required>
+            <select id="countryCode">
+              <option value="">Country Code</option>
+              <option value="+61">Australia (+61)</option>
+              <option value="+64">New Zealand (+64)</option>
+              <option value="+1">USA/Canada (+1)</option>
+              <option value="+44">UK (+44)</option>
+              <!-- Add more as needed -->
+            </select>
+            <input type="tel" id="mobileNumber" placeholder="Mobile Number" required>
+          </div>
+          <div class="terms-checkbox">
+            <input type="checkbox" id="agreeTerms" required>
+            <label for="agreeTerms">I agree to the <a onclick="openModal('termsModal')">Terms and Conditions</a></label>
+          </div>
+        </div>
+
         <div class="price-preview" id="pricePreview">
           <p>Price per person: <strong id="ppPrice">$0 AUD</strong></p>
           <p>Total for <span id="totalGuests">2</span> guests: <strong id="totalPrice">$0 AUD</strong></p>
@@ -800,6 +766,65 @@
         <div id="passengerForms" class="passenger-form"></div>
         <button class="checkout-btn" onclick="placeHold()">Place 48-Hour Hold</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Terms Modal -->
+  <div id="termsModal" class="modal terms-modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Terms and Conditions</h2>
+      <p>By using DownUnder Cruises and making a booking, you agree to be bound by these terms and conditions.</p>
+      <p>We act as an agent for cruise lines and suppliers. We do not operate the cruises ourselves and are not responsible for services provided by third parties.</p>
+      <p>Deposits are non-refundable and non-transferable. Cancellations are subject to cruise line policies plus our administration fees.</p>
+      <p>Prices are in AUD and subject to change. Availability is not guaranteed until confirmed.</p>
+      <p>Passengers must have valid passports, visas, and vaccinations as required. It is your responsibility to ensure compliance.</p>
+      <p>We recommend travel insurance covering cancellation, medical expenses, and other risks.</p>
+      <p>Liability is limited to the extent permitted by law. We are not liable for acts of suppliers, force majeure, or events beyond our control.</p>
+      <p>These terms may be updated. Continued use constitutes acceptance.</p>
+      <p>For full details, contact us before booking.</p>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content" style="max-width:500px;">
+      <span class="close">&times;</span>
+      <h2>Login</h2>
+      <form onsubmit="login(event)">
+        <input type="email" id="loginEmail" placeholder="Email" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button type="submit">Login</button>
+        <p style="text-align:center;margin-top:1rem;"><a onclick="openModal('forgotModal'); closeModal('loginModal')">Forgot Password?</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div id="signupModal" class="modal">
+    <div class="modal-content" style="max-width:500px;">
+      <span class="close">&times;</span>
+      <h2>Sign Up</h2>
+      <form onsubmit="signup(event)">
+        <input type="text" id="signupName" placeholder="Full Name" required>
+        <input type="email" id="signupEmail" placeholder="Email" required>
+        <input type="password" id="signupPassword" placeholder="Password" required>
+        <input type="password" id="signupPasswordConfirm" placeholder="Confirm Password" required>
+        <button type="submit">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div id="forgotModal" class="modal">
+    <div class="modal-content" style="max-width:500px;">
+      <span class="close">&times;</span>
+      <h2>Forgot Password</h2>
+      <p>Enter your email and we'll send a reset link (demo - check console).</p>
+      <form onsubmit="forgotPassword(event)">
+        <input type="email" id="forgotEmail" placeholder="Email" required>
+        <button type="submit">Send Reset Link</button>
+      </form>
     </div>
   </div>
 
@@ -822,7 +847,7 @@
       <span class="close">&times;</span>
       <i class="fas fa-check-circle" style="font-size:6rem; color:var(--success); margin:3rem 0;"></i>
       <h2>Hold Placed Successfully!</h2>
-      <p>Your cabin is now reserved for 48 hours.<br>Check your email for confirmation and deposit payment instructions.</p>
+      <p>Your cabin is now reserved for 48 hours.<br>We have emailed you and our team with the details.</p>
       <button onclick="closeModal('successModal')" style="padding:1.2rem 2.5rem; margin-top:2rem;">Close</button>
     </div>
   </div>
@@ -888,6 +913,54 @@
     </div>
   </section>
 
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            How do I book a cruise?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Select a deal, choose cabin type, fill passenger and contact details, agree to terms, and place a 48-hour hold. We'll email you confirmation and payment link.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            Are deposits refundable?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Deposits are non-refundable. Cancellations follow cruise line policies plus our fees.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            Do I need travel insurance?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Strongly recommended. It covers cancellation, medical, and more. Medicare doesn't cover overseas or onboard.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            What documents do I need?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Valid passport (6+ months validity), visas if required, and vaccinations. Check with embassies.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            Can I change my booking?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Possible with fees, subject to availability and cruise line approval.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="about" class="container">
     <h2>About DownUnder Cruises</h2>
     <p style="max-width:900px; margin:0 auto 3rem; text-align:center; font-size:1.2rem;">Your premier Australian cruise specialist. We secure exclusive group rates, onboard credits, and perks you won't find booking direct. Expert advice, prices in AUD.</p>
@@ -923,40 +996,189 @@
   </footer>
 
   <script>
-    // State
+    // User system (simple localStorage - demo only, not secure for production)
+    let currentUser = null;
+    const users = JSON.parse(localStorage.getItem('downunderUsers')) || {};
+
+    function updateUserUI() {
+      const btn = $('userBtn');
+      const dropdown = $('userDropdown');
+      if (currentUser) {
+        btn.textContent = `Hi, ${currentUser.name.split(' ')[0]}`;
+        dropdown.querySelector('button').style.display = 'block';
+        dropdown.querySelectorAll('a').forEach(a => a.style.display = 'none');
+      } else {
+        btn.textContent = 'Login / Sign Up';
+        dropdown.querySelector('button').style.display = 'none';
+        dropdown.querySelectorAll('a').forEach(a => a.style.display = 'block');
+      }
+    }
+
+    function signup(e) {
+      e.preventDefault();
+      const name = $('signupName').value.trim();
+      const email = $('signupEmail').value.trim().toLowerCase();
+      const pass = $('signupPassword').value;
+      const confirm = $('signupPasswordConfirm').value;
+      if (pass !== confirm) return alert('Passwords do not match');
+      if (users[email]) return alert('Email already registered');
+      users[email] = {name, password: pass}; // Plain text - demo only
+      localStorage.setItem('downunderUsers', JSON.stringify(users));
+      alert('Account created! Please login.');
+      closeModal('signupModal');
+      openModal('loginModal');
+    }
+
+    function login(e) {
+      e.preventDefault();
+      const email = $('loginEmail').value.trim().toLowerCase();
+      const pass = $('loginPassword').value;
+      if (users[email] && users[email].password === pass) {
+        currentUser = {email, name: users[email].name};
+        updateUserUI();
+        alert('Logged in successfully!');
+        closeModal('loginModal');
+      } else {
+        alert('Invalid credentials');
+      }
+    }
+
+    function logout() {
+      currentUser = null;
+      updateUserUI();
+      alert('Logged out');
+    }
+
+    function forgotPassword(e) {
+      e.preventDefault();
+      const email = $('forgotEmail').value.trim();
+      alert(`Password reset link sent to ${email} (demo - check console)`);
+      console.log('Reset for:', email);
+      closeModal('forgotModal');
+    }
+
+    // Dropdown toggle
+    $('userBtn').addEventListener('click', () => {
+      $('userDropdown').classList.toggle('active');
+    });
+
+    // Cruises data - easy to add new ones from partners here
+    const allCruises = [
+      {
+        key: 'south-pacific',
+        name: '9-Night South Pacific Escape',
+        depart: 'Sydney',
+        line: 'Paul Gauguin',
+        month: 'March 2026',
+        nights: '6-9 Nights',
+        image: 'https://www.tahititourisme.com/app/uploads/iris-images/22639/dji-0285-2-n060722-borabora-gauguina-ponant-julien-fabro-scaled-1-1920x1080-f50_50.jpg',
+        map: 'https://www.tahititourisme.com/app/uploads/iris-images/22639/dji-0285-2-n060722-borabora-gauguina-ponant-julien-fabro-scaled-1-1920x1080-f50_50.jpg',
+        ports: 'Day 1: Sydney • Day 3: Mystery Island • Day 4: Lifou • Day 5: Noumea • Day 9: Sydney',
+        basePP: 899,
+        bonus: '+ $150 onboard credit per cabin'
+      },
+      {
+        key: 'nz-fjords',
+        name: '12-Night NZ Fjords Adventure',
+        depart: 'Sydney',
+        line: 'Princess',
+        month: 'February 2026',
+        nights: '10-14 Nights',
+        image: 'https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg',
+        map: 'https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg',
+        ports: 'Day 1-2: Sydney • Day 5: Milford Sound • Day 6: Doubtful Sound • Day 7: Dusky Sound • Day 12: Sydney',
+        basePP: 1299,
+        bonus: '+ Free premium drinks package'
+      },
+      {
+        key: 'reef',
+        name: '7-Night Great Barrier Reef',
+        depart: 'Brisbane',
+        line: 'Carnival',
+        month: 'April 2026',
+        nights: '6-9 Nights',
+        image: 'https://greatbarrierreeftours.com/files/2022/03/reef-train-and-skyrail-scaled.jpg',
+        map: 'https://greatbarrierreeftours.com/files/2022/03/reef-train-and-skyrail-scaled.jpg',
+        ports: 'Day 1: Brisbane • Day 3: Airlie Beach • Day 5: Cairns • Day 6: Willis Island • Day 7: Brisbane',
+        basePP: 799,
+        bonus: '+ Kids sail free on family cabins'
+      },
+      {
+        key: 'vanuatu',
+        name: '10-Night Vanuatu Escape',
+        depart: 'Brisbane',
+        line: 'Carnival',
+        month: 'May 2026',
+        nights: '10-14 Nights',
+        image: 'https://www.carnival.com/-/media/Images/Ships/SL/carnival-splendor-mobile-4.jpg',
+        map: 'https://www.carnival.com/-/media/Images/Ships/SL/carnival-splendor-mobile-4.jpg',
+        ports: 'Day 1: Brisbane • Day 4: Noumea • Day 6: Mystery Island • Day 7: Port Vila • Day 10: Brisbane',
+        basePP: 949,
+        bonus: '+ $250 onboard credit per cabin'
+      }
+      // Add more cruises from partners here - just copy object and change details
+    ];
+
+    // Render cruises
+    function renderCruises(containerId, cruisesList) {
+      const container = $(containerId);
+      container.innerHTML = '';
+      cruisesList.forEach(cruise => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.onclick = () => openCabinModal(cruise.key);
+        card.innerHTML = `
+          <img src="${cruise.image}" alt="${cruise.name}">
+          <div class="card-info">
+            <h3>${cruise.name}</h3>
+            <p>${cruise.depart} departure • ${cruise.line}</p>
+            <p class="twin-quad"><strong>Twin from $${cruise.basePP} pp</strong></p>
+            <p class="bonus-offer">${cruise.bonus}</p>
+            <button>Select Cabin</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      // Re-observe for animations
+      document.querySelectorAll('.card').forEach(c => obs.observe(c));
+    }
+
+    renderCruises('dealsGrid', allCruises);
+
+    // Search functionality
+    $('search-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const depart = $('searchDepart').value;
+      const line = $('searchLine').value;
+      const month = $('searchMonth').value;
+      const nights = $('searchNights').value;
+
+      let results = allCruises;
+      if (depart) results = results.filter(c => c.depart.includes(depart));
+      if (line) results = results.filter(c => c.line.includes(line));
+      if (month) results = results.filter(c => c.month.includes(month));
+      if (nights) results = results.filter(c => c.nights === nights);
+
+      renderCruises('resultsGrid', results);
+      $('searchResults').style.display = results.length ? 'block' : 'none';
+      if (results.length === 0) $('resultsGrid').innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:3rem;">No cruises match your search. Try different filters!</p>';
+      $('searchResults').scrollIntoView({behavior: 'smooth'});
+    });
+
+    // FAQ toggle
+    function toggleFAQ(el) {
+      el.classList.toggle('active');
+      const answer = el.nextElementSibling;
+      answer.classList.toggle('active');
+    }
+
+    // Rest of script (state, modals, hold, etc.) same as previous with small fixes
+
     const state = {
       holds: JSON.parse(localStorage.getItem('downunderHolds')) || [],
       currentCruise: null,
       currentCabin: null,
       currentPP: 0
-    };
-
-    // Itineraries & Pricing
-    const cruises = {
-      'south-pacific': {
-        name: '9-Night South Pacific Escape',
-        basePP: 899,
-        map: 'https://www.tahititourisme.com/app/uploads/iris-images/22639/dji-0285-2-n060722-borabora-gauguina-ponant-julien-fabro-scaled-1-1920x1080-f50_50.jpg',
-        ports: 'Day 1: Sydney • Day 3: Mystery Island • Day 4: Lifou • Day 5: Noumea • Day 9: Sydney'
-      },
-      'nz-fjords': {
-        name: '12-Night NZ Fjords Adventure',
-        basePP: 1299,
-        map: 'https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg',
-        ports: 'Day 1-2: Sydney • Day 5: Milford Sound • Day 6: Doubtful Sound • Day 7: Dusky Sound • Day 12: Sydney'
-      },
-      'reef': {
-        name: '7-Night Great Barrier Reef',
-        basePP: 799,
-        map: 'https://greatbarrierreeftours.com/files/2022/03/reef-train-and-skyrail-scaled.jpg',
-        ports: 'Day 1: Brisbane • Day 3: Airlie Beach • Day 5: Cairns • Day 6: Willis Island • Day 7: Brisbane'
-      },
-      'vanuatu': {
-        name: '10-Night Vanuatu Escape',
-        basePP: 949,
-        map: 'https://www.carnival.com/-/media/Images/Ships/SL/carnival-splendor-mobile-4.jpg',
-        ports: 'Day 1: Brisbane • Day 4: Noumea • Day 6: Mystery Island • Day 7: Port Vila • Day 10: Brisbane'
-      }
     };
 
     const cabinTypes = [
@@ -966,11 +1188,9 @@
       {id:'suite', name:'Suite', mult:2.8}
     ];
 
-    // DOM
     const $ = id => document.getElementById(id);
     const cartCount = $('cartCount');
 
-    // Modals
     function openModal(id) {
       const modal = $(id);
       if (modal) modal.style.display = 'block';
@@ -989,9 +1209,8 @@
       if (e.target.classList.contains('modal')) closeModal(e.target.id);
     };
 
-    // Cabin Modal
     function openCabinModal(key) {
-      const cruise = cruises[key];
+      const cruise = allCruises.find(c => c.key === key);
       state.currentCruise = key;
       $('modalTitle').textContent = cruise.name;
 
@@ -1079,20 +1298,32 @@
       $('totalPrice').textContent = `$${total.toLocaleString()} AUD`;
     }
 
-    function validateForms() {
-      const required = document.querySelectorAll('#passengerForms input[required]');
-      for (const field of required) {
-        if (!field.value.trim()) {
-          alert('Please fill all required passenger details');
-          return false;
-        }
+    function validateContact() {
+      const email = $('contactEmail').value.trim();
+      const confirm = $('contactEmailConfirm').value.trim();
+      const code = $('countryCode').value;
+      const mobile = $('mobileNumber').value.trim();
+      const terms = $('agreeTerms').checked;
+
+      if (!email || !confirm || email !== confirm) {
+        alert('Emails must match and be valid');
+        return false;
       }
-      return true;
+      if (!code || !mobile) {
+        alert('Please enter country code and mobile number');
+        return false;
+      }
+      if (!terms) {
+        alert('You must agree to terms');
+        return false;
+      }
+      return {email, phone: code + mobile};
     }
 
     function placeHold() {
-      if (!validateForms()) return;
+      if (!validateForms() || !validateContact()) return;
 
+      const contact = validateContact();
       const adults = parseInt($('adultCount').value);
       const children = parseInt($('childCount').value);
       const totalGuests = adults + children;
@@ -1100,18 +1331,45 @@
       if (totalGuests === 1) pp = Math.round(pp * 1.75);
       const total = pp * totalGuests;
 
-      state.holds.push({
+      const cruise = allCruises.find(c => c.key === state.currentCruise);
+
+      const holdData = {
         id: Date.now(),
-        cruise: cruises[state.currentCruise].name,
+        cruise: cruise.name,
         cabin: state.currentCabin,
         guests: totalGuests,
         total: total,
+        email: contact.email,
+        phone: contact.phone,
         expires: Date.now() + 48*60*60*1000
-      });
+      };
 
+      state.holds.push(holdData);
       localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
       updateCartCount();
       renderHolds();
+
+      // Send emails via EmailJS - replace with your service/template IDs
+      const templateParams = {
+        to_email: contact.email,
+        admin_email: 'your@email.com', // Your email
+        cruise_name: cruise.name,
+        cabin_type: state.currentCabin.toUpperCase(),
+        guests: totalGuests,
+        total_price: `$${total.toLocaleString()} AUD`,
+        customer_email: contact.email,
+        customer_phone: contact.phone
+      };
+
+      // User confirmation email
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_USER_TEMPLATE_ID', templateParams)
+        .then(() => console.log('User email sent'))
+        .catch(err => console.error('Email error:', err));
+
+      // Admin notification
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_ADMIN_TEMPLATE_ID', templateParams)
+        .then(() => console.log('Admin email sent'))
+        .catch(err => console.error('Email error:', err));
 
       closeModal('cabinModal');
       openModal('successModal');
@@ -1132,7 +1390,7 @@
         <div class="holds-item">
           <div>
             <strong>${hold.cruise} - ${hold.cabin.toUpperCase()} Cabin</strong><br>
-            ${hold.guests} Guest${hold.guests > 1 ? 's' : ''}<br>
+            ${hold.guests} Guest${hold.guests > 1 ? 's' : ''} • Contact: ${hold.email}<br>
             <small>Expires: ${new Date(hold.expires).toLocaleString()}</small>
           </div>
           <div style="text-align:right;">
@@ -1171,17 +1429,12 @@
 
     // Init
     document.addEventListener('DOMContentLoaded', () => {
+      updateUserUI();
       const now = Date.now();
       state.holds = state.holds.filter(h => h.expires > now);
       localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
       updateCartCount();
       renderHolds();
-    });
-
-    // Fake search
-    $('search-form').addEventListener('submit', e => {
-      e.preventDefault();
-      alert('Search functionality would show real-time cruise matches in production!');
     });
   </script>
 </body>
