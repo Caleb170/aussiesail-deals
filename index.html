@@ -841,7 +841,203 @@
     </div>
   </div>
 
-  <!-- Login/Signup/Forgot/Holds modals same as previous -->
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content" style="max-width:500px;">
+      <span class="close" onclick="closeModal('loginModal')">&times;</span>
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Email" required>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+        <button type="submit">Login</button>
+        <p style="text-align:center;margin-top:1rem;"><a onclick="openModal('forgotModal'); closeModal('loginModal')">Forgot Password?</a></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div id="signupModal" class="modal">
+    <div class="modal-content" style="max-width:500px;">
+      <span class="close" onclick="closeModal('signupModal')">&times;</span>
+      <h2>Sign Up</h2>
+      <form id="signupForm">
+        <input type="text" id="signupName" placeholder="Full Name" required>
+        <input type="email" id="signupEmail" placeholder="Email" required>
+        <input type="password" id="signupPassword" placeholder="Password" required>
+        <input type="password" id="signupPasswordConfirm" placeholder="Confirm Password" required>
+        <button type="submit">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div id="forgotModal" class="modal">
+    <div class="modal-content" style="max-width:500px;">
+      <span class="close" onclick="closeModal('forgotModal')">&times;</span>
+      <h2>Forgot Password</h2>
+      <p>Enter your email and we'll send a reset link.</p>
+      <form id="forgotForm">
+        <input type="email" id="forgotEmail" placeholder="Email" required>
+        <button type="submit">Send Reset Link</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Holds Modal -->
+  <div id="holdsModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('holdsModal')">&times;</span>
+      <h2>Your Active Holds</h2>
+      <div id="holdsItems"></div>
+      <div class="hold-note">
+        Your cabins are securely held for 48 hours.<br>
+        Check your email for confirmation and deposit payment instructions.
+      </div>
+    </div>
+  </div>
+
+  <section id="destinations" class="container">
+    <h2>Popular Destinations</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://www.tahititourisme.com/app/uploads/iris-images/22639/dji-0285-2-n060722-borabora-gauguina-ponant-julien-fabro-scaled-1-1920x1080-f50_50.jpg" alt="South Pacific luxury cruise">
+        <div class="card-info">
+          <h3>South Pacific Islands</h3>
+          <p>Crystal waters, island hopping – pure paradise.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://cruisepassenger.com.au/wp-content/uploads/2024/08/milford-sound-cruise-1536x865.jpg" alt="New Zealand fjords cruise">
+        <div class="card-info">
+          <h3>New Zealand Fjords</h3>
+          <p>Majestic fjords, wildlife, and adventure.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://greatbarrierreeftours.com/files/2022/03/reef-train-and-skyrail-scaled.jpg" alt="Great Barrier Reef aerial view">
+        <div class="card-info">
+          <h3>Great Barrier Reef</h3>
+          <p>Colorful coral, tropical fish – diving paradise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lines" class="container">
+    <h2>Popular Cruise Lines</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://www.carnival.com/-/media/Images/Ships/SL/carnival-splendor-mobile-4.jpg" alt="Carnival Splendor">
+        <div class="card-info">
+          <h3>Carnival Cruise Line</h3>
+          <p>Fun-filled family cruising with entertainment and activities for all ages.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://www.royalcaribbeanpresscenter.com/media_photos/1667045067_October-2022-Ovation-of-the-Seas-Sydney-Opera-House-background.jpg" alt="Royal Caribbean Ovation of the Seas">
+        <div class="card-info">
+          <h3>Royal Caribbean</h3>
+          <p>Innovative ships with adventure activities, shows, and dining.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://assets.princess.com/is/image/princesscruises/grand-princess-at-sea-exterior-full-cabo-san-lucas-header-gradient?qlt=82&ts=1748374395059" alt="Princess Cruises Grand Princess">
+        <div class="card-info">
+          <h3>Princess Cruises</h3>
+          <p>Elegant ships and scenic itineraries with premium service.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://www.celebritycruises.com/content/dam/celebrity/new-images/destination-pages/australia-new-zealand/edge-sydney-australia-evening-2560x1440.jpg" alt="Celebrity Edge in Sydney">
+        <div class="card-info">
+          <h3>Celebrity Cruises</h3>
+          <p>Modern luxury with upscale dining and stylish design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            How do I book a cruise?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Select a deal, choose cabin type, fill passenger and contact details, agree to terms, and place a 48-hour hold. We'll email you confirmation and payment link.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            Are deposits refundable?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Deposits are non-refundable. Cancellations follow cruise line policies plus our fees.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            Do I need travel insurance?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Strongly recommended. It covers cancellation, medical, and more. Medicare doesn't cover overseas or onboard.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            What documents do I need?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Valid passport (6+ months validity), visas if required, and vaccinations. Check with embassies.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            Can I change my booking?<i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Possible with fees, subject to availability and cruise line approval.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="container">
+    <h2>About DownUnder Cruises</h2>
+    <p style="max-width:900px; margin:0 auto 3rem; text-align:center; font-size:1.2rem;">Your premier Australian cruise specialist. We secure exclusive group rates, onboard credits, and perks you won't find booking direct. Expert advice, prices in AUD.</p>
+    <p style="text-align:center; font-weight:700; font-size:1.1rem;">ATAS Accredited • ABN: [Your ABN] • Australian Owned & Operated</p>
+  </section>
+
+  <section id="contact" class="container">
+    <h2>Get in Touch</h2>
+    <form style="max-width:900px; margin:0 auto; display:grid; gap:2.5rem; padding-bottom:5rem;">
+      <input type="text" placeholder="Your Name" required/>
+      <input type="email" placeholder="Your Email" required/>
+      <select>
+        <option>Enquiry Type</option>
+        <option>Quote Request</option>
+        <option>Booking Help</option>
+        <option>General Enquiry</option>
+      </select>
+      <textarea placeholder="Your Message" required rows="14"></textarea>
+      <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+    </form>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p style="font-size:1.4rem;">© 2026 DownUnder Cruises • Australia's Best Cruise Deals</p>
+      <p style="margin:2rem 0; font-size:1.1rem;">ABN: [Your ABN] • ATAS Accredited • Australian Owned</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </footer>
 
   <script>
     // Close dropdown when clicking outside
@@ -1190,7 +1386,7 @@
       let customerSuccess = false;
       let adminSuccess = false;
 
-      emailjs.send('service_ua229ob', 'HoldConfirmation', templateParams)
+      emailjs.send('service_jzj4djq', 'HoldConfirmation', templateParams)
         .then((response) => {
           console.log('Customer email sent:', response);
           customerSuccess = true;
@@ -1202,7 +1398,7 @@
           checkCompletion();
         });
 
-      emailjs.send('service_ua229ob', 'NewHoldBooking', templateParams)
+      emailjs.send('service_jzj4djq', 'NewHoldBooking', templateParams)
         .then((response) => {
           console.log('Admin email sent:', response);
           adminSuccess = true;
@@ -1261,4 +1457,58 @@
     }
 
     // Hamburger
-    $('hamburger').addEventListener
+    $('hamburger').addEventListener('click', () => {
+      $('navMenu').classList.toggle('active');
+      $('hamburger').classList.toggle('active');
+    });
+
+    // Scroll header
+    window.addEventListener('scroll', () => {
+      document.querySelector('header').classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    // Card animations
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+    }, {threshold: 0.15});
+
+    // FAQ toggle
+    function toggleFAQ(el) {
+      el.classList.toggle('active');
+      const answer = el.nextElementSibling;
+      answer.classList.toggle('active');
+    }
+
+    // Search
+    $('search-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const depart = $('searchDepart').value;
+      const line = $('searchLine').value;
+      const month = $('searchMonth').value;
+      const nights = $('searchNights').value;
+
+      let results = allCruises;
+      if (depart) results = results.filter(c => c.depart.toLowerCase().includes(depart.toLowerCase()));
+      if (line) results = results.filter(c => c.line.toLowerCase().includes(line.toLowerCase()));
+      if (month) results = results.filter(c => c.month.includes(month));
+      if (nights) results = results.filter(c => c.nights === nights);
+
+      renderCruises('resultsGrid', results);
+      $('searchResults').style.display = results.length ? 'block' : 'none';
+      if (results.length === 0) $('resultsGrid').innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:3rem;">No matching cruises. Try different filters!</p>';
+      $('searchResults').scrollIntoView({behavior: 'smooth'});
+    });
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+      updateUserUI();
+      renderCruises('dealsGrid', allCruises);
+      const now = Date.now();
+      state.holds = state.holds.filter(h => h.expires > now);
+      localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
+      updateCartCount();
+      renderHolds();
+    });
+  </script>
+</body>
+</html>
