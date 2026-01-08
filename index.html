@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DownUnder Cruises • Premium Deals from Australia 2026+</title>
+  <title>Cruising DownUnder • Premium Cruise Deals from Australia 2026+</title>
   <meta name="description" content="Best cruise deals departing Sydney, Brisbane, Melbourne, Perth & more. 2026 South Pacific, NZ, Barrier Reef on Carnival, Royal Caribbean, Princess & top lines."/>
 
   <!-- Fonts -->
@@ -12,7 +12,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-  <!-- Latest EmailJS SDK v4 (as of January 2026) -->
+  <!-- EmailJS v4 SDK (current & supported) -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
     (function(){
@@ -43,18 +43,18 @@
       font-family: 'Poppins', sans-serif;
       color: #333;
       background: linear-gradient(to bottom, #f0f8ff, var(--light));
-      line-height: 1.7;
+      line-height: 1.85;
       padding-top: 80px;
       overflow-x: hidden;
     }
 
-    section { padding: 6rem 1.5rem; }
-    .container { max-width: 1400px; margin: 0 auto; padding: 0 1rem; }
+    section { padding: 6.5rem 1.5rem; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
 
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      background: rgba(0, 107, 51, 0.95);
+      background: rgba(0, 107, 51, 0.96);
       backdrop-filter: blur(12px);
       z-index: 1000;
       transition: all 0.4s ease;
@@ -66,53 +66,51 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 2rem;
+      padding: 1.3rem 2.5rem;
     }
 
     .logo {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      font-size: clamp(2rem, 5.5vw, 2.8rem);
       color: white;
       text-decoration: none;
       font-weight: 700;
       display: flex;
       align-items: center;
-      gap: 0.8rem;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      gap: 1rem;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
-    .logo i { color: var(--accent); font-size: 1.8rem; }
+    .logo i { color: var(--accent); font-size: 2.2rem; }
     .logo span { color: var(--accent); }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
       align-items: center;
     }
     .nav-links a {
       color: white;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       transition: all 0.3s;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
     }
-    .nav-links a:hover { color: var(--accent); background: rgba(255,215,0,0.1); transform: translateY(-3px); }
+    .nav-links a:hover { color: var(--accent); background: rgba(255,215,0,0.12); transform: translateY(-4px); }
 
-    .user-menu {
-      position: relative;
-    }
+    .user-menu { position: relative; }
     .user-menu button {
       background: none;
       border: none;
       color: white;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       cursor: pointer;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
       transition: all 0.3s;
     }
-    .user-menu button:hover { background: rgba(255,215,0,0.1); }
+    .user-menu button:hover { background: rgba(255,215,0,0.12); }
 
     .user-dropdown {
       display: none;
@@ -120,7 +118,7 @@
       right: 0;
       top: 100%;
       background: white;
-      min-width: 200px;
+      min-width: 220px;
       box-shadow: var(--bubble-shadow);
       border-radius: var(--bubble-radius);
       overflow: hidden;
@@ -130,7 +128,7 @@
     .user-dropdown a, .user-dropdown button {
       display: block;
       width: 100%;
-      padding: 1rem;
+      padding: 1.1rem 1.5rem;
       text-align: left;
       background: none;
       border: none;
@@ -139,52 +137,50 @@
       transition: background 0.3s;
       cursor: pointer;
     }
-    .user-dropdown a:hover, .user-dropdown button:hover {
-      background: #f0f8ff;
-    }
+    .user-dropdown a:hover, .user-dropdown button:hover { background: #f0f8ff; }
 
     .cart-icon {
       position: relative;
       color: white;
-      font-size: 1.8rem;
+      font-size: 2rem;
       cursor: pointer;
       transition: all 0.3s;
-      padding: 0.5rem;
+      padding: 0.6rem;
       border-radius: 50%;
     }
-    .cart-icon:hover { color: var(--accent); background: rgba(255,215,0,0.1); transform: scale(1.1); }
+    .cart-icon:hover { color: var(--accent); background: rgba(255,215,0,0.12); transform: scale(1.1); }
 
     .cart-count {
       position: absolute;
-      top: -8px;
-      right: -12px;
+      top: -10px;
+      right: -14px;
       background: var(--accent);
       color: var(--dark);
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 700;
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
     }
 
     .hamburger {
       display: none;
       flex-direction: column;
-      gap: 6px;
+      gap: 7px;
       cursor: pointer;
     }
     .hamburger span {
-      width: 32px;
+      width: 34px;
       height: 4px;
       background: white;
       border-radius: 2px;
       transition: all 0.3s;
     }
-    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
     .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
 
@@ -194,8 +190,8 @@
         top: 100%; left: 0; right: 0;
         background: rgba(0, 107, 51, 0.98);
         flex-direction: column;
-        padding: 3rem;
-        gap: 2.5rem;
+        padding: 3.5rem 2rem;
+        gap: 2.8rem;
         display: none;
         box-shadow: var(--bubble-shadow);
       }
@@ -205,7 +201,7 @@
 
     .hero {
       min-height: 95vh;
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)),
+      background: linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.72)),
                   url('https://images.pexels.com/photos/11820069/pexels-photo-11820069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') center/cover no-repeat fixed;
       color: white;
       display: flex;
@@ -213,21 +209,21 @@
       text-align: center;
     }
 
-    .hero-content { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .hero-content { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
 
     .hero h1 { 
       font-family: 'Playfair Display', serif;
-      font-size: clamp(3.5rem, 8vw, 6rem); 
-      margin-bottom: 1.5rem; 
-      text-shadow: 0 6px 20px rgba(0,0,0,0.8);
+      font-size: clamp(3.8rem, 9vw, 6.5rem); 
+      margin-bottom: 2rem; 
+      text-shadow: 0 8px 25px rgba(0,0,0,0.8);
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
     }
 
     .hero p { 
-      font-size: clamp(1.2rem, 3vw, 1.6rem); 
-      margin-bottom: 3rem; 
-      max-width: 900px; 
+      font-size: clamp(1.3rem, 3.5vw, 1.8rem); 
+      margin-bottom: 4rem; 
+      max-width: 950px; 
       margin-left: auto; 
       margin-right: auto;
       font-weight: 500;
@@ -237,60 +233,60 @@
     .hero-btn {
       background: linear-gradient(135deg, var(--accent), #e6c200);
       color: var(--dark);
-      padding: 1.2rem 2.5rem;
-      font-size: 1.2rem;
+      padding: 1.4rem 3rem;
+      font-size: 1.35rem;
       font-weight: 700;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      box-shadow: 0 10px 30px rgba(255,215,0,0.4);
-      transition: all 0.3s;
+      box-shadow: 0 12px 35px rgba(255,215,0,0.45);
+      transition: all 0.4s;
     }
     .hero-btn:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 40px rgba(255,215,0,0.5);
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(255,215,0,0.6);
     }
 
     .search-box {
-      background: rgba(255,255,255,0.25);
-      backdrop-filter: blur(20px);
+      background: rgba(255,255,255,0.28);
+      backdrop-filter: blur(22px);
       border-radius: var(--bubble-radius);
-      padding: 3.5rem;
-      border: 1px solid rgba(255,255,255,0.4);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-      max-width: 1200px;
-      margin: 3rem auto 0;
+      padding: 4rem;
+      border: 1px solid rgba(255,255,255,0.45);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.25);
+      max-width: 1250px;
+      margin: 4rem auto 0;
     }
 
     .search-box h3 { 
-      margin-bottom: 2.5rem; 
+      margin-bottom: 3rem; 
       color: white; 
-      font-size: 2.4rem; 
+      font-size: 2.6rem; 
       text-align: center;
       font-weight: 700;
-      text-shadow: 0 3px 10px rgba(0,0,0,0.6);
+      text-shadow: 0 4px 12px rgba(0,0,0,0.6);
     }
 
     .form-grid { 
       display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
-      gap: 2rem; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: 2.5rem; 
     }
 
     select, input, textarea, button {
-      padding: 1.4rem;
+      padding: 1.5rem;
       border: none;
       border-radius: var(--bubble-radius);
-      font-size: 1.1rem;
-      background: rgba(255,255,255,0.95);
+      font-size: 1.15rem;
+      background: rgba(255,255,255,0.97);
       box-shadow: var(--bubble-shadow);
       transition: all 0.3s;
     }
 
     select:focus, input:focus, textarea:focus {
       outline: none;
-      box-shadow: 0 0 0 4px rgba(255,215,0,0.5);
-      transform: translateY(-3px);
+      box-shadow: 0 0 0 5px rgba(255,215,0,0.55);
+      transform: translateY(-4px);
     }
 
     button {
@@ -298,17 +294,17 @@
       color: white;
       font-weight: 700;
       cursor: pointer;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
     button:hover { 
-      transform: translateY(-8px); 
-      box-shadow: 0 20px 40px rgba(0,107,51,0.7); 
+      transform: translateY(-10px); 
+      box-shadow: 0 25px 50px rgba(0,107,51,0.75); 
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 3.5rem;
     }
 
     .card {
@@ -319,58 +315,59 @@
       transition: all 0.5s ease;
       cursor: pointer;
       opacity: 0;
-      transform: translateY(50px);
+      transform: translateY(60px);
     }
 
-    .card.visible { opacity: 1; transform: translateY(0); transition-delay: 0.3s; }
+    .card.visible { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
 
     .card:hover { 
-      transform: translateY(-20px); 
+      transform: translateY(-25px); 
       box-shadow: var(--card-hover); 
     }
 
     .card img { 
       width: 100%; 
-      height: 260px; 
+      height: 280px; 
       object-fit: cover; 
-      transition: transform 0.8s ease; 
+      transition: transform 0.9s ease; 
     }
 
-    .card:hover img { transform: scale(1.15); }
+    .card:hover img { transform: scale(1.18); }
 
     .card-info { 
-      padding: 2.5rem; 
+      padding: 2.8rem; 
       text-align: center;
     }
 
     .card-info h3 { 
       color: var(--primary); 
-      margin-bottom: 1rem; 
-      font-size: 1.7rem;
+      margin-bottom: 1.2rem; 
+      font-size: 1.85rem;
       font-weight: 700;
     }
 
     .card-info p { 
-      margin-bottom: 1.2rem; 
+      margin-bottom: 1.4rem; 
       font-weight: 500;
       color: #555;
+      line-height: 1.7;
     }
 
     .twin-quad {
-      font-size: 1.4rem;
+      font-size: 1.55rem;
       font-weight: 700;
       color: #c62828;
-      margin: 1.2rem 0;
+      margin: 1.4rem 0;
     }
 
     .bonus-offer {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--primary);
       font-weight: 600;
-      margin: 1rem 0;
-      background: rgba(0,107,51,0.05);
-      padding: 0.8rem;
-      border-radius: 12px;
+      margin: 1.2rem 0;
+      background: rgba(0,107,51,0.06);
+      padding: 1rem;
+      border-radius: 14px;
     }
 
     .modal {
@@ -379,26 +376,26 @@
       z-index: 2000;
       left: 0; top: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.85);
+      background: rgba(0,0,0,0.88);
       overflow-y: auto;
     }
 
     .modal-content {
       background: white;
-      margin: 4% auto;
-      padding: 3rem;
+      margin: 5% auto;
+      padding: 3.5rem;
       border-radius: var(--bubble-radius);
-      max-width: 1100px;
+      max-width: 1150px;
       width: 94%;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      box-shadow: 0 25px 70px rgba(0,0,0,0.35);
       position: relative;
     }
 
     .close {
       position: absolute;
-      right: 2rem;
-      top: 1.5rem;
-      font-size: 3rem;
+      right: 2.5rem;
+      top: 2rem;
+      font-size: 3.5rem;
       cursor: pointer;
       color: var(--gray);
       transition: all 0.3s;
@@ -406,42 +403,42 @@
 
     .close:hover {
       color: var(--primary);
-      transform: scale(1.1);
+      transform: scale(1.15);
     }
 
     .itinerary-section {
-      margin: 3rem 0;
+      margin: 3.5rem 0;
       text-align: center;
       background: #f0f8ff;
-      padding: 2.5rem;
+      padding: 3rem;
       border-radius: var(--bubble-radius);
     }
 
     .itinerary-map img {
       max-width: 100%;
-      max-height: 500px;
+      max-height: 520px;
       object-fit: contain;
       border-radius: var(--bubble-radius);
       box-shadow: var(--bubble-shadow);
     }
 
     #itineraryPorts {
-      margin-top: 1.5rem;
-      font-size: 1.2rem;
+      margin-top: 2rem;
+      font-size: 1.3rem;
       color: var(--primary-dark);
       font-weight: 600;
     }
 
     .cabin-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin: 3.5rem 0;
     }
 
     .cabin-card {
       background: #f0f8ff;
-      padding: 2rem;
+      padding: 2.5rem;
       text-align: center;
       border-radius: var(--bubble-radius);
       box-shadow: var(--bubble-shadow);
@@ -449,25 +446,25 @@
     }
 
     .cabin-card:hover {
-      transform: translateY(-10px);
+      transform: translateY(-12px);
     }
 
     .passenger-form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
     }
 
     .passenger-block {
       background: #f0f8ff;
-      padding: 2rem;
+      padding: 2.5rem;
       border-radius: var(--bubble-radius);
       box-shadow: var(--bubble-shadow);
     }
 
     .contact-info-section {
-      margin: 3rem 0 2rem;
-      padding: 2.5rem;
+      margin: 3.5rem 0 2.5rem;
+      padding: 3rem;
       background: #f0f8ff;
       border-radius: var(--bubble-radius);
       box-shadow: var(--bubble-shadow);
@@ -475,21 +472,21 @@
 
     .contact-info-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
     }
 
     .terms-checkbox {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin: 2rem 0;
-      font-size: 1.1rem;
+      gap: 1.2rem;
+      margin: 2.5rem 0;
+      font-size: 1.15rem;
       font-weight: 600;
     }
 
     .terms-checkbox input {
-      transform: scale(1.4);
+      transform: scale(1.5);
     }
 
     .terms-checkbox a {
@@ -500,52 +497,52 @@
 
     .price-preview {
       text-align: center;
-      padding: 2.5rem;
+      padding: 3rem;
       background: #e8f5e8;
       border-radius: var(--bubble-radius);
-      margin: 2.5rem 0;
-      font-size: 1.5rem;
+      margin: 3rem 0;
+      font-size: 1.6rem;
       box-shadow: var(--bubble-shadow);
     }
 
     .price-preview strong {
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       color: var(--primary-dark);
     }
 
     .checkout-btn {
       width: 100%;
-      padding: 1.8rem;
-      font-size: 1.5rem;
-      border-radius: 30px;
-      margin-top: 1rem;
-      box-shadow: 0 10px 30px rgba(0,107,51,0.4);
+      padding: 2rem;
+      font-size: 1.7rem;
+      border-radius: 35px;
+      margin-top: 1.5rem;
+      box-shadow: 0 12px 35px rgba(0,107,51,0.45);
     }
 
     .success-modal .modal-content {
       text-align: center;
-      max-width: 600px;
-      padding: 4rem;
+      max-width: 650px;
+      padding: 4.5rem;
     }
 
     .success-modal i {
-      font-size: 7rem;
+      font-size: 8rem;
       color: var(--success);
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .faq-section {
       background: #f0f8ff;
-      padding: 4rem 0;
+      padding: 5rem 0;
     }
 
     .faq-accordion {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
     .faq-item {
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
       border-radius: var(--bubble-radius);
       overflow: hidden;
       box-shadow: var(--bubble-shadow);
@@ -553,7 +550,7 @@
 
     .faq-question {
       background: white;
-      padding: 1.5rem;
+      padding: 1.8rem;
       cursor: pointer;
       font-weight: 600;
       display: flex;
@@ -576,45 +573,45 @@
 
     .faq-answer {
       background: #f8f9fa;
-      padding: 0 1.5rem;
+      padding: 0 1.8rem;
       max-height: 0;
       overflow: hidden;
       transition: all 0.4s ease;
     }
 
     .faq-answer.active {
-      padding: 1.5rem;
-      max-height: 800px;
+      padding: 1.8rem;
+      max-height: 900px;
     }
 
     footer {
       background: linear-gradient(135deg, var(--dark), var(--primary-dark));
       color: white;
       text-align: center;
-      padding: 6rem 2rem 4rem;
+      padding: 7rem 2.5rem 5rem;
     }
 
     .social-icons a { 
       color: white; 
-      font-size: 2.5rem; 
-      margin: 0 2rem; 
+      font-size: 2.8rem; 
+      margin: 0 2.5rem; 
       transition: all 0.3s;
     }
 
     .social-icons a:hover { 
       color: var(--accent); 
-      transform: translateY(-8px) scale(1.2);
+      transform: translateY(-10px) scale(1.15);
     }
 
     @media (max-width: 768px) {
-      section { padding: 5rem 1rem; }
-      .hero { min-height: 85vh; }
-      .search-box { padding: 3rem; }
+      section { padding: 5.5rem 1.2rem; }
+      .hero { min-height: 90vh; }
+      .search-box { padding: 3.5rem; }
       .form-grid { grid-template-columns: 1fr; }
-      .card img { height: 220px; }
-      .modal-content { padding: 2rem; margin: 8% auto; }
+      .card img { height: 240px; }
+      .modal-content { padding: 2.5rem; margin: 8% auto; }
       .passenger-form-grid { grid-template-columns: 1fr; }
-      .itinerary-map img { max-height: 350px; }
+      .itinerary-map img { max-height: 380px; }
     }
   </style>
 </head>
@@ -622,7 +619,7 @@
 
   <header>
     <nav class="container">
-      <a href="#" class="logo"><i class="fas fa-ship"></i> Down<span>Under</span> Cruises</a>
+      <a href="#" class="logo"><i class="fas fa-ship"></i> Cruising <span>DownUnder</span></a>
       <div class="nav-links" id="navMenu">
         <a href="#deals">Hot Deals</a>
         <a href="#destinations">Destinations</a>
@@ -698,7 +695,7 @@
           </select>
           <button type="submit">Search Cruises <i class="fas fa-search"></i></button>
         </form>
-        <div id="searchResults" style="margin-top:3rem;display:none;">
+        <div id="searchResults" style="margin-top:3.5rem;display:none;">
           <h3>Search Results</h3>
           <div class="grid" id="resultsGrid"></div>
         </div>
@@ -829,7 +826,7 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal('termsModal')">&times;</span>
       <h2>Terms and Conditions</h2>
-      <p>By using DownUnder Cruises and making a booking, you agree to be bound by these terms and conditions.</p>
+      <p>By using Cruising DownUnder and making a booking, you agree to be bound by these terms and conditions.</p>
       <p>We act as an agent for cruise lines and suppliers. We do not operate the cruises ourselves and are not responsible for services provided by third parties.</p>
       <p>Deposits are non-refundable and non-transferable. Cancellations are subject to cruise line policies plus our administration fees.</p>
       <p>Prices are in AUD and subject to change. Availability is not guaranteed until confirmed.</p>
@@ -843,21 +840,21 @@
 
   <!-- Login Modal -->
   <div id="loginModal" class="modal">
-    <div class="modal-content" style="max-width:500px;">
+    <div class="modal-content" style="max-width:520px;">
       <span class="close" onclick="closeModal('loginModal')">&times;</span>
       <h2>Login</h2>
       <form id="loginForm">
         <input type="email" id="loginEmail" placeholder="Email" required>
         <input type="password" id="loginPassword" placeholder="Password" required>
         <button type="submit">Login</button>
-        <p style="text-align:center;margin-top:1rem;"><a onclick="openModal('forgotModal'); closeModal('loginModal')">Forgot Password?</a></p>
+        <p style="text-align:center;margin-top:1.2rem;"><a onclick="openModal('forgotModal'); closeModal('loginModal')">Forgot Password?</a></p>
       </form>
     </div>
   </div>
 
   <!-- Signup Modal -->
   <div id="signupModal" class="modal">
-    <div class="modal-content" style="max-width:500px;">
+    <div class="modal-content" style="max-width:520px;">
       <span class="close" onclick="closeModal('signupModal')">&times;</span>
       <h2>Sign Up</h2>
       <form id="signupForm">
@@ -872,7 +869,7 @@
 
   <!-- Forgot Password Modal -->
   <div id="forgotModal" class="modal">
-    <div class="modal-content" style="max-width:500px;">
+    <div class="modal-content" style="max-width:520px;">
       <span class="close" onclick="closeModal('forgotModal')">&times;</span>
       <h2>Forgot Password</h2>
       <p>Enter your email and we'll send a reset link.</p>
@@ -1006,14 +1003,14 @@
   </section>
 
   <section id="about" class="container">
-    <h2>About DownUnder Cruises</h2>
-    <p style="max-width:900px; margin:0 auto 3rem; text-align:center; font-size:1.2rem;">Your premier Australian cruise specialist. We secure exclusive group rates, onboard credits, and perks you won't find booking direct. Expert advice, prices in AUD.</p>
-    <p style="text-align:center; font-weight:700; font-size:1.1rem;">ATAS Accredited • ABN: [Your ABN] • Australian Owned & Operated</p>
+    <h2>About Cruising DownUnder</h2>
+    <p style="max-width:950px; margin:0 auto 3.5rem; text-align:center; font-size:1.25rem;">Your premier Australian cruise specialist. We secure exclusive group rates, onboard credits, and perks you won't find booking direct. Expert advice, prices in AUD.</p>
+    <p style="text-align:center; font-weight:700; font-size:1.2rem;">ATAS Accredited • ABN: [Your ABN] • Australian Owned & Operated</p>
   </section>
 
   <section id="contact" class="container">
     <h2>Get in Touch</h2>
-    <form style="max-width:900px; margin:0 auto; display:grid; gap:2.5rem; padding-bottom:5rem;">
+    <form style="max-width:950px; margin:0 auto; display:grid; gap:2.8rem; padding-bottom:6rem;">
       <input type="text" placeholder="Your Name" required/>
       <input type="email" placeholder="Your Email" required/>
       <select>
@@ -1022,15 +1019,15 @@
         <option>Booking Help</option>
         <option>General Enquiry</option>
       </select>
-      <textarea placeholder="Your Message" required rows="14"></textarea>
+      <textarea placeholder="Your Message" required rows="16"></textarea>
       <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
     </form>
   </section>
 
   <footer>
     <div class="container">
-      <p style="font-size:1.4rem;">© 2026 DownUnder Cruises • Australia's Best Cruise Deals</p>
-      <p style="margin:2rem 0; font-size:1.1rem;">ABN: [Your ABN] • ATAS Accredited • Australian Owned</p>
+      <p style="font-size:1.5rem;">© 2026 Cruising DownUnder • Australia's Premier Cruise Deals</p>
+      <p style="margin:2.5rem 0; font-size:1.2rem;">ABN: [Your ABN] • ATAS Accredited • Australian Owned</p>
       <div class="social-icons">
         <a href="#"><i class="fab fa-facebook-f"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -1053,7 +1050,7 @@
 
     // User system (demo localStorage)
     let currentUser = null;
-    const users = JSON.parse(localStorage.getItem('downunderUsers')) || {};
+    const users = JSON.parse(localStorage.getItem('cruisingUsers')) || {};
 
     function updateUserUI() {
       const btn = document.getElementById('userBtn');
@@ -1091,7 +1088,7 @@
       if (pass !== confirm) return alert('Passwords do not match');
       if (users[email]) return alert('Email already registered');
       users[email] = {name, password: pass};
-      localStorage.setItem('downunderUsers', JSON.stringify(users));
+      localStorage.setItem('cruisingUsers', JSON.stringify(users));
       alert('Account created! Please login.');
       closeModal('signupModal');
       openModal('loginModal');
@@ -1189,7 +1186,7 @@
 
     // State
     const state = {
-      holds: JSON.parse(localStorage.getItem('downunderHolds')) || [],
+      holds: JSON.parse(localStorage.getItem('cruisingHolds')) || [],
       currentCruise: null,
       currentCabin: null,
       currentPP: 0
@@ -1357,6 +1354,24 @@
 
       const cruise = allCruises.find(c => c.key === state.currentCruise);
 
+      // Collect full passenger details for admin email
+      const passengers = [];
+      const blocks = document.querySelectorAll('.passenger-block');
+      blocks.forEach((block, index) => {
+        const title = block.querySelector('select').value || 'N/A';
+        const inputs = block.querySelectorAll('input');
+        const first = inputs[0].value || 'N/A';
+        const middle = inputs[1].value || '';
+        const last = inputs[2].value || 'N/A';
+        const dob = inputs[3].value || 'N/A';
+        const nationality = inputs[4].value || 'N/A';
+        passengers.push({
+          type: index < adults ? 'Adult' : 'Child',
+          number: index < adults ? (index + 1) : (index - adults + 1),
+          title, first, middle, last, dob, nationality
+        });
+      });
+
       const holdData = {
         id: Date.now(),
         cruise: cruise.name,
@@ -1365,11 +1380,12 @@
         total: total,
         email: contact.email,
         phone: contact.phone,
-        expires: Date.now() + 48*60*60*1000
+        expires: Date.now() + 48*60*60*1000,
+        passengers
       };
 
       state.holds.push(holdData);
-      localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
+      localStorage.setItem('cruisingHolds', JSON.stringify(state.holds));
       updateCartCount();
       renderHolds();
 
@@ -1380,32 +1396,33 @@
         guests: totalGuests,
         total_price: `$${total.toLocaleString()} AUD`,
         customer_email: contact.email,
-        customer_phone: contact.phone
+        customer_phone: contact.phone,
+        passengers // array for admin template
       };
 
       let customerSuccess = false;
       let adminSuccess = false;
 
-      emailjs.send('service_jzj4djq', 'HoldConfirmation', templateParams)
+      emailjs.send('service_695f165f6d5aa5b0b70a0403', 'HoldConfirmation', templateParams)
         .then((response) => {
-          console.log('Customer email sent:', response);
+          console.log('Customer email SUCCESS:', response);
           customerSuccess = true;
           checkCompletion();
         })
         .catch((err) => {
-          console.error('Customer email error:', err);
+          console.error('Customer email ERROR:', err);
           alert('Customer email failed: ' + (err.text || err.message || 'Unknown error'));
           checkCompletion();
         });
 
-      emailjs.send('service_jzj4djq', 'NewHoldBooking', templateParams)
+      emailjs.send('service_695f165f6d5aa5b0b70a0403', 'NewHoldBooking', templateParams)
         .then((response) => {
-          console.log('Admin email sent:', response);
+          console.log('Admin email SUCCESS:', response);
           adminSuccess = true;
           checkCompletion();
         })
         .catch((err) => {
-          console.error('Admin email error:', err);
+          console.error('Admin email ERROR:', err);
           alert('Admin email failed: ' + (err.text || err.message || 'Unknown error'));
           checkCompletion();
         });
@@ -1428,7 +1445,7 @@
     function renderHolds() {
       const container = $('holdsItems');
       if (state.holds.length === 0) {
-        container.innerHTML = '<p style="text-align:center;padding:3rem;font-size:1.2rem;">No active holds yet. Start booking your dream cruise!</p>';
+        container.innerHTML = '<p style="text-align:center;padding:3.5rem;font-size:1.3rem;">No active holds yet. Start booking your dream cruise!</p>';
         return;
       }
 
@@ -1441,7 +1458,7 @@
           </div>
           <div style="text-align:right;">
             <strong>$${hold.total.toLocaleString()} AUD</strong><br>
-            <button onclick="removeHold(${i})" style="color:#c00;margin-top:0.8rem;padding:0.6rem 1.2rem;border-radius:12px;">Remove Hold</button>
+            <button onclick="removeHold(${i})" style="color:#c00;margin-top:1rem;padding:0.7rem 1.4rem;border-radius:14px;">Remove Hold</button>
           </div>
         </div>
       `).join('');
@@ -1450,7 +1467,7 @@
     function removeHold(index) {
       if (confirm('Remove this hold?')) {
         state.holds.splice(index, 1);
-        localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
+        localStorage.setItem('cruisingHolds', JSON.stringify(state.holds));
         updateCartCount();
         renderHolds();
       }
@@ -1495,7 +1512,7 @@
 
       renderCruises('resultsGrid', results);
       $('searchResults').style.display = results.length ? 'block' : 'none';
-      if (results.length === 0) $('resultsGrid').innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:3rem;">No matching cruises. Try different filters!</p>';
+      if (results.length === 0) $('resultsGrid').innerHTML = '<p style="grid-column:1/-1;text-align:center;padding:3.5rem;">No matching cruises. Try different filters!</p>';
       $('searchResults').scrollIntoView({behavior: 'smooth'});
     });
 
@@ -1505,7 +1522,7 @@
       renderCruises('dealsGrid', allCruises);
       const now = Date.now();
       state.holds = state.holds.filter(h => h.expires > now);
-      localStorage.setItem('downunderHolds', JSON.stringify(state.holds));
+      localStorage.setItem('cruisingHolds', JSON.stringify(state.holds));
       updateCartCount();
       renderHolds();
     });
