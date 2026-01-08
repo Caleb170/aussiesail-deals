@@ -1346,24 +1346,6 @@
 
       const cruise = allCruises.find(c => c.key === state.currentCruise);
 
-      // Collect full passenger details for admin email
-      const passengers = [];
-      const blocks = document.querySelectorAll('.passenger-block');
-      blocks.forEach((block, index) => {
-        const title = block.querySelector('select').value || 'N/A';
-        const inputs = block.querySelectorAll('input');
-        const first = inputs[0].value || 'N/A';
-        const middle = inputs[1].value || '';
-        const last = inputs[2].value || 'N/A';
-        const dob = inputs[3].value || 'N/A';
-        const nationality = inputs[4].value || 'N/A';
-        passengers.push({
-          type: index < adults ? 'Adult' : 'Child',
-          number: index < adults ? (index + 1) : (index - adults + 1),
-          title, first, middle, last, dob, nationality
-        });
-      });
-
       const holdData = {
         id: Date.now(),
         cruise: cruise.name,
@@ -1372,8 +1354,7 @@
         total: total,
         email: contact.email,
         phone: contact.phone,
-        expires: Date.now() + 48*60*60*1000,
-        passengers
+        expires: Date.now() + 48*60*60*1000
       };
 
       state.holds.push(holdData);
@@ -1381,22 +1362,35 @@
       updateCartCount();
       renderHolds();
 
-      const templateParams = {
-        to_email: contact.email,
-        cruise_name: cruise.name,
-        cabin_type: state.currentCabin.toUpperCase(),
-        guests: totalGuests,
-        total_price: `$${total.toLocaleString()} AUD`,
-        customer_email: contact.email,
-        customer_phone: contact.phone,
-        passengers
-      };
-
-      // Temporary alert until Brevo API is connected
-      alert('Hold placed successfully! Emails would be sent here (Brevo integration pending serverless function).');
-
-      closeModal('cabinModal');
-      openModal('successModal');
+      // Send to Vercel serverless function (this handles both customer and admin emails via Brevo)
+      fetch('/api/send-hold', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to_email: contact.email,
+          cruise_name: cruise.name,
+          cabin_type: state.currentCabin.toUpperCase(),
+          guests: totalGuests,
+          total_price: `$${total.toLocaleString()} AUD`,
+          customer_email: contact.email,
+          customer_phone: contact.phone
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          console.log('Hold confirmation sent via Brevo!');
+          closeModal('cabinModal');
+          openModal('successModal');
+        } else {
+          console.error('Server error:', data.error);
+          alert('Hold placed, but email sending failed: ' + (data.error || 'Unknown error'));
+        }
+      })
+      .catch(err => {
+        console.error('Fetch error:', err);
+        alert('Network error – hold placed, but email may not have sent. Please contact us.');
+      });
     }
 
     function updateCartCount() {
