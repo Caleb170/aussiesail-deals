@@ -12,14 +12,6 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-  <!-- EmailJS v4 SDK (current & supported) -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function(){
-      emailjs.init({ publicKey: "thAWGlhV_hgMrC1cX" });
-    })();
-  </script>
-
   <style>
     :root {
       --primary: #006b33;
@@ -1397,45 +1389,14 @@
         total_price: `$${total.toLocaleString()} AUD`,
         customer_email: contact.email,
         customer_phone: contact.phone,
-        passengers // array for admin template
+        passengers
       };
 
-      let customerSuccess = false;
-      let adminSuccess = false;
+      // Temporary alert until Brevo API is connected
+      alert('Hold placed successfully! Emails would be sent here (Brevo integration pending serverless function).');
 
-      emailjs.send('service_695f165f6d5aa5b0b70a0403', 'HoldConfirmation', templateParams)
-        .then((response) => {
-          console.log('Customer email SUCCESS:', response);
-          customerSuccess = true;
-          checkCompletion();
-        })
-        .catch((err) => {
-          console.error('Customer email ERROR:', err);
-          alert('Customer email failed: ' + (err.text || err.message || 'Unknown error'));
-          checkCompletion();
-        });
-
-      emailjs.send('service_695f165f6d5aa5b0b70a0403', 'NewHoldBooking', templateParams)
-        .then((response) => {
-          console.log('Admin email SUCCESS:', response);
-          adminSuccess = true;
-          checkCompletion();
-        })
-        .catch((err) => {
-          console.error('Admin email ERROR:', err);
-          alert('Admin email failed: ' + (err.text || err.message || 'Unknown error'));
-          checkCompletion();
-        });
-
-      function checkCompletion() {
-        if (customerSuccess && adminSuccess) {
-          closeModal('cabinModal');
-          openModal('successModal');
-        } else {
-          closeModal('cabinModal');
-          openModal('successModal');
-        }
-      }
+      closeModal('cabinModal');
+      openModal('successModal');
     }
 
     function updateCartCount() {
