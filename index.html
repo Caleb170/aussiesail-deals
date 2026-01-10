@@ -1346,6 +1346,24 @@
 
       const cruise = allCruises.find(c => c.key === state.currentCruise);
 
+      // Collect passenger details (for logging or future use)
+      const passengers = [];
+      const blocks = document.querySelectorAll('.passenger-block');
+      blocks.forEach((block, index) => {
+        const title = block.querySelector('select').value || 'N/A';
+        const inputs = block.querySelectorAll('input');
+        const first = inputs[0].value || 'N/A';
+        const middle = inputs[1].value || '';
+        const last = inputs[2].value || 'N/A';
+        const dob = inputs[3].value || 'N/A';
+        const nationality = inputs[4].value || 'N/A';
+        passengers.push({
+          type: index < adults ? 'Adult' : 'Child',
+          number: index < adults ? (index + 1) : (index - adults + 1),
+          title, first, middle, last, dob, nationality
+        });
+      });
+
       const holdData = {
         id: Date.now(),
         cruise: cruise.name,
@@ -1362,7 +1380,7 @@
       updateCartCount();
       renderHolds();
 
-      // Send to Vercel serverless function (this handles both customer and admin emails via Brevo)
+      // Send data to Vercel serverless function (this triggers Brevo emails for both customer and admin)
       fetch('/api/send-hold', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1376,10 +1394,15 @@
           customer_phone: contact.phone
         })
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Server responded with status ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
         if (data.success) {
-          console.log('Hold confirmation sent via Brevo!');
+          console.log('Success: Emails sent via Brevo!');
           closeModal('cabinModal');
           openModal('successModal');
         } else {
