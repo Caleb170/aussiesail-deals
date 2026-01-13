@@ -6,13 +6,13 @@
   <title>Cruising DownUnder • Premium Cruise Deals from Australia 2026+</title>
   <meta name="description" content="Exclusive 2026+ cruise deals departing Sydney, Brisbane, Melbourne, Perth & more. 2026 South Pacific, NZ, Barrier Reef on Carnival, Royal Caribbean, Princess & top lines."/>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts for typography - Playfair Display for headings, Poppins for body text -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  <!-- Font Awesome -->
+  <!-- Font Awesome for icons like ship, search, cart, etc. -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
   <style>
-    /* Root variables for colors and shadows - this allows easy theme changes */
+    /* Root variables for colors and shadows - this allows easy theme changes across the site */
     :root {
       --primary: #006b33; /* Main green color for buttons and accents */
       --primary-dark: #004d26; /* Darker green for gradients and hovers */
@@ -20,39 +20,53 @@
       --dark: #002f19; /* Deep green for footers and backgrounds */
       --light: #f8f9fa; /* Light gray for backgrounds */
       --gray: #6c757d; /* Medium gray for text */
-      --bubble-shadow: 0 8px 25px rgba(0,0,0,0.15); /* Shadow for cards and modals */
-      --bubble-radius: 20px; /* Rounded corners for modern look */
-      --success: #28a745; /* Green for success messages */
-      --warning: #ffc107; /* Yellow for warnings */
-      --card-hover: 0 20px 40px rgba(0,0,0,0.2); /* Hover shadow for cards */
+      --bubble-shadow: 0 8px 25px rgba(0,0,0,0.15); /* Shadow for cards and modals to give depth */
+      --bubble-radius: 20px; /* Rounded corners for modern, bubbly look */
+      --success: #28a745; /* Green for success messages like hold placed */
+      --warning: #ffc107; /* Yellow for warnings or highlights */
+      --card-hover: 0 20px 40px rgba(0,0,0,0.2); /* Hover shadow for cards to add interactivity */
     }
 
-    /* Reset for consistent styling across browsers */
-    * { margin:0; padding:0; box-sizing:border-box; }
+    /* Reset for consistent styling across different browsers and devices */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    /* Smooth scrolling for internal links */
-    html { scroll-behavior: smooth; }
+    /* Smooth scrolling for internal links like #deals, #faq, etc. */
+    html {
+      scroll-behavior: smooth;
+    }
 
-    /* Base body styling */
+    /* Base body styling - sets font, color, background gradient, line height, padding for header, and prevents horizontal overflow */
     body {
       font-family: 'Poppins', sans-serif;
       color: #333;
       background: linear-gradient(to bottom, #f0f8ff, var(--light));
       line-height: 1.85;
-      padding-top: 80px; /* Space for fixed header */
-      overflow-x: hidden; /* Prevent horizontal scroll */
+      padding-top: 80px; /* Space for fixed header to avoid content overlap */
+      overflow-x: hidden; /* Prevent horizontal scroll from wide elements */
     }
 
-    /* Section padding */
-    section { padding: 6.5rem 1.5rem; }
+    /* Section padding - standard spacing for sections like hero, deals, etc. */
+    section {
+      padding: 6.5rem 1.5rem;
+    }
 
-    /* Container for centering content */
-    .container { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
+    /* Container for centering content - max width for large screens, auto margins, padding for small screens */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
 
-    /* Header styling - fixed top */
+    /* Header styling - fixed top bar with green background, blur effect, high z-index, transition for scroll effect, shadow */
     header {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       background: rgba(0, 107, 51, 0.96);
       backdrop-filter: blur(12px);
       z-index: 1000;
@@ -60,10 +74,12 @@
       box-shadow: var(--bubble-shadow);
     }
 
-    /* Scrolled header effect */
-    header.scrolled { background: rgba(0, 107, 51, 1); }
+    /* Scrolled header effect - removes transparency when scrolled for better visibility */
+    header.scrolled {
+      background: rgba(0, 107, 51, 1);
+    }
 
-    /* Navigation layout */
+    /* Navigation layout - flex for alignment, padding, max width, auto margins */
     nav {
       display: flex;
       align-items: center;
@@ -72,7 +88,7 @@
       margin: 0 auto;
     }
 
-    /* Logo styling */
+    /* Logo styling - flex for icon and text, clamp for responsive size, white color, no decoration, bold, shadow for depth, margin left to pull it further left */
     .logo {
       flex: 0 0 auto;
       font-family: 'Playfair Display', serif;
@@ -84,13 +100,19 @@
       align-items: center;
       gap: 1rem;
       text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      margin-left: -2.5rem; /* Increased margin to pull logo almost all the way left */
     }
 
-    .logo i { color: var(--accent); font-size: 2.2rem; }
+    .logo i {
+      color: var(--accent);
+      font-size: 2.2rem;
+    }
 
-    .logo span { color: var(--accent); }
+    .logo span {
+      color: var(--accent);
+    }
 
-    /* Center navigation links */
+    /* Center navigation links - flex grow, flex for alignment, gap for spacing, center justification */
     .nav-center {
       flex: 1 1 auto;
       display: flex;
@@ -109,9 +131,13 @@
       border-radius: 10px;
     }
 
-    .nav-center a:hover { color: var(--accent); background: rgba(255,215,0,0.12); transform: translateY(-4px); }
+    .nav-center a:hover {
+      color: var(--accent);
+      background: rgba(255,215,0,0.12);
+      transform: translateY(-4px);
+    }
 
-    /* Right side icons and menu */
+    /* Right side icons and menu - flex for alignment, gap for spacing */
     .nav-right {
       flex: 0 0 auto;
       display: flex;
@@ -119,7 +145,9 @@
       gap: 1.5rem;
     }
 
-    .user-menu { position: relative; }
+    .user-menu {
+      position: relative;
+    }
 
     .user-menu button {
       background: none;
@@ -132,7 +160,9 @@
       transition: all 0.3s;
     }
 
-    .user-menu button:hover { background: rgba(255,215,0,0.12); }
+    .user-menu button:hover {
+      background: rgba(255,215,0,0.12);
+    }
 
     .user-dropdown {
       display: none;
@@ -147,7 +177,9 @@
       z-index: 100;
     }
 
-    .user-dropdown.active { display: block; }
+    .user-dropdown.active {
+      display: block;
+    }
 
     .user-dropdown a, .user-dropdown button {
       display: block;
@@ -162,7 +194,9 @@
       cursor: pointer;
     }
 
-    .user-dropdown a:hover, .user-dropdown button:hover { background: #f0f8ff; }
+    .user-dropdown a:hover, .user-dropdown button:hover {
+      background: #f0f8ff;
+    }
 
     .cart-icon {
       position: relative;
@@ -174,7 +208,11 @@
       border-radius: 50%;
     }
 
-    .cart-icon:hover { color: var(--accent); background: rgba(255,215,0,0.12); transform: scale(1.1); }
+    .cart-icon:hover {
+      color: var(--accent);
+      background: rgba(255,215,0,0.12);
+      transform: scale(1.1);
+    }
 
     .cart-count {
       position: absolute;
@@ -208,11 +246,20 @@
       transition: all 0.3s;
     }
 
-    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
-    .hamburger.active span:nth-child(2) { opacity: 0; }
-    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
 
-    @media (max-width: 992px) {
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(8px, -8px);
+    }
+
+    /* Media query for hamburger menu - adjusted to show at max-width: 1200px for auto adjust, and always on mobile */
+    @media (max-width: 1200px) {
       .nav-center {
         position: absolute;
         top: 100%;
@@ -227,23 +274,33 @@
         display: none;
         box-shadow: var(--bubble-shadow);
       }
-      .nav-center.active { display: flex; }
-      .hamburger { display: flex; }
-      .nav-right { margin-left: auto; }
+      .nav-center.active {
+        display: flex;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .nav-right {
+        margin-left: auto;
+      }
     }
 
-    /* Hero section styling */
+    /* Hero section styling - min height, background with gradient overlay, flex for centering */
     .hero {
       min-height: 95vh;
       background: linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.72)),
-                  url('https://www.australia.com/content/dam/digital/australia/au-en/articles/the-best-cruises-in-australia-2.jpg') center/cover no-repeat fixed;
+                  url('https://cruisepassenger.com.au/wp-content/uploads/2023/06/Princess-Cruises-Australia-2.jpg') center/cover no-repeat fixed;
       color: white;
       display: flex;
       align-items: center;
       text-align: center;
     }
 
-    .hero-content { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
 
     .hero h1 {
       font-family: 'Playfair Display', serif;
@@ -308,7 +365,36 @@
       gap: 2.5rem;
     }
 
-    select, input, textarea, button {
+    /* Custom styled select elements - clean, modern look with custom arrow, no browser default */
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: rgba(255,255,255,0.97) url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat right 1.5rem center / 1.2rem;
+      padding: 1.5rem;
+      border: none;
+      border-radius: var(--bubble-radius);
+      font-size: 1.15rem;
+      box-shadow: var(--bubble-shadow);
+      transition: all 0.3s;
+      cursor: pointer;
+      color: #333;
+      font-weight: 500;
+    }
+
+    select:focus {
+      outline: none;
+      box-shadow: 0 0 0 5px rgba(255,215,0,0.55);
+      transform: translateY(-4px);
+    }
+
+    select option {
+      background: white;
+      color: #333;
+      font-weight: 500;
+    }
+
+    input, textarea {
       padding: 1.5rem;
       border: none;
       border-radius: var(--bubble-radius);
@@ -316,9 +402,10 @@
       background: rgba(255,255,255,0.97);
       box-shadow: var(--bubble-shadow);
       transition: all 0.3s;
+      font-weight: 500;
     }
 
-    select:focus, input:focus, textarea:focus {
+    input:focus, textarea:focus {
       outline: none;
       box-shadow: 0 0 0 5px rgba(255,215,0,0.55);
       transform: translateY(-4px);
@@ -330,6 +417,11 @@
       font-weight: 700;
       cursor: pointer;
       font-size: 1.3rem;
+      padding: 1.5rem;
+      border: none;
+      border-radius: var(--bubble-radius);
+      box-shadow: var(--bubble-shadow);
+      transition: all 0.3s;
     }
 
     button:hover {
@@ -354,7 +446,11 @@
       transform: translateY(60px);
     }
 
-    .card.visible { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.4s;
+    }
 
     .card:hover {
       transform: translateY(-25px);
@@ -368,7 +464,9 @@
       transition: transform 0.9s ease;
     }
 
-    .card:hover img { transform: scale(1.18); }
+    .card:hover img {
+      transform: scale(1.18);
+    }
 
     .card-info {
       padding: 2.8rem;
@@ -410,8 +508,10 @@
       display: none;
       position: fixed;
       z-index: 2000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0,0,0,0.88);
       overflow-y: auto;
     }
@@ -749,21 +849,21 @@
     <h2>Popular Destinations</h2>
     <div class="grid">
       <div class="card">
-        <img src="https://thumbs.dreamstime.com/b/aerial-view-luxury-yacht-sailing-near-great-barrier-reef-turquoise-water-coral-coral-blue-ocean-horizon-tourism-travel-destination-385698135.jpg" alt="South Pacific Islands" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="South Pacific Islands" loading="lazy">
         <div class="card-info">
           <h3>South Pacific Islands</h3>
           <p>Crystal waters, island hopping – pure paradise.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://live-production.wcms.abc-cdn.net.au/9a0f240e6eb6d58be6c535728abb9df6?impolicy=wcms_crop_resize&cropH=2813&cropW=5000&xPos=0&yPos=520&width=862&height=485" alt="New Zealand Fjords" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1507699622162-f4c5e83206a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="New Zealand Fjords" loading="lazy">
         <div class="card-info">
           <h3>New Zealand Fjords</h3>
           <p>Majestic fjords, wildlife, and adventure.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://cdn.audleytravel.com/1050/750/79/1023321-coral-expeditions-great-barrier-reef.webp" alt="Great Barrier Reef" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Great Barrier Reef" loading="lazy">
         <div class="card-info">
           <h3>Great Barrier Reef</h3>
           <p>Colorful coral, tropical fish – diving paradise.</p>
@@ -777,21 +877,21 @@
     <h2>Popular Cruise Lines</h2>
     <div class="grid">
       <div class="card">
-        <img src="https://qtxasset.com/quartz/qcloud1/media/image/Sunsation%20Point%20Day%20Lead%20Photo.jpg?VersionId=XEbjLOeZx91mPtRPqu1C3g6K9QJT4hyj" alt="Carnival Cruise Line" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1569261672078-4c0a3d5c7a8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Carnival Cruise Line" loading="lazy">
         <div class="card-info">
           <h3>Carnival Cruise Line</h3>
           <p>Fun-filled family cruising with entertainment and activities for all ages.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Adventure_of_the_Seas_at_Grand_Turk.jpg" alt="Royal Caribbean" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Royal Caribbean" loading="lazy">
         <div class="card-info">
           <h3>Royal Caribbean</h3>
           <p>Innovative ships with adventure activities, shows, and dining.</p>
         </div>
       </div>
       <div class="card">
-        <img src="https://www.usatoday.com/gcdn/-mm-/e2cd26bcab578bb0ec61fa0a8528dba5613640ef/c=2-0-1024-768/local/-/media/USATODAY/GenericImages/2013/11/05/1383660878004-Golden-Princessx-extralarge.jpg" alt="Princess Cruises" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1551632435-3e9e6e0c1e5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Princess Cruises" loading="lazy">
         <div class="card-info">
           <h3>Princess Cruises</h3>
           <p>Elegant ships and scenic itineraries with premium service.</p>
@@ -1027,8 +1127,8 @@
         depart: 'Sydney',
         line: 'Paul Gauguin',
         month: 'March 2026',
-        image: 'https://thumbs.dreamstime.com/b/aerial-view-luxury-yacht-sailing-near-great-barrier-reef-turquoise-water-coral-coral-blue-ocean-horizon-tourism-travel-destination-385698135.jpg',
-        map: 'https://thumbs.dreamstime.com/b/aerial-view-luxury-yacht-sailing-near-great-barrier-reef-turquoise-water-coral-coral-blue-ocean-horizon-tourism-travel-destination-385698135.jpg',
+        image: 'https://www.cruiseabout.com.au/wp-content/uploads/2023/09/SOUTH-PACIFIC-HERO-scaled.jpg',
+        map: 'https://www.cruiseabout.com.au/wp-content/uploads/2023/09/SOUTH-PACIFIC-HERO-scaled.jpg',
         ports: 'Day 1: Sydney • Day 3: Mystery Island • Day 4: Lifou • Day 5: Noumea • Day 9: Sydney',
         basePP: 899,
         bonus: '+ $150 onboard credit'
@@ -1039,8 +1139,8 @@
         depart: 'Sydney',
         line: 'Princess',
         month: 'February 2026',
-        image: 'https://www.cruiseabout.com.au/wp-content/uploads/2023/09/NEW-ZEALAND-HERO-scaled.jpg',
-        map: 'https://www.cruiseabout.com.au/wp-content/uploads/2023/09/NEW-ZEALAND-HERO-scaled.jpg',
+        image: 'https://live-production.wcms.abc-cdn.net.au/9a0f240e6eb6d58be6c535728abb9df6?impolicy=wcms_crop_resize&cropH=2813&cropW=5000&xPos=0&yPos=520&width=862&height=485',
+        map: 'https://live-production.wcms.abc-cdn.net.au/9a0f240e6eb6d58be6c535728abb9df6?impolicy=wcms_crop_resize&cropH=2813&cropW=5000&xPos=0&yPos=520&width=862&height=485',
         ports: 'Day 1-2: Sydney • Day 5: Milford Sound • Day 6: Doubtful Sound • Day 7: Dusky Sound • Day 12: Sydney',
         basePP: 1299,
         bonus: '+ Free premium drinks package'
