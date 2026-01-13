@@ -92,7 +92,7 @@
     .logo {
       flex: 0 0 auto;
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5.5vw, 2.8rem);
+      font-size: clamp(1.8rem, 5vw, 2.5rem); /* Reduced size for mobile balance */
       color: white;
       text-decoration: none;
       font-weight: 700;
@@ -100,12 +100,12 @@
       align-items: center;
       gap: 1rem;
       text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-      margin-left: -2.5rem; /* Increased margin to pull logo almost all the way left */
+      margin-left: -4rem; /* Further left for better balance on desktop */
     }
 
     .logo i {
       color: var(--accent);
-      font-size: 2.2rem;
+      font-size: 2rem;
     }
 
     .logo span {
@@ -258,7 +258,7 @@
       transform: rotate(-45deg) translate(8px, -8px);
     }
 
-    /* Media query for hamburger menu - adjusted to show at max-width: 1200px for auto adjust, and always on mobile */
+    /* Media query for hamburger menu - shows at max-width: 1200px for auto adjust, and always on mobile */
     @media (max-width: 1200px) {
       .nav-center {
         position: absolute;
@@ -289,7 +289,7 @@
     .hero {
       min-height: 95vh;
       background: linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.72)),
-                  url('https://www.australia.com/content/dam/digital/australia/au-en/articles/the-best-cruises-in-australia-2.jpg') center/cover no-repeat fixed;
+                  url('https://images.unsplash.com/photo-1569261672078-4c0a3d5c7a8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
       color: white;
       display: flex;
       align-items: center;
@@ -748,9 +748,6 @@
       .modal-content { padding: 2.5rem; margin: 8% auto; }
       .passenger-form-grid { grid-template-columns: 1fr; }
       .itinerary-map img { max-height: 380px; }
-      .logo {
-        font-size: clamp(1.8rem, 5vw, 2.2rem); /* Smaller logo on mobile */
-      }
     }
   </style>
 </head>
